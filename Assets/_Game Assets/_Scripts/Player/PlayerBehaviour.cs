@@ -11,8 +11,9 @@ public class PlayerBehaviour : MonoBehaviourPun
 
     [HideInInspector]
     public Animator anim;
-    [HideInInspector]
+
     public GameObject cam;
+
     private PhotonView pv;
 
     void Start()
@@ -24,7 +25,7 @@ public class PlayerBehaviour : MonoBehaviourPun
             return;
         }
         anim = GetComponent<Animator>();
-        //cam = GameObject.FindObjectOfType<OrbitCamera>().gameObject;
+        cam.SetActive(true);
         //Cursor.lockState = CursorLockMode.Locked;
     }
 
@@ -43,10 +44,10 @@ public class PlayerBehaviour : MonoBehaviourPun
         {
             Sprint();
         }
-        /*if (playerRotateWithCam)
+        if (playerRotateWithCam)
         {
             RotateToLook();
-        }*/
+        }
     }
 
     void Movement()
