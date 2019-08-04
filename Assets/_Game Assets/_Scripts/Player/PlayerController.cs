@@ -42,4 +42,23 @@ public class PlayerController : MonoBehaviourPun
         }
     }
 
+    [Header("Raycast")]
+    public float raycastRange;
+    public LayerMask canHit;
+
+    void OnGround()
+    {
+        RaycastHit hit;
+
+        if (Physics.Raycast(transform.position, -transform.up, out hit, raycastRange, canHit ))
+        {
+            Debug.DrawRay(transform.position, -transform.up * raycastRange, Color.yellow);
+            Debug.Log("InGround");
+        }
+        else
+        {
+            Debug.Log("InAir");
+        }
+    }
+
 }
