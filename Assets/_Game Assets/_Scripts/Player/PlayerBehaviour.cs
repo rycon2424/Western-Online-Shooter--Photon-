@@ -10,10 +10,14 @@ public class PlayerBehaviour : MonoBehaviourPun
     public bool playerRotateWithCam;
     public bool onlineReady;
 
-    [HideInInspector]
+    [Header("AnimationStuff")]
     public Animator anim;
+    public Transform lookObj = null;
 
-    public GameObject cam;
+    [Header("CamereStuff")]
+    public Camera cam;
+    public AudioListener al;
+    public OrbitCamera oc;
 
     private PhotonView pv;
 
@@ -26,7 +30,9 @@ public class PlayerBehaviour : MonoBehaviourPun
             return;
         }
         anim = GetComponent<Animator>();
-        cam.SetActive(true);
+        cam.enabled = true;
+        al.enabled = true;
+        oc.enabled = true;
         //Cursor.lockState = CursorLockMode.Locked;
     }
 
@@ -36,11 +42,12 @@ public class PlayerBehaviour : MonoBehaviourPun
     public float z;
     public void Update()
     {
+        OnGround();
         if (pv.IsMine == false && onlineReady == true)
         {
             return;
         }
-        if (OnGround() == true)
+        if (onGround == true)
         {
             Movement();
         }
@@ -80,26 +87,47 @@ public class PlayerBehaviour : MonoBehaviourPun
     [Header("Raycast")]
     public float raycastRange;
     public LayerMask canHit;
+    public bool onGround;
+    public bool hardlanding;
 
-    bool OnGround()
+    void OnGround()
     {
         RaycastHit hit;
         
         if (Physics.Raycast(transform.position, -transform.up, out hit, raycastRange, canHit))
         {
             Debug.DrawRay(transform.position, -transform.up * raycastRange, Color.yellow);
-            if (anim.GetBool("Ground") == false)
+            if (anim.GetBool("Ground") == false && hardlanding == true)
             {
                 anim.Play("Hard Landing");
+                hardlanding = false;
             }
+            StopCoroutine("OffGround");
             anim.SetBool("Ground", true);
-            return true;
+            onGround = true;
         }
         else
         {
             anim.SetBool("Ground", false);
-            return false;
+            if (hardlanding == false)
+            {
+                StartCoroutine("OffGround");
+            }
+            onGround = false;
         }
+    }
+    
+    IEnumerator OffGround()
+    {
+        yield return new WaitForSeconds(0.5f);
+        hardlanding = true;
+    }
+
+    //a callback for calculating IK
+    void OnAnimatorIK()
+    {
+        anim.SetLookAtWeight(1);
+        anim.SetLookAtPosition(lookObj.position);
     }
 
 }
