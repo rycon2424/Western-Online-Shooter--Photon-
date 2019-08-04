@@ -42,11 +42,11 @@ public class PlayerBehaviour : MonoBehaviourPun
     public float z;
     public void Update()
     {
-        OnGround();
         if (pv.IsMine == false && onlineReady == true)
         {
             return;
         }
+        OnGround();
         if (onGround == true)
         {
             Movement();
@@ -88,7 +88,7 @@ public class PlayerBehaviour : MonoBehaviourPun
     public float raycastRange;
     public LayerMask canHit;
     public bool onGround;
-    public bool hardlanding;
+    public bool coRoRunning;
 
     void OnGround()
     {
@@ -97,30 +97,30 @@ public class PlayerBehaviour : MonoBehaviourPun
         if (Physics.Raycast(transform.position, -transform.up, out hit, raycastRange, canHit))
         {
             Debug.DrawRay(transform.position, -transform.up * raycastRange, Color.yellow);
-            if (anim.GetBool("Ground") == false && hardlanding == true)
-            {
-                anim.Play("Hard Landing");
-                hardlanding = false;
-            }
             StopCoroutine("OffGround");
+            coRoRunning = false;
             anim.SetBool("Ground", true);
             onGround = true;
         }
         else
         {
-            anim.SetBool("Ground", false);
-            if (hardlanding == false)
+            if (coRoRunning == false)
             {
                 StartCoroutine("OffGround");
             }
             onGround = false;
         }
     }
-    
+
     IEnumerator OffGround()
     {
+        coRoRunning = true;
+
         yield return new WaitForSeconds(0.5f);
-        hardlanding = true;
+
+        anim.SetBool("Ground", false);
+        
+        coRoRunning = false;
     }
 
     //a callback for calculating IK

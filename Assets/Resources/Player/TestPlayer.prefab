@@ -2172,7 +2172,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 311
   onGround: 0
-  hardlanding: 0
+  coRoRunning: 0
 --- !u!114 &6842935164246843361
 MonoBehaviour:
   m_ObjectHideFlags: 0
