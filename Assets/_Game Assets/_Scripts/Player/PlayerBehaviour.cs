@@ -140,6 +140,10 @@ public class PlayerBehaviour : MonoBehaviourPun
     //a callback for calculating IK
     void OnAnimatorIK()
     {
+        if (anim.GetBool("Aim") == true || anim.GetBool("Running") == true)
+        {
+            return;
+        }
         anim.SetLookAtWeight(1);
         anim.SetLookAtPosition(lookObj.position);
     }

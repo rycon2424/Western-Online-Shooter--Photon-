@@ -6,7 +6,16 @@ using Photon.Pun;
 public class PlayerCombat : MonoBehaviourPun
 {
 
-    public PlayerBehaviour pb;
+    private PlayerBehaviour pb;
+
+    private Transform chest;
+    public Vector3 offset;
+
+    void Start()
+    {
+        pb = GetComponent<PlayerBehaviour>();
+        chest = pb.anim.GetBoneTransform(HumanBodyBones.Chest);
+    }
 
     public void Combat()
     {
@@ -34,13 +43,15 @@ public class PlayerCombat : MonoBehaviourPun
         pb.anim.SetBool("1Handed", false);
     }
 
-    //a callback for calculating IK
-    void OnAnimatorIK()
+    void LateUpdate()
     {
-        if (pb.anim.GetBool("Aim") == true)
+        if (pb.anim.GetBool("Aim") == false)
         {
             return;
         }
+        chest.LookAt(pb.lookObj.position);
+        chest.rotation = chest.rotation * Quaternion.Euler(offset);
+
     }
 
 }

@@ -109,8 +109,8 @@ MonoBehaviour:
   horizontalRotationSpeed: 250
   verticalRotationSpeed: 150
   rotationDampening: 0.75
-  minVerticalAngle: -60
-  maxVerticalAngle: 60
+  minVerticalAngle: -20
+  maxVerticalAngle: 30
   useRMBToAim: 0
 --- !u!1 &2185964531060163339
 GameObject:
@@ -139,7 +139,7 @@ Transform:
   m_GameObject: {fileID: 2185964531060163339}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 6.07}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children: []
   m_Father: {fileID: 2118596687}
   m_RootOrder: 0
@@ -2160,7 +2160,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isSprinting: 0
   playerRotateWithCam: 1
-  onlineReady: 0
+  onlineReady: 1
   anim: {fileID: 3402340705741740924}
   lookObj: {fileID: 3225096546299476417}
   cam: {fileID: 2118596686}
@@ -2188,7 +2188,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c5bb0914534303429d04c9c2c0943aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pb: {fileID: 3343304055085306551}
+  offset: {x: 0, y: -50, z: -90}
 --- !u!114 &6842935164246843361
 MonoBehaviour:
   m_ObjectHideFlags: 0
