@@ -14,7 +14,8 @@ public class PlayerBehaviour : MonoBehaviourPun
     public Animator anim;
     public Transform lookObj = null;
 
-    [Header("CamereStuff")]
+    [Header("CameraStuff")]
+    public GameObject UI;
     public Camera cam;
     public AudioListener al;
     public OrbitCamera oc;
@@ -33,6 +34,7 @@ public class PlayerBehaviour : MonoBehaviourPun
         {
             return;
         }
+        UI.SetActive(true);
         anim = GetComponent<Animator>();
         cam.enabled = true;
         al.enabled = true;

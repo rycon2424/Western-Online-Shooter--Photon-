@@ -34,6 +34,7 @@ public class PlayerCombat : MonoBehaviourPun
         Debug.Log("EnterCombat");
         pb.anim.SetBool("Aim", true);
         pb.anim.SetBool("1Handed", true);
+        AimRaycast();
     }
 
     public void ExitCombat()
@@ -51,7 +52,22 @@ public class PlayerCombat : MonoBehaviourPun
         }
         chest.LookAt(pb.lookObj.position);
         chest.rotation = chest.rotation * Quaternion.Euler(offset);
+    }
 
+    [Header("AimRange")]
+    public float hitRange;
+    public LayerMask canHit;
+    public Transform cameraTransform;
+    RaycastHit hit;
+
+    void AimRaycast()
+    {
+        Debug.DrawRay(cameraTransform.position, cameraTransform.forward * hitRange, Color.red);
+
+        if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, hitRange) && Input.GetMouseButtonDown(0))
+        {
+            Debug.Log("Shot " + hit.collider.name);
+        }
     }
 
 }
