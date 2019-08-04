@@ -2238,6 +2238,9 @@ MonoBehaviour:
   - Type: 4
     SynchronizeType: 2
     Name: Ground
+  - Type: 4
+    SynchronizeType: 2
+    Name: Falling
   m_SynchronizeLayers:
   - SynchronizeType: 2
     LayerIndex: 0

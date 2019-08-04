@@ -99,7 +99,6 @@ public class PlayerBehaviour : MonoBehaviourPun
             Debug.DrawRay(transform.position, -transform.up * raycastRange, Color.yellow);
             StopCoroutine("OffGround");
             coRoRunning = false;
-            anim.SetBool("Ground", true);
             onGround = true;
         }
         else
@@ -110,6 +109,12 @@ public class PlayerBehaviour : MonoBehaviourPun
             }
             onGround = false;
         }
+        anim.SetBool("Ground", onGround);
+    }
+
+    public void HasLanded()
+    {
+        anim.SetBool("Falling", false);
     }
 
     IEnumerator OffGround()
@@ -118,7 +123,7 @@ public class PlayerBehaviour : MonoBehaviourPun
 
         yield return new WaitForSeconds(0.5f);
 
-        anim.SetBool("Ground", false);
+        anim.SetBool("Falling", true);
         
         coRoRunning = false;
     }
