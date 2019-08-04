@@ -19,7 +19,11 @@ public class PlayerBehaviour : MonoBehaviourPun
     public AudioListener al;
     public OrbitCamera oc;
 
-    private PhotonView pv;
+    [Header("CombatStuff")]
+    public PlayerCombat pc;
+
+    [HideInInspector]
+    public PhotonView pv;
 
     void Start()
     {
@@ -33,7 +37,7 @@ public class PlayerBehaviour : MonoBehaviourPun
         cam.enabled = true;
         al.enabled = true;
         oc.enabled = true;
-        //Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     [HideInInspector]
@@ -42,6 +46,10 @@ public class PlayerBehaviour : MonoBehaviourPun
     public float z;
     public void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
         if (pv.IsMine == false && onlineReady == true)
         {
             return;
@@ -50,6 +58,7 @@ public class PlayerBehaviour : MonoBehaviourPun
         if (onGround == true)
         {
             Movement();
+            pc.Combat();
         }
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {

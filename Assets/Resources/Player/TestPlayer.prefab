@@ -2091,6 +2091,7 @@ GameObject:
   - component: {fileID: 3347675744499232018}
   - component: {fileID: 3402340705741740924}
   - component: {fileID: 3343304055085306551}
+  - component: {fileID: 8282014711370084330}
   - component: {fileID: 6842935164246843361}
   - component: {fileID: 4648109632837387673}
   - component: {fileID: 5316606831146216313}
@@ -2159,12 +2160,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isSprinting: 0
   playerRotateWithCam: 1
-  onlineReady: 1
+  onlineReady: 0
   anim: {fileID: 3402340705741740924}
   lookObj: {fileID: 3225096546299476417}
   cam: {fileID: 2118596686}
   al: {fileID: 2118596685}
   oc: {fileID: 2118596688}
+  pc: {fileID: 8282014711370084330}
+  pv: {fileID: 0}
   x: 0
   z: 0
   raycastRange: 0.5
@@ -2173,6 +2176,19 @@ MonoBehaviour:
     m_Bits: 311
   onGround: 0
   coRoRunning: 0
+--- !u!114 &8282014711370084330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3342700336380948104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c5bb0914534303429d04c9c2c0943aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pb: {fileID: 3343304055085306551}
 --- !u!114 &6842935164246843361
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2241,6 +2257,12 @@ MonoBehaviour:
   - Type: 4
     SynchronizeType: 2
     Name: Falling
+  - Type: 4
+    SynchronizeType: 2
+    Name: Aim
+  - Type: 4
+    SynchronizeType: 2
+    Name: 1Handed
   m_SynchronizeLayers:
   - SynchronizeType: 2
     LayerIndex: 0
