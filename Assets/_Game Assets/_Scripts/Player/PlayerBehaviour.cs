@@ -11,7 +11,6 @@ public class PlayerBehaviour : MonoBehaviourPun
     public bool dead;
 
     [Header("Stats")]
-    public bool isSprinting;
     public bool playerRotateWithCam;
     public bool onlineReady;
 
@@ -78,9 +77,13 @@ public class PlayerBehaviour : MonoBehaviourPun
                 Movement();
                 pc.Combat();
             }
-            if (Input.GetKeyDown(KeyCode.LeftShift))
+            if (Input.GetKey(KeyCode.LeftShift))
             {
-                Sprint();
+                anim.SetBool("Running", true);
+            }
+            else
+            {
+                anim.SetBool("Running", false);
             }
             if (playerRotateWithCam)
             {
@@ -118,12 +121,6 @@ public class PlayerBehaviour : MonoBehaviourPun
 
         anim.SetFloat("Horizontal", x);
         anim.SetFloat("Vertical", z);
-    }
-
-    void Sprint()
-    {
-        isSprinting = !isSprinting;
-        anim.SetBool("Running", isSprinting);
     }
 
     void RotateToLook()

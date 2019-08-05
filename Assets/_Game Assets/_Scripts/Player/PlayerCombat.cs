@@ -40,7 +40,14 @@ public class PlayerCombat : MonoBehaviourPun
     public void EnterCombat()
     {
         pb.anim.SetBool("Aim", true);
-        pb.anim.SetBool("1Handed", true);
+        if (typeGun == GunType.revolver)
+        {
+            pb.anim.SetBool("1Handed", true);
+        }
+        else
+        {
+            pb.anim.SetBool("2Handed", true);
+        }
         if (Input.GetMouseButton(0) && canShoot == true && pb.onlineReady)
         {
             pb.pv.RPC("AimRaycast", RpcTarget.All);
@@ -55,6 +62,7 @@ public class PlayerCombat : MonoBehaviourPun
     {
         pb.anim.SetBool("Aim", false);
         pb.anim.SetBool("1Handed", false);
+        pb.anim.SetBool("2Handed", false);
     }
 
     void LateUpdate()
