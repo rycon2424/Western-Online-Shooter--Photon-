@@ -35,5 +35,6 @@ MonoBehaviour:
   - HardLand
   - SyncBool
   - AimRaycast
+  - Respawn
   DisableAutoOpenWizard: 1
   ShowSettings: 1

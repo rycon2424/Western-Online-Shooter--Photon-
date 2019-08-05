@@ -30,6 +30,7 @@ public class PlayerInterface : MonoBehaviourPun
         if (pb.health <= 0)
         {
             Debug.Log("Die");
+            pb.dead = true;
         }
     }
 

@@ -8,6 +8,7 @@ public class PlayerBehaviour : MonoBehaviourPun
 
     [Header("Info")]
     public int health;
+    public bool dead;
 
     [Header("Stats")]
     public bool isSprinting;
@@ -63,7 +64,7 @@ public class PlayerBehaviour : MonoBehaviourPun
         {
             return;
         }
-        if (health > 0)
+        if (dead == false)
         {
             OnGround();
             if (onGround == true)
@@ -80,6 +81,28 @@ public class PlayerBehaviour : MonoBehaviourPun
                 RotateToLook();
             }
         }
+        else
+        {
+            GetComponent<CharacterController>().enabled = false;
+            anim.SetBool("Alive", false);
+            if (Input.GetKeyDown(KeyCode.P))
+            {
+                pv.RPC("Respawn", RpcTarget.All);
+            }
+        }
+    }
+
+    [PunRPC]
+    void Respawn()
+    {
+        GameSetupController gsc;
+        gsc = FindObjectOfType<GameSetupController>();
+        transform.position = gsc.spawns[Random.Range(0, gsc.spawns.Length)].position;
+        GetComponent<CharacterController>().enabled = true;
+        health = 100;
+        dead = false;
+        anim.SetBool("Alive", true);
+        pi.UpdateHealthUI();
     }
 
     void Movement()
@@ -152,7 +175,7 @@ public class PlayerBehaviour : MonoBehaviourPun
     //a callback for calculating IK
     void OnAnimatorIK()
     {
-        if (anim.GetBool("Aim") == true || anim.GetBool("Running") == true || anim.GetInteger("Health") < 1)
+        if (anim.GetBool("Aim") == true || anim.GetBool("Running") == true || dead == true)
         {
             return;
         }

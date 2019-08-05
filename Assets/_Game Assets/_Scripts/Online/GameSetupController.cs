@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class GameSetupController : MonoBehaviour
 {
-    // This script will be added to any multiplayer scene
+
+    [Header("UseFFAsettings")]
+    public bool FFA;
+    public Transform[] spawns;
+
     void Start()
     {
         CreatePlayer(); //Create a networked player object for each player that loads into the multiplayer scenes.
@@ -13,6 +17,13 @@ public class GameSetupController : MonoBehaviour
     private void CreatePlayer()
     {
         Debug.Log("Creating Player");
-        PhotonNetwork.Instantiate(Path.Combine("Player", "TestPlayer"), Vector3.zero, Quaternion.identity);
+        if (FFA)
+        {
+            PhotonNetwork.Instantiate(Path.Combine("Player", "TestPlayer"), spawns[Random.Range(0, spawns.Length)].position, Quaternion.identity);
+        }
+        else
+        {
+            PhotonNetwork.Instantiate(Path.Combine("Player", "TestPlayer"), Vector3.zero, Quaternion.identity);
+        }
     }
 }
