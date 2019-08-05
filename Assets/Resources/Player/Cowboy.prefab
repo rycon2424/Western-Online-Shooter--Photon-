@@ -372,7 +372,7 @@ MonoBehaviour:
   height: 2.2
   horizontalRotationSpeed: 250
   verticalRotationSpeed: 150
-  rotationDampening: 0.75
+  rotationDampening: 0
   minVerticalAngle: -20
   maxVerticalAngle: 45
   useRMBToAim: 0

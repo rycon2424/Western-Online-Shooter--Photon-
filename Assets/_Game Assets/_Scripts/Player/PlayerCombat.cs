@@ -99,7 +99,9 @@ public class PlayerCombat : MonoBehaviourPun
             if (hit.collider.CompareTag("Player"))
             {
                 lastTargetHit = hit.collider.GetComponent<PlayerBehaviour>();
-                pb.pv.RPC("TargetTakeDamage", RpcTarget.All);
+                lastTargetHit.health -= weaponDamage;
+                lastTargetHit.pi.UpdateHealthUI();
+                HitMarker();
             }
             Debug.Log(pb.pv.Owner + " Shot " + hit.collider.name);
         }
@@ -143,14 +145,6 @@ public class PlayerCombat : MonoBehaviourPun
     void HideHitMarker()
     {
         pb.hitmarker.SetActive(false);
-    }
-
-    [PunRPC]
-    void TargetTakeDamage()
-    {
-        lastTargetHit.health -= weaponDamage;
-        lastTargetHit.pi.UpdateHealthUI();
-        HitMarker();
     }
 
 }
