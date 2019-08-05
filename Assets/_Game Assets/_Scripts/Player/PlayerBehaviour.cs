@@ -34,6 +34,10 @@ public class PlayerBehaviour : MonoBehaviourPun
 
     void Start()
     {
+        cam.enabled = false;
+        al.enabled = false;
+        oc.enabled = false;
+        UI.SetActive(false);
         pv = GetComponent<PhotonView>();
         pi = GetComponent<PlayerInterface>();
         pc = GetComponent<PlayerCombat>();

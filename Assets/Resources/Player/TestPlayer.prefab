@@ -281,7 +281,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2118596687}
   - component: {fileID: 2118596686}
-  - component: {fileID: 2118596685}
   - component: {fileID: 2118596688}
   - component: {fileID: 6673238053736063661}
   - component: {fileID: 6274414020249670102}
@@ -349,14 +348,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &2118596685
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2118596684}
-  m_Enabled: 0
 --- !u!114 &2118596688
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2407,6 +2398,7 @@ GameObject:
   - component: {fileID: 4648109632837387673}
   - component: {fileID: 5316606831146216313}
   - component: {fileID: 2655661717389787130}
+  - component: {fileID: 2739595755295838430}
   m_Layer: 9
   m_Name: TestPlayer
   m_TagString: Player
@@ -2479,7 +2471,7 @@ MonoBehaviour:
   lookObj: {fileID: 3225096546299476417}
   UI: {fileID: 7974175078840996143}
   cam: {fileID: 2118596686}
-  al: {fileID: 2118596685}
+  al: {fileID: 2739595755295838430}
   oc: {fileID: 2118596688}
   pc: {fileID: 8282014711370084330}
   pi: {fileID: 6048330678917269546}
@@ -2624,6 +2616,14 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0.001941562, y: 0.8994857, z: -9.655471e-15}
+--- !u!81 &2739595755295838430
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3342700336380948104}
+  m_Enabled: 0
 --- !u!1 &3342708566260296664
 GameObject:
   m_ObjectHideFlags: 0
