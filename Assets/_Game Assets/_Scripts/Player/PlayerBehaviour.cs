@@ -129,7 +129,7 @@ public class PlayerBehaviour : MonoBehaviourPun
         var CharacterRotation = cam.transform.rotation;
         CharacterRotation.x = 0;
         CharacterRotation.z = 0;
-        transform.rotation = Quaternion.Slerp(transform.rotation, CharacterRotation, Time.deltaTime * 4);
+        transform.rotation = Quaternion.Slerp(transform.rotation, CharacterRotation, Time.deltaTime * 8);
     }
 
     [Header("Raycast")]

@@ -59,7 +59,7 @@ public class PlayerCombat : MonoBehaviourPun
 
     void LateUpdate()
     {
-        if (pb.anim.GetBool("Aim") == false)
+        if (pb.anim.GetBool("Aim") == false || pb.anim.GetBool("Falling") == true)
         {
             return;
         }
@@ -68,6 +68,8 @@ public class PlayerCombat : MonoBehaviourPun
     }
 
     [Header("WeaponStats")]
+    public GunType typeGun;
+    public enum GunType { revolver, shotgun, rifle}
     public float weaponRange;
     public int weaponDamage;
     public float fireRate;
