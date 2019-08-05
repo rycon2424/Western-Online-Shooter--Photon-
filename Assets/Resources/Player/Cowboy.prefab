@@ -2770,13 +2770,13 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 1.68
-  m_Radius: 0.2178661
+  m_Height: 1.8
+  m_Radius: 0.25
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0.001941562, y: 0.8994857, z: -9.655471e-15}
+  m_Center: {x: 0.002, y: 0.95, z: 0}
 --- !u!81 &2739595755295838430
 AudioListener:
   m_ObjectHideFlags: 0

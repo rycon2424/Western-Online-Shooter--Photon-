@@ -1043,14 +1043,24 @@ PrefabInstance:
       propertyPath: viewIdField
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 4982297560103809872, guid: a3bf83496238e654b975788535ce18a2,
+    - target: {fileID: 6673238053736063661, guid: a3bf83496238e654b975788535ce18a2,
         type: 3}
       propertyPath: viewIdField
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6673238053736063661, guid: a3bf83496238e654b975788535ce18a2,
         type: 3}
+      propertyPath: InstantiationId
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4982297560103809872, guid: a3bf83496238e654b975788535ce18a2,
+        type: 3}
       propertyPath: viewIdField
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4982297560103809872, guid: a3bf83496238e654b975788535ce18a2,
+        type: 3}
+      propertyPath: InstantiationId
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
