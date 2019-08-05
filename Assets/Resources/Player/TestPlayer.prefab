@@ -2670,6 +2670,7 @@ MonoBehaviour:
   revolverShots:
   - {fileID: 8300000, guid: 6e45f6e227edd0c42ab29e572f4449d1, type: 3}
   - {fileID: 8300000, guid: 91db513eb95a3c74fae89c1ce46f8956, type: 3}
+  - {fileID: 8300000, guid: b8f9ec1c9715b654b9fd87b566927b32, type: 3}
   playerSource: {fileID: 8230337550154884241}
   gunSource: {fileID: 3943771559992095803}
 --- !u!114 &6842935164246843361
