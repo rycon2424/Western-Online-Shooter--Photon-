@@ -66,7 +66,7 @@ public class PlayerCombat : MonoBehaviourPun
 
         if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, hitRange) && Input.GetMouseButtonDown(0))
         {
-            Debug.Log("Shot " + hit.collider.name);
+            Debug.Log(pb.pv.Owner + " Shot " + hit.collider.name);
         }
     }
 
