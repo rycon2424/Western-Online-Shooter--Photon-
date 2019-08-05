@@ -59,7 +59,7 @@ public class PlayerCombat : MonoBehaviourPun
 
     void LateUpdate()
     {
-        if (pb.anim.GetBool("Aim") == false || pb.anim.GetBool("Falling") == true)
+        if (pb.anim.GetBool("Aim") == false || pb.anim.GetBool("Falling") == true || pb.dead == true)
         {
             return;
         }

@@ -62,13 +62,13 @@ public class PlayerBehaviour : MonoBehaviourPun
     public float z;
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Cursor.lockState = CursorLockMode.None;
-        }
         if (pv.IsMine == false && onlineReady == true)
         {
             return;
+        }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Cursor.lockState = CursorLockMode.None;
         }
         if (dead == false)
         {
