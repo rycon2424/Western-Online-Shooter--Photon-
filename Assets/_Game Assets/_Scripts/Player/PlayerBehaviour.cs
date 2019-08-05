@@ -20,6 +20,7 @@ public class PlayerBehaviour : MonoBehaviourPun
 
     [Header("CameraStuff")]
     public GameObject UI;
+    public GameObject hitmarker;
     public Camera cam;
     public AudioListener al;
     public OrbitCamera oc;
@@ -53,6 +54,7 @@ public class PlayerBehaviour : MonoBehaviourPun
         al.enabled = true;
         oc.enabled = true;
         Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     [HideInInspector]
@@ -68,6 +70,7 @@ public class PlayerBehaviour : MonoBehaviourPun
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
         if (dead == false)
         {

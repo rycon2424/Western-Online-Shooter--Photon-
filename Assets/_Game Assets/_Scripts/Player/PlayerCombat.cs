@@ -52,7 +52,7 @@ public class PlayerCombat : MonoBehaviourPun
         {
             pb.pv.RPC("AimRaycast", RpcTarget.All);
         }
-        else if (Input.GetMouseButton(0) && canShoot == true)
+        else if (Input.GetMouseButton(0) && canShoot == true && pb.onlineReady == false)
         {
             AimRaycast();
         }
@@ -85,7 +85,10 @@ public class PlayerCombat : MonoBehaviourPun
     public LayerMask canHit;
     public Transform cameraTransform;
     RaycastHit hit;
-    
+
+    [Header("Last Player Shot")]
+    public PlayerBehaviour lastTargetHit;
+
     [PunRPC]
     void AimRaycast()
     {
@@ -95,8 +98,8 @@ public class PlayerCombat : MonoBehaviourPun
         {
             if (hit.collider.CompareTag("Player"))
             {
-                hit.collider.GetComponent<PlayerBehaviour>().health -= weaponDamage;
-                hit.collider.GetComponent<PlayerBehaviour>().pi.UpdateHealthUI();
+                lastTargetHit = hit.collider.GetComponent<PlayerBehaviour>();
+                pb.pv.RPC("TargetTakeDamage", RpcTarget.All);
             }
             Debug.Log(pb.pv.Owner + " Shot " + hit.collider.name);
         }
@@ -128,6 +131,26 @@ public class PlayerCombat : MonoBehaviourPun
     void FireRate()
     {
         canShoot = true;
+    }
+    
+    void HitMarker()
+    {
+        pb.hitmarker.SetActive(true);
+        pb.ps.Audio_HitMarker();
+        Invoke("HideHitMarker", 0.5f);
+    }
+
+    void HideHitMarker()
+    {
+        pb.hitmarker.SetActive(false);
+    }
+
+    [PunRPC]
+    void TargetTakeDamage()
+    {
+        lastTargetHit.health -= weaponDamage;
+        lastTargetHit.pi.UpdateHealthUI();
+        HitMarker();
     }
 
 }

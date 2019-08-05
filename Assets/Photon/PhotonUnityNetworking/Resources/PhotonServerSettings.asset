@@ -36,5 +36,8 @@ MonoBehaviour:
   - SyncBool
   - AimRaycast
   - Respawn
+  - HitMarker
+  - ShotHit
+  - TargetTakeDamage
   DisableAutoOpenWizard: 1
   ShowSettings: 1

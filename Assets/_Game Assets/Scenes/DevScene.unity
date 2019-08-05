@@ -889,7 +889,7 @@ GameObject:
   - component: {fileID: 2110579694}
   m_Layer: 0
   m_Name: High Target
-  m_TagString: Untagged
+  m_TagString: Finish
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1043,24 +1043,22 @@ PrefabInstance:
       propertyPath: viewIdField
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 5689055, guid: a3bf83496238e654b975788535ce18a2, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5689055, guid: a3bf83496238e654b975788535ce18a2, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6673238053736063661, guid: a3bf83496238e654b975788535ce18a2,
         type: 3}
       propertyPath: viewIdField
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 6673238053736063661, guid: a3bf83496238e654b975788535ce18a2,
-        type: 3}
-      propertyPath: InstantiationId
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 4982297560103809872, guid: a3bf83496238e654b975788535ce18a2,
         type: 3}
       propertyPath: viewIdField
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4982297560103809872, guid: a3bf83496238e654b975788535ce18a2,
-        type: 3}
-      propertyPath: InstantiationId
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
