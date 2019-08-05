@@ -41,9 +41,13 @@ public class PlayerCombat : MonoBehaviourPun
     {
         pb.anim.SetBool("Aim", true);
         pb.anim.SetBool("1Handed", true);
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0) && canShoot == true && pb.onlineReady)
         {
             pb.pv.RPC("AimRaycast", RpcTarget.All);
+        }
+        else if (Input.GetMouseButton(0) && canShoot == true)
+        {
+            AimRaycast();
         }
     }
 
@@ -63,8 +67,11 @@ public class PlayerCombat : MonoBehaviourPun
         chest.rotation = chest.rotation * Quaternion.Euler(offset);
     }
 
-    [Header("AimRange")]
-    public float hitRange;
+    [Header("WeaponStats")]
+    public float weaponRange;
+    public int weaponDamage;
+    public float fireRate;
+    public bool canShoot;
     public LayerMask canHit;
     public Transform cameraTransform;
     RaycastHit hit;
@@ -72,18 +79,24 @@ public class PlayerCombat : MonoBehaviourPun
     [PunRPC]
     void AimRaycast()
     {
-        Debug.DrawRay(cameraTransform.position, cameraTransform.forward * hitRange, Color.red);
+        Debug.DrawRay(cameraTransform.position, cameraTransform.forward * weaponRange, Color.red);
 
-        if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, hitRange, canHit))
+        if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, weaponRange, canHit))
         {
             if (hit.collider.CompareTag("Player"))
             {
-                hit.collider.GetComponent<PlayerBehaviour>().health -= 5;
+                hit.collider.GetComponent<PlayerBehaviour>().health -= weaponDamage;
                 hit.collider.GetComponent<PlayerBehaviour>().pi.UpdateHealthUI();
-
             }
+            canShoot = false;
+            Invoke("FireRate", fireRate);
             Debug.Log(pb.pv.Owner + " Shot " + hit.collider.name);
         }
+    }
+    
+    void FireRate()
+    {
+        canShoot = true;
     }
 
 }

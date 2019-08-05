@@ -2497,7 +2497,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   offset: {x: 0, y: -50, z: -90}
-  hitRange: 50
+  weaponRange: 50
+  weaponDamage: 15
+  fireRate: 1
+  canShoot: 1
   canHit:
     serializedVersion: 2
     m_Bits: 4294967295
