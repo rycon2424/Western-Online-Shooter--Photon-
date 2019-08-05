@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class GameSetupController : MonoBehaviour
 {
-
     [Header("UseFFAsettings")]
     public bool FFA;
     public Transform[] spawns;
@@ -19,11 +18,11 @@ public class GameSetupController : MonoBehaviour
         Debug.Log("Creating Player");
         if (FFA)
         {
-            PhotonNetwork.Instantiate(Path.Combine("Player", "TestPlayer"), spawns[Random.Range(0, spawns.Length)].position, Quaternion.identity);
+            PhotonNetwork.Instantiate(Path.Combine("Player", "Cowboy"), spawns[Random.Range(0, spawns.Length)].position, Quaternion.identity);
         }
         else
         {
-            PhotonNetwork.Instantiate(Path.Combine("Player", "TestPlayer"), Vector3.zero, Quaternion.identity);
+            PhotonNetwork.Instantiate(Path.Combine("Player", "Cowboy"), Vector3.zero, Quaternion.identity);
         }
     }
 }
