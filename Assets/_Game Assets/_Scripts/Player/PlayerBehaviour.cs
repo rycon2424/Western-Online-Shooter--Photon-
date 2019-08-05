@@ -28,6 +28,7 @@ public class PlayerBehaviour : MonoBehaviourPun
     [Header("CodeReferences")]
     public PlayerCombat pc;
     public PlayerInterface pi;
+    public PlayerSound ps;
 
     [HideInInspector]
     public PhotonView pv;
@@ -41,6 +42,7 @@ public class PlayerBehaviour : MonoBehaviourPun
         pv = GetComponent<PhotonView>();
         pi = GetComponent<PlayerInterface>();
         pc = GetComponent<PlayerCombat>();
+        ps = GetComponent<PlayerSound>();
         anim = GetComponent<Animator>();
         if (pv.IsMine == false && onlineReady == true)
         {

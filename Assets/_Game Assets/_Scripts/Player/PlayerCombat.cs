@@ -90,9 +90,30 @@ public class PlayerCombat : MonoBehaviourPun
                 hit.collider.GetComponent<PlayerBehaviour>().health -= weaponDamage;
                 hit.collider.GetComponent<PlayerBehaviour>().pi.UpdateHealthUI();
             }
-            canShoot = false;
-            Invoke("FireRate", fireRate);
             Debug.Log(pb.pv.Owner + " Shot " + hit.collider.name);
+        }
+        else
+        {
+            Debug.Log(pb.pv.Owner + " missed ");
+        }
+        GunShotSound();
+        Invoke("FireRate", fireRate);
+        canShoot = false;
+    }
+
+    void GunShotSound()
+    {
+        switch (typeGun)
+        {
+            case GunType.revolver:
+                pb.ps.Audio_RevolverShot();
+                break;
+            case GunType.shotgun:
+                break;
+            case GunType.rifle:
+                break;
+            default:
+                break;
         }
     }
     

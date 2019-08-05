@@ -8,18 +8,19 @@ public class PlayerSound : MonoBehaviourPun
 
     public AudioClip[] footSteps;
     public AudioClip[] revolverShots;
-    public AudioSource audioOutput;
+    public AudioSource playerSource;
+    public AudioSource gunSource;
 
     public void Audio_FootStep()
     {
-        audioOutput.clip = footSteps[Random.Range(0, footSteps.Length)];
-        audioOutput.Play();
+        playerSource.clip = footSteps[Random.Range(0, footSteps.Length)];
+        playerSource.Play();
     }
 
     public void Audio_RevolverShot()
     {
-        audioOutput.clip = revolverShots[Random.Range(0, revolverShots.Length)];
-        audioOutput.Play();
+        gunSource.clip = revolverShots[Random.Range(0, revolverShots.Length)];
+        gunSource.Play();
     }
 
 }
