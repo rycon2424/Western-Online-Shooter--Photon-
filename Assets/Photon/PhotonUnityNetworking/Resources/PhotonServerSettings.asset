@@ -34,5 +34,6 @@ MonoBehaviour:
   - RespawnSpaceship
   - HardLand
   - SyncBool
+  - AimRaycast
   DisableAutoOpenWizard: 1
   ShowSettings: 1

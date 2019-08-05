@@ -5,6 +5,10 @@ using Photon.Pun;
 
 public class PlayerBehaviour : MonoBehaviourPun
 {
+
+    [Header("Info")]
+    public int health;
+
     [Header("Stats")]
     public bool isSprinting;
     public bool playerRotateWithCam;
@@ -20,8 +24,9 @@ public class PlayerBehaviour : MonoBehaviourPun
     public AudioListener al;
     public OrbitCamera oc;
 
-    [Header("CombatStuff")]
+    [Header("CodeReferences")]
     public PlayerCombat pc;
+    public PlayerInterface pi;
 
     [HideInInspector]
     public PhotonView pv;
@@ -29,6 +34,8 @@ public class PlayerBehaviour : MonoBehaviourPun
     void Start()
     {
         pv = GetComponent<PhotonView>();
+        pi = GetComponent<PlayerInterface>();
+        pc = GetComponent<PlayerCombat>();
         anim = GetComponent<Animator>();
         if (pv.IsMine == false && onlineReady == true)
         {
@@ -56,19 +63,22 @@ public class PlayerBehaviour : MonoBehaviourPun
         {
             return;
         }
-        OnGround();
-        if (onGround == true)
+        if (health > 0)
         {
-            Movement();
-            pc.Combat();
-        }
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            Sprint();
-        }
-        if (playerRotateWithCam)
-        {
-            RotateToLook();
+            OnGround();
+            if (onGround == true)
+            {
+                Movement();
+                pc.Combat();
+            }
+            if (Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                Sprint();
+            }
+            if (playerRotateWithCam)
+            {
+                RotateToLook();
+            }
         }
     }
 
@@ -142,7 +152,7 @@ public class PlayerBehaviour : MonoBehaviourPun
     //a callback for calculating IK
     void OnAnimatorIK()
     {
-        if (anim.GetBool("Aim") == true || anim.GetBool("Running") == true)
+        if (anim.GetBool("Aim") == true || anim.GetBool("Running") == true || anim.GetInteger("Health") < 1)
         {
             return;
         }

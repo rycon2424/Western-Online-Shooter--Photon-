@@ -17,6 +17,14 @@ public class PlayerCombat : MonoBehaviourPun
         chest = pb.anim.GetBoneTransform(HumanBodyBones.Chest);
     }
 
+    void Update()
+    {
+        if (pb.pv.IsMine == false && pb.onlineReady)
+        {
+            return;
+        }
+    }
+    
     public void Combat()
     {
         if (Input.GetMouseButton(1))
@@ -31,15 +39,16 @@ public class PlayerCombat : MonoBehaviourPun
     
     public void EnterCombat()
     {
-        Debug.Log("EnterCombat");
         pb.anim.SetBool("Aim", true);
         pb.anim.SetBool("1Handed", true);
-        AimRaycast();
+        if (Input.GetMouseButton(0))
+        {
+            pb.pv.RPC("AimRaycast", RpcTarget.All);
+        }
     }
 
     public void ExitCombat()
     {
-        Debug.Log("ExitCombat");
         pb.anim.SetBool("Aim", false);
         pb.anim.SetBool("1Handed", false);
     }
@@ -59,13 +68,20 @@ public class PlayerCombat : MonoBehaviourPun
     public LayerMask canHit;
     public Transform cameraTransform;
     RaycastHit hit;
-
+    
+    [PunRPC]
     void AimRaycast()
     {
         Debug.DrawRay(cameraTransform.position, cameraTransform.forward * hitRange, Color.red);
 
-        if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, hitRange) && Input.GetMouseButtonDown(0))
+        if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, hitRange, canHit))
         {
+            if (hit.collider.CompareTag("Player"))
+            {
+                hit.collider.GetComponent<PlayerBehaviour>().health -= 5;
+                hit.collider.GetComponent<PlayerBehaviour>().pi.UpdateHealthUI();
+
+            }
             Debug.Log(pb.pv.Owner + " Shot " + hit.collider.name);
         }
     }
