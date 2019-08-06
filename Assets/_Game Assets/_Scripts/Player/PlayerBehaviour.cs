@@ -95,13 +95,23 @@ public class PlayerBehaviour : MonoBehaviourPun
         }
         else
         {
-            GetComponent<CharacterController>().enabled = false;
-            anim.SetBool("Alive", false);
             if (Input.GetKeyDown(KeyCode.P))
             {
                 pv.RPC("Respawn", RpcTarget.All);
             }
         }
+    }
+
+    public void Death()
+    {
+        anim.SetBool("Alive", false);
+        pv.RPC("DisableCollider", RpcTarget.All);
+    }
+
+    [PunRPC]
+    void DisableCollider()
+    {
+        GetComponent<CharacterController>().enabled = false;
     }
 
     [PunRPC]

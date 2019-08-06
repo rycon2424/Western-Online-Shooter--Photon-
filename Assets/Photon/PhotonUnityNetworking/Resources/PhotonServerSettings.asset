@@ -34,5 +34,6 @@ MonoBehaviour:
   - SyncHealth
   - SyncWeaponCycle
   - SyncWeaponUI
+  - DisableCollider
   DisableAutoOpenWizard: 1
   ShowSettings: 1
