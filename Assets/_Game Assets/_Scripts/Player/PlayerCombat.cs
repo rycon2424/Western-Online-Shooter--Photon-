@@ -19,7 +19,7 @@ public class PlayerCombat : MonoBehaviourPun
 
     void Update()
     {
-        if (pb.pv.IsMine == false && pb.onlineReady)
+        if (pb.pv.IsMine == false && pb.onlineReady == true)
         {
             return;
         }
@@ -29,6 +29,34 @@ public class PlayerCombat : MonoBehaviourPun
     void SelectWeapon()
     {
         if (Input.GetAxis("Mouse ScrollWheel") > 0f) // forward
+        {
+            if (pb.onlineReady)
+            {
+                pb.pv.RPC("SyncWeaponCycle", RpcTarget.All, true);
+            }
+            else
+            {
+                SyncWeaponCycle(true);
+            }
+        }
+        else if (Input.GetAxis("Mouse ScrollWheel") < 0f) // backwards
+        {
+            if (pb.onlineReady)
+            {
+                pb.pv.RPC("SyncWeaponCycle", RpcTarget.All, false);
+            }
+            else
+            {
+                SyncWeaponCycle(false);
+            }
+        }
+        pb.pi.UpdateWeaponUI();
+    }
+
+    [PunRPC]
+    void SyncWeaponCycle(bool forward)
+    {
+        if (forward == true)
         {
             if (typeGun == GunType.noWeapon)
             {
@@ -43,7 +71,7 @@ public class PlayerCombat : MonoBehaviourPun
                 typeGun = GunType.noWeapon;
             }
         }
-        else if (Input.GetAxis("Mouse ScrollWheel") < 0f) // backwards
+        else
         {
             if (typeGun == GunType.revolver)
             {
@@ -58,7 +86,6 @@ public class PlayerCombat : MonoBehaviourPun
                 typeGun = GunType.rifle;
             }
         }
-        pb.pi.UpdateWeaponUI();
     }
 
     public void Combat()
