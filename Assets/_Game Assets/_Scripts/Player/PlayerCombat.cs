@@ -112,6 +112,7 @@ public class PlayerCombat : MonoBehaviourPun
     {
         if (typeGun == GunType.noWeapon)
         {
+            pb.anim.SetBool("Aim", false);
             return;
         }
         if (Input.GetMouseButton(1))
@@ -127,7 +128,6 @@ public class PlayerCombat : MonoBehaviourPun
     public void EnterCombat()
     {
         pb.anim.SetBool("Aim", true);
-        pb.anim.SetBool("1Handed", true);
 
         if (Input.GetMouseButton(0) && canShoot == true && pb.onlineReady)
         {
@@ -142,7 +142,6 @@ public class PlayerCombat : MonoBehaviourPun
     public void ExitCombat()
     {
         pb.anim.SetBool("Aim", false);
-        pb.anim.SetBool("1Handed", false);
     }
 
     void LateUpdate()
