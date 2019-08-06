@@ -32,8 +32,7 @@ MonoBehaviour:
   - AimRaycast
   - Respawn
   - SyncHealth
-  - SyncWeaponUI
-  - SelectWeapon
   - SyncWeaponCycle
+  - SyncWeaponUI
   DisableAutoOpenWizard: 1
   ShowSettings: 1

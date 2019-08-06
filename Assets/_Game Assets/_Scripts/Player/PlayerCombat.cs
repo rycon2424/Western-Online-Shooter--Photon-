@@ -179,7 +179,6 @@ public class PlayerCombat : MonoBehaviourPun
             {
                 hit.collider.GetComponent<PlayerBehaviour>().health -= weaponDamage;
                 int health = hit.collider.GetComponent<PlayerBehaviour>().health;
-                Debug.Log(health);
                 hit.collider.GetComponent<PlayerBehaviour>().pi.UpdateHealthUI(health);
                 HitMarker();
             }
