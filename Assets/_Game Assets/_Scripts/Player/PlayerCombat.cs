@@ -85,9 +85,7 @@ public class PlayerCombat : MonoBehaviourPun
     public LayerMask canHit;
     public Transform cameraTransform;
     RaycastHit hit;
-
-    [Header("Last Player Shot")]
-    public PlayerBehaviour lastTargetHit;
+    
 
     [PunRPC]
     void AimRaycast()
@@ -98,9 +96,10 @@ public class PlayerCombat : MonoBehaviourPun
         {
             if (hit.collider.CompareTag("Player"))
             {
-                lastTargetHit = hit.collider.GetComponent<PlayerBehaviour>();
-                lastTargetHit.health -= weaponDamage;
-                lastTargetHit.pi.UpdateHealthUI();
+                hit.collider.GetComponent<PlayerBehaviour>().health -= weaponDamage;
+                int health = hit.collider.GetComponent<PlayerBehaviour>().health;
+                Debug.Log(health);
+                hit.collider.GetComponent<PlayerBehaviour>().pi.UpdateHealthUI(health);
                 HitMarker();
             }
             Debug.Log(pb.pv.Owner + " Shot " + hit.collider.name);

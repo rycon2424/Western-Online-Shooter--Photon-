@@ -114,7 +114,7 @@ public class PlayerBehaviour : MonoBehaviourPun
         health = 100;
         dead = false;
         anim.SetBool("Alive", true);
-        pi.UpdateHealthUI();
+        pi.UpdateHealthUI(health);
     }
 
     void Movement()
@@ -188,5 +188,4 @@ public class PlayerBehaviour : MonoBehaviourPun
         anim.SetLookAtWeight(1);
         anim.SetLookAtPosition(lookObj.position);
     }
-
 }

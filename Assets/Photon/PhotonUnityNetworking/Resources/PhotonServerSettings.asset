@@ -29,15 +29,8 @@ MonoBehaviour:
   EnableSupportLogger: 0
   RunInBackground: 1
   RpcList:
-  - DestroySpaceship
-  - Fire
-  - RespawnSpaceship
-  - HardLand
-  - SyncBool
   - AimRaycast
   - Respawn
-  - HitMarker
-  - ShotHit
-  - TargetTakeDamage
+  - SyncHealth
   DisableAutoOpenWizard: 1
   ShowSettings: 1
