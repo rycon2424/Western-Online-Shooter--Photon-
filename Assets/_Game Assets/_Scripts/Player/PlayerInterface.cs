@@ -64,18 +64,67 @@ public class PlayerInterface : MonoBehaviourPun
             case PlayerCombat.GunType.revolver:
                 weaponSort.sprite = revolver;
                 pb.anim.SetInteger("WeaponType", 1);
+                if (pb.onlineReady)
+                {
+                    pb.pv.RPC("SyncWeaponUI", RpcTarget.All, pb.anim.GetInteger("WeaponType"));
+                }
+                else
+                {
+                    SyncWeaponUI(pb.anim.GetInteger("WeaponType"));
+                }
+                //pb.pv.RPC("SyncWeaponUI", RpcTarget.All);
                 break;
             case PlayerCombat.GunType.rifle:
                 weaponSort.sprite = rifle;
                 pb.anim.SetInteger("WeaponType", 2);
+                if (pb.onlineReady)
+                {
+                    pb.pv.RPC("SyncWeaponUI", RpcTarget.All, pb.anim.GetInteger("WeaponType"));
+                }
+                else
+                {
+                    SyncWeaponUI(pb.anim.GetInteger("WeaponType"));
+                }
                 break;
             case PlayerCombat.GunType.noWeapon:
                 weaponSort.sprite = noWeapon;
                 pb.anim.SetInteger("WeaponType", 0);
+                if (pb.onlineReady)
+                {
+                    pb.pv.RPC("SyncWeaponUI", RpcTarget.All, pb.anim.GetInteger("WeaponType"));
+                }
+                else
+                {
+                    SyncWeaponUI(pb.anim.GetInteger("WeaponType"));
+                }
                 break;
             default:
                 break;
         }
     }
 
+    public GameObject revolverModel;
+    public GameObject rifleModel;
+
+    [PunRPC]
+    public void SyncWeaponUI(int weaponType)
+    {
+        switch (weaponType)
+        {
+            case 0:
+                revolverModel.SetActive(false);
+                rifleModel.SetActive(false);
+                break;
+            case 1:
+                revolverModel.SetActive(true);
+                rifleModel.SetActive(false);
+                break;
+            case 2:
+                revolverModel.SetActive(false);
+                rifleModel.SetActive(true);
+                break;
+            default:
+                break;
+        }
+    }
 }
