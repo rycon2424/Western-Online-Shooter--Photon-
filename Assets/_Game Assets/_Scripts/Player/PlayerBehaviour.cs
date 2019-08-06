@@ -105,6 +105,7 @@ public class PlayerBehaviour : MonoBehaviourPun
     public void Death()
     {
         anim.SetBool("Alive", false);
+        anim.SetBool("Aim", false);
         pv.RPC("DisableCollider", RpcTarget.All);
     }
 
