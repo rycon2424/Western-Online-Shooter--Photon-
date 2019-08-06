@@ -22,7 +22,10 @@ public class PlayerInterface : MonoBehaviourPun
     // Update is called once per frame
     void Update()
     {
-
+        if (pb.pv.IsMine == false)
+        {
+            return;
+        }
     }
 
     public void UpdateHealthUI(int health)
@@ -45,6 +48,11 @@ public class PlayerInterface : MonoBehaviourPun
             Debug.Log("Die");
             pb.dead = true;
         }
+    }
+
+    void UpdateWeaponUI()
+    {
+
     }
 
 }

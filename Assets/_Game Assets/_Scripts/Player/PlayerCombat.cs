@@ -23,10 +23,49 @@ public class PlayerCombat : MonoBehaviourPun
         {
             return;
         }
+        SelectWeapon();
     }
     
+    void SelectWeapon()
+    {
+        if (Input.GetAxis("Mouse ScrollWheel") > 0f) // forward
+        {
+            if (typeGun == GunType.noWeapon)
+            {
+                typeGun = GunType.revolver;
+            }
+            else if (typeGun == GunType.revolver)
+            {
+                typeGun = GunType.rifle;
+            }
+            else if (typeGun == GunType.rifle)
+            {
+                typeGun = GunType.noWeapon;
+            }
+        }
+        else if (Input.GetAxis("Mouse ScrollWheel") < 0f) // backwards
+        {
+            if (typeGun == GunType.revolver)
+            {
+                typeGun = GunType.noWeapon;
+            }
+            else if (typeGun == GunType.rifle)
+            {
+                typeGun = GunType.revolver;
+            }
+            else if (typeGun == GunType.noWeapon)
+            {
+                typeGun = GunType.rifle;
+            }
+        }
+    }
+
     public void Combat()
     {
+        if (typeGun == GunType.noWeapon)
+        {
+            return;
+        }
         if (Input.GetMouseButton(1))
         {
             EnterCombat();
@@ -40,14 +79,8 @@ public class PlayerCombat : MonoBehaviourPun
     public void EnterCombat()
     {
         pb.anim.SetBool("Aim", true);
-        if (typeGun == GunType.revolver)
-        {
-            pb.anim.SetBool("1Handed", true);
-        }
-        else
-        {
-            pb.anim.SetBool("2Handed", true);
-        }
+        pb.anim.SetBool("1Handed", true);
+
         if (Input.GetMouseButton(0) && canShoot == true && pb.onlineReady)
         {
             pb.pv.RPC("AimRaycast", RpcTarget.All);
@@ -62,7 +95,6 @@ public class PlayerCombat : MonoBehaviourPun
     {
         pb.anim.SetBool("Aim", false);
         pb.anim.SetBool("1Handed", false);
-        pb.anim.SetBool("2Handed", false);
     }
 
     void LateUpdate()
@@ -74,13 +106,15 @@ public class PlayerCombat : MonoBehaviourPun
         chest.LookAt(pb.lookObj.position);
         chest.rotation = chest.rotation * Quaternion.Euler(offset);
     }
-
+    
     [Header("WeaponStats")]
     public GunType typeGun;
-    public enum GunType { revolver, shotgun, rifle}
+    public enum GunType { revolver, rifle, noWeapon }
     public float weaponRange;
     public int weaponDamage;
     public float fireRate;
+    
+    [Header("Other Stats")]
     public bool canShoot;
     public LayerMask canHit;
     public Transform cameraTransform;
@@ -91,7 +125,7 @@ public class PlayerCombat : MonoBehaviourPun
     void AimRaycast()
     {
         Debug.DrawRay(cameraTransform.position, cameraTransform.forward * weaponRange, Color.red);
-
+        
         if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, weaponRange, canHit))
         {
             if (hit.collider.CompareTag("Player"))
@@ -120,9 +154,9 @@ public class PlayerCombat : MonoBehaviourPun
             case GunType.revolver:
                 pb.ps.Audio_RevolverShot();
                 break;
-            case GunType.shotgun:
-                break;
             case GunType.rifle:
+                break;
+            case GunType.noWeapon:
                 break;
             default:
                 break;

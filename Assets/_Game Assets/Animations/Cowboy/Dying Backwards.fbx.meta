@@ -185,7 +185,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Dying
       takeName: mixamo.com
-      firstFrame: 0
+      firstFrame: 54
       lastFrame: 357
       wrapMode: 0
       orientationOffsetY: 0
