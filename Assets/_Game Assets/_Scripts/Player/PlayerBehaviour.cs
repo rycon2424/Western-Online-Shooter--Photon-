@@ -75,7 +75,7 @@ public class PlayerBehaviour : MonoBehaviourPun
         if (dead == false)
         {
             OnGround();
-            if (onGround == true)
+            if (onGround == true && anim.GetBool("Falling") == false)
             {
                 Movement();
                 pc.Combat();
