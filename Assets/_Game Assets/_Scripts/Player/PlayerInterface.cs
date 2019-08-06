@@ -6,7 +6,7 @@ using Photon.Pun;
 
 public class PlayerInterface : MonoBehaviourPun
 {
-
+    [Header("Health UI")]
     public Slider healthBar;
     public PlayerBehaviour pb;
 
@@ -15,6 +15,7 @@ public class PlayerInterface : MonoBehaviourPun
     {
         pb = GetComponent<PlayerBehaviour>();
         UpdateHealthUI(pb.health);
+        UpdateWeaponUI();
     }
 
     private int currentHealth;
@@ -50,9 +51,31 @@ public class PlayerInterface : MonoBehaviourPun
         }
     }
 
-    void UpdateWeaponUI()
-    {
+    [Header("Weapon UI")]
+    public Image weaponSort;
+    public Sprite noWeapon;
+    public Sprite revolver;
+    public Sprite rifle;
 
+    public void UpdateWeaponUI()
+    {
+        switch (pb.pc.typeGun)
+        {
+            case PlayerCombat.GunType.revolver:
+                weaponSort.sprite = revolver;
+                pb.anim.SetInteger("WeaponType", 1);
+                break;
+            case PlayerCombat.GunType.rifle:
+                weaponSort.sprite = rifle;
+                pb.anim.SetInteger("WeaponType", 2);
+                break;
+            case PlayerCombat.GunType.noWeapon:
+                weaponSort.sprite = noWeapon;
+                pb.anim.SetInteger("WeaponType", 0);
+                break;
+            default:
+                break;
+        }
     }
 
 }

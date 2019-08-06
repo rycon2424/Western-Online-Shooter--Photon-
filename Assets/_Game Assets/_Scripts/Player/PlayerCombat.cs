@@ -58,6 +58,7 @@ public class PlayerCombat : MonoBehaviourPun
                 typeGun = GunType.rifle;
             }
         }
+        pb.pi.UpdateWeaponUI();
     }
 
     public void Combat()
