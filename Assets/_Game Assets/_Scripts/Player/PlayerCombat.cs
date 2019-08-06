@@ -86,6 +86,26 @@ public class PlayerCombat : MonoBehaviourPun
                 typeGun = GunType.rifle;
             }
         }
+        switch (typeGun)
+        {
+            case GunType.revolver:
+                weaponRange = 50;
+                weaponDamage = 15;
+                fireRate = 1;
+                break;
+            case GunType.rifle:
+                weaponRange = 200;
+                weaponDamage = 30;
+                fireRate = 2;
+                break;
+            case GunType.noWeapon:
+                weaponRange = 0;
+                weaponDamage = 0;
+                fireRate = 0;
+                break;
+            default:
+                break;
+        }
     }
 
     public void Combat()
@@ -148,7 +168,6 @@ public class PlayerCombat : MonoBehaviourPun
     public Transform cameraTransform;
     RaycastHit hit;
     
-
     [PunRPC]
     void AimRaycast()
     {
@@ -183,6 +202,7 @@ public class PlayerCombat : MonoBehaviourPun
                 pb.ps.Audio_RevolverShot();
                 break;
             case GunType.rifle:
+                pb.ps.Audio_RifleShot();
                 break;
             case GunType.noWeapon:
                 break;
