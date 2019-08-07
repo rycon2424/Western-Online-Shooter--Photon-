@@ -34,7 +34,7 @@ public class PlayerBehaviour : MonoBehaviourPun
     [HideInInspector]
     public PhotonView pv;
 
-    void Start()
+    void Awake()
     {
         cam.enabled = false;
         al.enabled = false;
