@@ -13,8 +13,7 @@ public class PlayerInterface : MonoBehaviourPun
         oc = GetComponentInChildren<OrbitCamera>();
         UpdateHealthUI(pb.health);
         UpdateWeaponUI();
-        openMenu = false;
-        OpenCloseMenu();
+        CloseMenu();
     }
 
     private int currentHealth;
