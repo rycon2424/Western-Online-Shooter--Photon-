@@ -375,6 +375,7 @@ MonoBehaviour:
   minVerticalAngle: -20
   maxVerticalAngle: 45
   useRMBToAim: 0
+  pause: 0
 --- !u!114 &6673238053736063661
 MonoBehaviour:
   m_ObjectHideFlags: 0

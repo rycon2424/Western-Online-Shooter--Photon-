@@ -55,6 +55,7 @@ public class PlayerInterface : MonoBehaviourPun
     public void OpenMenu()
     {
         Cursor.lockState = CursorLockMode.None;
+        oc.pause = true;
         Cursor.visible = true;
         menu.SetActive(true);
         openMenu = true;
@@ -64,6 +65,7 @@ public class PlayerInterface : MonoBehaviourPun
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        oc.pause = false;
         menu.SetActive(false);
         openMenu = false;
     }

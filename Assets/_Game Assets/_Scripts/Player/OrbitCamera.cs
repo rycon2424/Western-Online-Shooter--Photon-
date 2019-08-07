@@ -19,6 +19,7 @@ public class OrbitCamera : MonoBehaviour
     public float minVerticalAngle = -60.0f;
     public float maxVerticalAngle = 60.0f;
     public bool useRMBToAim = false;
+    public bool pause;
 
     /* These variables are meant to store values given by the script and
      * not the user */
@@ -65,24 +66,14 @@ public class OrbitCamera : MonoBehaviour
      * to adjusting the camera to avoid geometry clipping */
     void LateUpdate()
     {
+        
         if (!viewTarget)
             return;
-
-        /* We check for right mouse button functionality, set the rotation
-         * angles, and lock the mouse cursor */
-        if (!useRMBToAim)
+        if (pause == false)
         {
-            h += Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;
-            v -= Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime;
-
-            h = ClampAngle(h, -360.0f, 360.0f);
-            v = ClampAngle(v, minVerticalAngle, maxVerticalAngle);
-
-            newRotation = Quaternion.Euler(v, h, 0.0f);
-        }
-        else
-        {
-            if (Input.GetMouseButton(1))
+            /* We check for right mouse button functionality, set the rotation
+             * angles, and lock the mouse cursor */
+            if (!useRMBToAim)
             {
                 h += Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;
                 v -= Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime;
@@ -92,26 +83,39 @@ public class OrbitCamera : MonoBehaviour
 
                 newRotation = Quaternion.Euler(v, h, 0.0f);
             }
+            else
+            {
+                if (Input.GetMouseButton(1))
+                {
+                    h += Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;
+                    v -= Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime;
+
+                    h = ClampAngle(h, -360.0f, 360.0f);
+                    v = ClampAngle(v, minVerticalAngle, maxVerticalAngle);
+
+                    newRotation = Quaternion.Euler(v, h, 0.0f);
+                }
+            }
         }
 
-        /* We set the distance by moving the mouse wheel and use a custom
-         * growth function as the time value for linear interpolation */
-        distance = Mathf.Clamp(distance - Input.GetAxis("Mouse ScrollWheel") * 10, minDistance, maxDistance);
-        smoothDistance = Mathf.Lerp(smoothDistance, distance, TimeSignature(distanceSpeed));
+            /* We set the distance by moving the mouse wheel and use a custom
+             * growth function as the time value for linear interpolation */
+            distance = Mathf.Clamp(distance - Input.GetAxis("Mouse ScrollWheel") * 10, minDistance, maxDistance);
+            smoothDistance = Mathf.Lerp(smoothDistance, distance, TimeSignature(distanceSpeed));
 
-        /*We give the rotation some smoothing for a nicer effect */
-        smoothRotation = Quaternion.Slerp(smoothRotation, newRotation, TimeSignature((1 / rotationDampening) * 100.0f));
+            /*We give the rotation some smoothing for a nicer effect */
+            smoothRotation = Quaternion.Slerp(smoothRotation, newRotation, TimeSignature((1 / rotationDampening) * 100.0f));
 
-        newPosition = viewTarget.position;
-        newPosition += smoothRotation * new Vector3(0.0f, height, -smoothDistance);
+            newPosition = viewTarget.position;
+            newPosition += smoothRotation * new Vector3(0.0f, height, -smoothDistance);
 
-        /* Calls the function to adjust the camera position to avoid clipping */
-        CheckSphere();
+            /* Calls the function to adjust the camera position to avoid clipping */
+            CheckSphere();
 
-        smoothRotation.eulerAngles = new Vector3(smoothRotation.eulerAngles.x, smoothRotation.eulerAngles.y, 0.0f);
+            smoothRotation.eulerAngles = new Vector3(smoothRotation.eulerAngles.x, smoothRotation.eulerAngles.y, 0.0f);
 
-        cameraTransform.position = newPosition;
-        cameraTransform.rotation = smoothRotation;
+            cameraTransform.position = newPosition;
+            cameraTransform.rotation = smoothRotation;
     }
 
     /* This is where the camera checks for a collsion hit within a specified radius,
