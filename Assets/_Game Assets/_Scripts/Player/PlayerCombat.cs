@@ -68,6 +68,10 @@ public class PlayerCombat : MonoBehaviourPun
             }
             else if (typeGun == GunType.rifle)
             {
+                typeGun = GunType.tommygun;
+            }
+            else if (typeGun == GunType.tommygun)
+            {
                 typeGun = GunType.noWeapon;
             }
         }
@@ -81,9 +85,13 @@ public class PlayerCombat : MonoBehaviourPun
             {
                 typeGun = GunType.revolver;
             }
-            else if (typeGun == GunType.noWeapon)
+            else if (typeGun == GunType.tommygun)
             {
                 typeGun = GunType.rifle;
+            }
+            else if (typeGun == GunType.noWeapon)
+            {
+                typeGun = GunType.tommygun;
             }
         }
         switch (typeGun)
@@ -97,6 +105,11 @@ public class PlayerCombat : MonoBehaviourPun
                 weaponRange = 200;
                 weaponDamage = 30;
                 fireRate = 2;
+                break;
+            case GunType.tommygun:
+                weaponRange = 30;
+                weaponDamage = 5;
+                fireRate = 0.15f;
                 break;
             case GunType.noWeapon:
                 weaponRange = 0;
@@ -156,7 +169,7 @@ public class PlayerCombat : MonoBehaviourPun
     
     [Header("WeaponStats")]
     public GunType typeGun;
-    public enum GunType { revolver, rifle, noWeapon }
+    public enum GunType { revolver, rifle, tommygun, noWeapon }
     public float weaponRange;
     public int weaponDamage;
     public float fireRate;
@@ -201,6 +214,9 @@ public class PlayerCombat : MonoBehaviourPun
                 break;
             case GunType.rifle:
                 pb.ps.Audio_RifleShot();
+                break;
+            case GunType.tommygun:
+                pb.ps.Audio_TommygunShot();
                 break;
             case GunType.noWeapon:
                 break;

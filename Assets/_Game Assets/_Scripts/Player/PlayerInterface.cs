@@ -11,7 +11,10 @@ public class PlayerInterface : MonoBehaviourPun
     {
         pb = GetComponent<PlayerBehaviour>();
         oc = GetComponentInChildren<OrbitCamera>();
-        UpdateHealthUI(pb.health);
+        if (pb.onlineReady == true)
+        {
+            UpdateHealthUI(pb.health);
+        }
         UpdateWeaponUI();
         CloseMenu();
     }
@@ -117,6 +120,7 @@ public class PlayerInterface : MonoBehaviourPun
     public Sprite noWeapon;
     public Sprite revolver;
     public Sprite rifle;
+    public Sprite tommygun;
 
     public void UpdateWeaponUI()
     {
@@ -151,6 +155,18 @@ public class PlayerInterface : MonoBehaviourPun
                     SyncWeaponUI(pb.anim.GetInteger("WeaponType"));
                 }
                 break;
+            case PlayerCombat.GunType.tommygun:
+                weaponSort.sprite = tommygun;
+                pb.anim.SetInteger("WeaponType", 3);
+                if (pb.onlineReady)
+                {
+                    pb.pv.RPC("SyncWeaponUI", RpcTarget.All, pb.anim.GetInteger("WeaponType"));
+                }
+                else
+                {
+                    SyncWeaponUI(pb.anim.GetInteger("WeaponType"));
+                }
+                break;
             case PlayerCombat.GunType.noWeapon:
                 weaponSort.sprite = noWeapon;
                 pb.anim.SetInteger("WeaponType", 0);
@@ -168,8 +184,10 @@ public class PlayerInterface : MonoBehaviourPun
         }
     }
 
+    [Header("Gun models")]
     public GameObject revolverModel;
     public GameObject rifleModel;
+    public GameObject tommygunModel;
 
     [PunRPC]
     public void SyncWeaponUI(int weaponType)
@@ -179,14 +197,22 @@ public class PlayerInterface : MonoBehaviourPun
             case 0:
                 revolverModel.SetActive(false);
                 rifleModel.SetActive(false);
+                tommygunModel.SetActive(false);
                 break;
             case 1:
                 revolverModel.SetActive(true);
                 rifleModel.SetActive(false);
+                tommygunModel.SetActive(false);
                 break;
             case 2:
                 revolverModel.SetActive(false);
                 rifleModel.SetActive(true);
+                tommygunModel.SetActive(false);
+                break;
+            case 3:
+                revolverModel.SetActive(false);
+                rifleModel.SetActive(false);
+                tommygunModel.SetActive(true);
                 break;
             default:
                 break;

@@ -9,6 +9,7 @@ public class PlayerSound : MonoBehaviourPun
     public AudioClip[] footSteps;
     public AudioClip[] revolverShots;
     public AudioClip[] rifleShots;
+    public AudioClip[] tommygunShots;
     public AudioSource playerSource;
     public AudioSource gunSource;
     public AudioSource hitmarkerSource;
@@ -35,6 +36,12 @@ public class PlayerSound : MonoBehaviourPun
     public void Audio_RifleShot()
     {
         gunSource.clip = rifleShots[Random.Range(0, rifleShots.Length)];
+        gunSource.Play();
+    }
+
+    public void Audio_TommygunShot()
+    {
+        gunSource.clip = tommygunShots[Random.Range(0, tommygunShots.Length)];
         gunSource.Play();
     }
 
