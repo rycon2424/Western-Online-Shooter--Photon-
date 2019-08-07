@@ -1053,6 +1053,16 @@ PrefabInstance:
       propertyPath: offsetKnife.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8282014711370084330, guid: a3bf83496238e654b975788535ce18a2,
+        type: 3}
+      propertyPath: rifleAmmo
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8282014711370084330, guid: a3bf83496238e654b975788535ce18a2,
+        type: 3}
+      propertyPath: tommygunAmmo
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 6842935164246843361, guid: a3bf83496238e654b975788535ce18a2,
         type: 3}
       propertyPath: viewIdField

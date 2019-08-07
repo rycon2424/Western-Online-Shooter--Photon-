@@ -67,11 +67,29 @@ public class PlayerCombat : MonoBehaviourPun
             }
             else if (typeGun == GunType.revolver)
             {
-                typeGun = GunType.rifle;
+                if (rifleAmmo > 0)
+                {
+                    typeGun = GunType.rifle;
+                }
+                else if (tommygunAmmo > 0)
+                {
+                    typeGun = GunType.tommygun;
+                }
+                else
+                {
+                    typeGun = GunType.noWeapon;
+                }
             }
             else if (typeGun == GunType.rifle)
             {
-                typeGun = GunType.tommygun;
+                if (tommygunAmmo > 0)
+                {
+                    typeGun = GunType.tommygun;
+                }
+                else
+                {
+                    typeGun = GunType.noWeapon;
+                }
             }
             else if (typeGun == GunType.tommygun)
             {
@@ -90,11 +108,29 @@ public class PlayerCombat : MonoBehaviourPun
             }
             else if (typeGun == GunType.tommygun)
             {
-                typeGun = GunType.rifle;
+                if (rifleAmmo > 0)
+                {
+                    typeGun = GunType.rifle;
+                }
+                else
+                {
+                    typeGun = GunType.revolver;
+                }
             }
             else if (typeGun == GunType.noWeapon)
             {
-                typeGun = GunType.tommygun;
+                if (tommygunAmmo > 0)
+                {
+                    typeGun = GunType.tommygun;
+                }
+                else if (rifleAmmo > 0)
+                {
+                    typeGun = GunType.rifle;
+                }
+                else
+                {
+                    typeGun = GunType.revolver;
+                }
             }
         }
         if (pb.onlineReady)
@@ -139,6 +175,10 @@ public class PlayerCombat : MonoBehaviourPun
 
     public void Combat()
     {
+        if (pb.pi.openMenu == true)
+        {
+            return;
+        }
         if (typeGun == GunType.noWeapon)
         {
             pb.anim.SetBool("Aim", false);
@@ -169,11 +209,11 @@ public class PlayerCombat : MonoBehaviourPun
     {
         pb.anim.SetBool("Aim", true);
 
-        if (Input.GetMouseButton(0) && canShoot == true && pb.onlineReady)
+        if (Input.GetMouseButton(0) && canShoot == true && pb.onlineReady && CheckAmmunition())
         {
             pb.pv.RPC("AimRaycast", RpcTarget.All);
         }
-        else if (Input.GetMouseButton(0) && canShoot == true && pb.onlineReady == false)
+        else if (Input.GetMouseButton(0) && canShoot == true && pb.onlineReady == false && CheckAmmunition())
         {
             AimRaycast();
         }
@@ -200,6 +240,10 @@ public class PlayerCombat : MonoBehaviourPun
     public float weaponRange;
     public int weaponDamage;
     public float fireRate;
+
+    [Header("Ammunition")]
+    public int rifleAmmo;
+    public int tommygunAmmo;
 
     [Header("Other Stats")]
     public bool canSwitchWeapons = true;
@@ -233,6 +277,7 @@ public class PlayerCombat : MonoBehaviourPun
             Debug.Log(pb.pv.Owner + " missed ");
         }
         GunShotSound();
+        UseAmmo();
         Invoke("FireRate", fireRate);
         canShoot = false;
     }
@@ -334,9 +379,64 @@ public class PlayerCombat : MonoBehaviourPun
         knifeInHand.SetActive(false);
         sheatedKnife.SetActive(true);
         canSwitchWeapons = true;
+        canShoot = true;
     }
 
     #endregion
+
+    bool CheckAmmunition()
+    {
+        switch (typeGun)
+        {
+            case GunType.revolver:
+                return true;
+            case GunType.rifle:
+                if (rifleAmmo > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            case GunType.tommygun:
+                if (tommygunAmmo > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            case GunType.noWeapon:
+                return false;
+            default:
+                return false;
+        }
+    }
+
+    void UseAmmo()
+    {
+        switch (typeGun)
+        {
+            case GunType.revolver:
+                pb.pi.UpdateAmmoUI(-1);
+                break;
+            case GunType.rifle:
+                rifleAmmo -= 1;
+                pb.pi.UpdateAmmoUI(rifleAmmo);
+                break;
+            case GunType.tommygun:
+                tommygunAmmo -= 1;
+                pb.pi.UpdateAmmoUI(tommygunAmmo);
+                break;
+            case GunType.noWeapon:
+                pb.pi.UpdateAmmoUI(-1);
+                break;
+            default:
+                break;
+        }
+    }
 
     void GunShotSound()
     {

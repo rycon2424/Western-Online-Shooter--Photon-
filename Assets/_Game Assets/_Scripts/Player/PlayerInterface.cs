@@ -130,6 +130,9 @@ public class PlayerInterface : MonoBehaviourPun
     public Sprite rifle;
     public Sprite tommygun;
 
+    [Header("Weapon Ammo")]
+    public Text ammoText;
+
     public void UpdateWeaponUI()
     {
         if (pb == null)
@@ -149,7 +152,7 @@ public class PlayerInterface : MonoBehaviourPun
                 {
                     SyncWeaponUI(pb.anim.GetInteger("WeaponType"));
                 }
-                //pb.pv.RPC("SyncWeaponUI", RpcTarget.All);
+                UpdateAmmoUI(-1);
                 break;
             case PlayerCombat.GunType.rifle:
                 weaponSort.sprite = rifle;
@@ -162,6 +165,7 @@ public class PlayerInterface : MonoBehaviourPun
                 {
                     SyncWeaponUI(pb.anim.GetInteger("WeaponType"));
                 }
+                UpdateAmmoUI(pb.pc.rifleAmmo);
                 break;
             case PlayerCombat.GunType.tommygun:
                 weaponSort.sprite = tommygun;
@@ -174,6 +178,7 @@ public class PlayerInterface : MonoBehaviourPun
                 {
                     SyncWeaponUI(pb.anim.GetInteger("WeaponType"));
                 }
+                UpdateAmmoUI(pb.pc.tommygunAmmo);
                 break;
             case PlayerCombat.GunType.noWeapon:
                 weaponSort.sprite = noWeapon;
@@ -186,9 +191,22 @@ public class PlayerInterface : MonoBehaviourPun
                 {
                     SyncWeaponUI(pb.anim.GetInteger("WeaponType"));
                 }
+                UpdateAmmoUI(-1);
                 break;
             default:
                 break;
+        }
+    }
+
+    public void UpdateAmmoUI(int ammo)
+    {
+        if (ammo == -1)
+        {
+            ammoText.text = "∞";
+        }
+        else
+        {
+            ammoText.text = ammo.ToString();
         }
     }
 

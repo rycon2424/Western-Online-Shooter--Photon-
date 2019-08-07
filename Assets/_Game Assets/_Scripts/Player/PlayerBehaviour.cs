@@ -150,7 +150,7 @@ public class PlayerBehaviour : MonoBehaviourPun
         var CharacterRotation = cam.transform.rotation;
         CharacterRotation.x = 0;
         CharacterRotation.z = 0;
-        transform.rotation = Quaternion.Slerp(transform.rotation, CharacterRotation, Time.deltaTime * 8);
+        transform.rotation = Quaternion.Slerp(transform.rotation, CharacterRotation, Time.deltaTime * 12);
     }
 
     [Header("Raycast")]
@@ -184,6 +184,7 @@ public class PlayerBehaviour : MonoBehaviourPun
     public void HasLanded()
     {
         anim.SetBool("Falling", false);
+        pc.HideKnife();
     }
 
     IEnumerator OffGround()
