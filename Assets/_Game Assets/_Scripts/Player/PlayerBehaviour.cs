@@ -29,6 +29,7 @@ public class PlayerBehaviour : MonoBehaviourPun
     public PlayerCombat pc;
     public PlayerInterface pi;
     public PlayerSound ps;
+    public GameSetupController gsc;
 
     [HideInInspector]
     public PhotonView pv;
@@ -43,6 +44,7 @@ public class PlayerBehaviour : MonoBehaviourPun
         pi = GetComponent<PlayerInterface>();
         pc = GetComponent<PlayerCombat>();
         ps = GetComponent<PlayerSound>();
+        gsc = FindObjectOfType<GameSetupController>();
         anim = GetComponent<Animator>();
         if (pv.IsMine == false && onlineReady == true)
         {
@@ -53,6 +55,14 @@ public class PlayerBehaviour : MonoBehaviourPun
         cam.enabled = true;
         al.enabled = true;
         oc.enabled = true;
+        if (onlineReady)
+        {
+            pv.RPC("Respawn", RpcTarget.All);
+        }
+        else
+        {
+            Respawn();
+        }
     }
 
     [HideInInspector]
@@ -111,14 +121,16 @@ public class PlayerBehaviour : MonoBehaviourPun
     [PunRPC]
     void Respawn()
     {
-        GameSetupController gsc;
-        gsc = FindObjectOfType<GameSetupController>();
-        transform.position = gsc.spawns[Random.Range(0, gsc.spawns.Length)].position;
+        if (gsc != null)
+        {
+            transform.position = gsc.spawns[Random.Range(0, gsc.spawns.Length)].position;
+        }
         GetComponent<CharacterController>().enabled = true;
         health = 100;
         dead = false;
         anim.SetBool("Alive", true);
         pc.typeGun = PlayerCombat.GunType.noWeapon;
+        pc.AssignDamage();
         pi.UpdateWeaponUI();
         pi.UpdateHealthUI(health);
     }

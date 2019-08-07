@@ -1038,6 +1038,21 @@ PrefabInstance:
       propertyPath: onlineReady
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8282014711370084330, guid: a3bf83496238e654b975788535ce18a2,
+        type: 3}
+      propertyPath: offsetKnife.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8282014711370084330, guid: a3bf83496238e654b975788535ce18a2,
+        type: 3}
+      propertyPath: offsetKnife.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8282014711370084330, guid: a3bf83496238e654b975788535ce18a2,
+        type: 3}
+      propertyPath: offsetKnife.z
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6842935164246843361, guid: a3bf83496238e654b975788535ce18a2,
         type: 3}
       propertyPath: viewIdField
@@ -1115,6 +1130,26 @@ PrefabInstance:
         type: 3}
       propertyPath: viewIdField
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7363956452609127060, guid: a3bf83496238e654b975788535ce18a2,
+        type: 3}
+      propertyPath: viewIdField
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7363956452609127060, guid: a3bf83496238e654b975788535ce18a2,
+        type: 3}
+      propertyPath: InstantiationId
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6463881299100799812, guid: a3bf83496238e654b975788535ce18a2,
+        type: 3}
+      propertyPath: viewIdField
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6463881299100799812, guid: a3bf83496238e654b975788535ce18a2,
+        type: 3}
+      propertyPath: InstantiationId
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a3bf83496238e654b975788535ce18a2, type: 3}

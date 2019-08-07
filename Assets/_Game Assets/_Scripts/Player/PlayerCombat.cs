@@ -28,29 +28,32 @@ public class PlayerCombat : MonoBehaviourPun
     
     void SelectWeapon()
     {
-        if (Input.GetAxis("Mouse ScrollWheel") > 0f) // forward
+        if (canSwitchWeapons)
         {
-            if (pb.onlineReady)
+            if (Input.GetAxis("Mouse ScrollWheel") > 0f) // forward
             {
-                pb.pv.RPC("SyncWeaponCycle", RpcTarget.All, true);
+                if (pb.onlineReady)
+                {
+                    pb.pv.RPC("SyncWeaponCycle", RpcTarget.All, true);
+                }
+                else
+                {
+                    SyncWeaponCycle(true);
+                }
             }
-            else
+            else if (Input.GetAxis("Mouse ScrollWheel") < 0f) // backwards
             {
-                SyncWeaponCycle(true);
+                if (pb.onlineReady)
+                {
+                    pb.pv.RPC("SyncWeaponCycle", RpcTarget.All, false);
+                }
+                else
+                {
+                    SyncWeaponCycle(false);
+                }
             }
+            pb.pi.UpdateWeaponUI();
         }
-        else if (Input.GetAxis("Mouse ScrollWheel") < 0f) // backwards
-        {
-            if (pb.onlineReady)
-            {
-                pb.pv.RPC("SyncWeaponCycle", RpcTarget.All, false);
-            }
-            else
-            {
-                SyncWeaponCycle(false);
-            }
-        }
-        pb.pi.UpdateWeaponUI();
     }
 
     [PunRPC]
@@ -94,6 +97,19 @@ public class PlayerCombat : MonoBehaviourPun
                 typeGun = GunType.tommygun;
             }
         }
+        if (pb.onlineReady)
+        {
+            pb.pv.RPC("AssignDamage", RpcTarget.All);
+        }
+        else if (pb.onlineReady == false)
+        {
+            AssignDamage();
+        }
+    }
+
+    [PunRPC]
+    public void AssignDamage()
+    {
         switch (typeGun)
         {
             case GunType.revolver:
@@ -112,8 +128,8 @@ public class PlayerCombat : MonoBehaviourPun
                 fireRate = 0.15f;
                 break;
             case GunType.noWeapon:
-                weaponRange = 0;
-                weaponDamage = 0;
+                weaponRange = 1;
+                weaponDamage = 80;
                 fireRate = 0;
                 break;
             default:
@@ -126,6 +142,17 @@ public class PlayerCombat : MonoBehaviourPun
         if (typeGun == GunType.noWeapon)
         {
             pb.anim.SetBool("Aim", false);
+            if (Input.GetMouseButton(0) && pb.onlineReady == true && canShoot)
+            {
+                Debug.Log("melee");
+                pb.pv.RPC("SyncKnifeAnim", RpcTarget.All);
+            }
+            else if (Input.GetMouseButton(0) && canShoot)
+            {
+                Debug.Log("melee");
+                pb.anim.Play("Knife");
+                canSwitchWeapons = false;
+            }
             return;
         }
         if (Input.GetMouseButton(1))
@@ -173,8 +200,9 @@ public class PlayerCombat : MonoBehaviourPun
     public float weaponRange;
     public int weaponDamage;
     public float fireRate;
-    
+
     [Header("Other Stats")]
+    public bool canSwitchWeapons = true;
     public bool canShoot;
     public LayerMask canHit;
     public Transform cameraTransform;
@@ -183,7 +211,7 @@ public class PlayerCombat : MonoBehaviourPun
     [PunRPC]
     void AimRaycast()
     {
-        Debug.DrawRay(cameraTransform.position, cameraTransform.forward * weaponRange, Color.red);
+        Debug.DrawRay(cameraTransform.position, cameraTransform.forward * weaponRange, Color.red, 0.5f);
         
         if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, weaponRange, canHit))
         {
@@ -192,6 +220,10 @@ public class PlayerCombat : MonoBehaviourPun
                 hit.collider.GetComponent<PlayerBehaviour>().health -= weaponDamage;
                 int health = hit.collider.GetComponent<PlayerBehaviour>().health;
                 hit.collider.GetComponent<PlayerBehaviour>().pi.UpdateHealthUI(health);
+                HitMarker();
+            }
+            if (hit.collider.CompareTag("Finish"))
+            {
                 HitMarker();
             }
             Debug.Log(pb.pv.Owner + " Shot " + hit.collider.name);
@@ -204,6 +236,108 @@ public class PlayerCombat : MonoBehaviourPun
         Invoke("FireRate", fireRate);
         canShoot = false;
     }
+
+    #region knife
+
+    [Header("Knife")]
+    public GameObject sheatedKnife;
+    public GameObject knifeInHand;
+    RaycastHit knifeHit;
+
+    [PunRPC]
+    void SyncKnifeAnim()
+    {
+        canSwitchWeapons = false;
+        pb.anim.Play("Knife");
+    }
+
+    public void CastKnife()
+    {
+        if (pb.pv.IsMine == false && pb.onlineReady == true)
+        {
+            return;
+        }
+        if (pb.onlineReady)
+        {
+            pb.pv.RPC("KnifeCast", RpcTarget.All);
+        }
+        else
+        {
+            KnifeCast();
+        }
+    }
+
+    [PunRPC]
+    void KnifeCast()
+    {
+        Vector3 rayOrigin = transform.position + transform.forward * 0.3f + transform.up * 1.4f;
+        Debug.DrawRay(rayOrigin, transform.forward * weaponRange, Color.blue, 1);
+
+        if (Physics.Raycast(rayOrigin, transform.forward, out knifeHit, weaponRange, canHit))
+        {
+            if (knifeHit.collider.CompareTag("Player"))
+            {
+                int firsthealth = knifeHit.collider.GetComponent<PlayerBehaviour>().health;
+                knifeHit.collider.GetComponent<PlayerBehaviour>().health -= weaponDamage;
+                int health = knifeHit.collider.GetComponent<PlayerBehaviour>().health;
+                Debug.Log(health);
+                knifeHit.collider.GetComponent<PlayerBehaviour>().pi.UpdateHealthUI(health);
+                Debug.Log(pb.pv.Owner + " did " + (firsthealth - health) + " damage!");
+                HitMarker();
+            }
+            if (knifeHit.collider.CompareTag("Finish"))
+            {
+                HitMarker();
+            }
+            Debug.Log(pb.pv.Owner + " Knived " + knifeHit.collider.name);
+        }
+        else
+        {
+            Debug.Log(pb.pv.Owner + " missed ");
+        }
+        canShoot = false;
+    }
+
+    public void CanKnifeAgain()
+    {
+        canSwitchWeapons = true;
+        canShoot = true;
+    }
+
+    [HideInInspector]
+    public bool hasKnifeOut;
+
+    public void ShowHideKnife()
+    {
+        if (pb.onlineReady)
+        {
+            //pb.pv.RPC("SyncKnifeVisiblity", RpcTarget.All);
+            SyncKnifeVisiblity();
+        }
+        else
+        {
+            SyncKnifeVisiblity();
+        }
+    }
+
+    //[PunRPC]
+    void SyncKnifeVisiblity()
+    {
+        if (hasKnifeOut)
+        {
+            knifeInHand.SetActive(false);
+            sheatedKnife.SetActive(true);
+            hasKnifeOut = false;
+        }
+        else
+        {
+            sheatedKnife.SetActive(false);
+            knifeInHand.SetActive(true);
+            hasKnifeOut = true;
+        }
+    }
+
+    #endregion
 
     void GunShotSound()
     {

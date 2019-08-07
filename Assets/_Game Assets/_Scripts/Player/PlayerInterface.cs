@@ -11,12 +11,13 @@ public class PlayerInterface : MonoBehaviourPun
     {
         pb = GetComponent<PlayerBehaviour>();
         oc = GetComponentInChildren<OrbitCamera>();
-        if (pb.onlineReady == true)
-        {
-            UpdateHealthUI(pb.health);
-        }
         UpdateWeaponUI();
         CloseMenu();
+        if (pb.onlineReady == false)
+        {
+            return;
+        }
+        UpdateHealthUI(pb.health);
     }
 
     private int currentHealth;
@@ -92,7 +93,14 @@ public class PlayerInterface : MonoBehaviourPun
 
     public void UpdateHealthUI(int health)
     {
-        pb.pv.RPC("SyncHealth", RpcTarget.All, health);
+        if (pb.onlineReady == true)
+        {
+            pb.pv.RPC("SyncHealth", RpcTarget.All, health);
+        }
+        if (pb.onlineReady == false)
+        {
+            SyncHealth(health);
+        }
     }
 
     [PunRPC]

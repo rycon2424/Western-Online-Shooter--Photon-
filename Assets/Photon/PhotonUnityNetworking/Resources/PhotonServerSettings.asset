@@ -30,10 +30,14 @@ MonoBehaviour:
   RunInBackground: 1
   RpcList:
   - AimRaycast
+  - AssignDamage
+  - DisableCollider
+  - KnifeCast
   - Respawn
   - SyncHealth
+  - SyncKnifeAnim
+  - SyncKnifeVisiblity
   - SyncWeaponCycle
   - SyncWeaponUI
-  - DisableCollider
   DisableAutoOpenWizard: 1
   ShowSettings: 1
