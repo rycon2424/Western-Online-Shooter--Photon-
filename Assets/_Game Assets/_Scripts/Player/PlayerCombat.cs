@@ -128,7 +128,7 @@ public class PlayerCombat : MonoBehaviourPun
                 fireRate = 0.15f;
                 break;
             case GunType.noWeapon:
-                weaponRange = 1;
+                weaponRange = 1.5f;
                 weaponDamage = 80;
                 fireRate = 0;
                 break;
@@ -270,7 +270,7 @@ public class PlayerCombat : MonoBehaviourPun
     [PunRPC]
     void KnifeCast()
     {
-        Vector3 rayOrigin = transform.position + transform.forward * 0.3f + transform.up * 1.4f;
+        Vector3 rayOrigin = transform.position + transform.forward * 0.3f + transform.up * 1f;
         Debug.DrawRay(rayOrigin, transform.forward * weaponRange, Color.blue, 1);
 
         if (Physics.Raycast(rayOrigin, transform.forward, out knifeHit, weaponRange, canHit))
