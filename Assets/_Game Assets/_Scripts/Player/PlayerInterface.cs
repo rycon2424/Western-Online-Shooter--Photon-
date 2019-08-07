@@ -118,6 +118,10 @@ public class PlayerInterface : MonoBehaviourPun
 
     public void UpdateWeaponUI()
     {
+        if (pb == null)
+        {
+            pb = GetComponent<PlayerBehaviour>();
+        }
         switch (pb.pc.typeGun)
         {
             case PlayerCombat.GunType.revolver:
