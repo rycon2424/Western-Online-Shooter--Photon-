@@ -309,18 +309,9 @@ public class PlayerCombat : MonoBehaviourPun
 
     public void ShowHideKnife()
     {
-        if (pb.onlineReady)
-        {
-            //pb.pv.RPC("SyncKnifeVisiblity", RpcTarget.All);
-            SyncKnifeVisiblity();
-        }
-        else
-        {
-            SyncKnifeVisiblity();
-        }
+        SyncKnifeVisiblity();
     }
-
-    //[PunRPC]
+    
     void SyncKnifeVisiblity()
     {
         if (hasKnifeOut)
@@ -335,6 +326,14 @@ public class PlayerCombat : MonoBehaviourPun
             knifeInHand.SetActive(true);
             hasKnifeOut = true;
         }
+    }
+
+    //When respawning but knife is still visible
+    public void HideKnife()
+    {
+        knifeInHand.SetActive(false);
+        sheatedKnife.SetActive(true);
+        canSwitchWeapons = true;
     }
 
     #endregion
