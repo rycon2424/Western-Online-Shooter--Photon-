@@ -183,7 +183,7 @@ public class PlayerInterface : MonoBehaviourPun
             case PlayerCombat.GunType.noWeapon:
                 weaponSort.sprite = noWeapon;
                 pb.anim.SetInteger("WeaponType", 0);
-                if (pb.onlineReady)
+                if (pb.onlineReady && pb.pv.IsMine)
                 {
                     pb.pv.RPC("SyncWeaponUI", RpcTarget.All, pb.anim.GetInteger("WeaponType"));
                 }
