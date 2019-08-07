@@ -20,7 +20,7 @@ public class WeaponCrate : MonoBehaviourPun
         {
             col.GetComponent<PlayerCombat>().rifleAmmo += rifleAmmoGiven;
             col.GetComponent<PlayerCombat>().tommygunAmmo += tommyAmmoGiven;
-            col.GetComponent<PlayerCombat>().pb.pv.RPC("DestroySelf", RpcTarget.All);
+            GetComponent<PhotonView>().RPC("DestroySelf", RpcTarget.All);
         }
     }
 

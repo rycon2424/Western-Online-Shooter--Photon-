@@ -40,5 +40,6 @@ MonoBehaviour:
   - SyncWeaponCycle
   - SyncWeaponUI
   - DestroySelf
+  - SpawnWeaponCrate
   DisableAutoOpenWizard: 1
   ShowSettings: 1
