@@ -39,5 +39,6 @@ MonoBehaviour:
   - SyncKnifeVisiblity
   - SyncWeaponCycle
   - SyncWeaponUI
+  - DestroySelf
   DisableAutoOpenWizard: 1
   ShowSettings: 1

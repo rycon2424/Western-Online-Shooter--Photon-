@@ -5,8 +5,8 @@ using Photon.Pun;
 
 public class PlayerCombat : MonoBehaviourPun
 {
-
-    private PlayerBehaviour pb;
+    [HideInInspector]
+    public PlayerBehaviour pb;
 
     private Transform chest;
     public Vector3 offset;
