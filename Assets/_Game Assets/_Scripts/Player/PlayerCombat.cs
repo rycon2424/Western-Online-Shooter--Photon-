@@ -67,6 +67,45 @@ public class PlayerCombat : MonoBehaviourPun
             }
             else if (typeGun == GunType.revolver)
             {
+                typeGun = GunType.rifle;
+            }
+            else if (typeGun == GunType.rifle)
+            {
+                typeGun = GunType.tommygun;
+            }
+            else if (typeGun == GunType.tommygun)
+            {
+                typeGun = GunType.noWeapon;
+            }
+        }
+        else
+        {
+            if (typeGun == GunType.revolver)
+            {
+                typeGun = GunType.noWeapon;
+            }
+            else if (typeGun == GunType.rifle)
+            {
+                typeGun = GunType.revolver;
+            }
+            else if (typeGun == GunType.tommygun)
+            {
+                typeGun = GunType.rifle;
+            }
+            else if (typeGun == GunType.noWeapon)
+            {
+                typeGun = GunType.tommygun;
+            }
+        }
+        #region old version
+        /*if (forward == true)
+        {
+            if (typeGun == GunType.noWeapon)
+            {
+                typeGun = GunType.revolver;
+            }
+            else if (typeGun == GunType.revolver)
+            {
                 if (rifleAmmo > 0)
                 {
                     typeGun = GunType.rifle;
@@ -132,7 +171,8 @@ public class PlayerCombat : MonoBehaviourPun
                     typeGun = GunType.revolver;
                 }
             }
-        }
+        }*/
+        #endregion
         if (pb.onlineReady)
         {
             pb.pv.RPC("AssignDamage", RpcTarget.All);
@@ -384,6 +424,7 @@ public class PlayerCombat : MonoBehaviourPun
 
     #endregion
 
+    #region check ammo / use ammo / sync ammo
     bool CheckAmmunition()
     {
         switch (typeGun)
@@ -414,7 +455,7 @@ public class PlayerCombat : MonoBehaviourPun
                 return false;
         }
     }
-
+    
     void UseAmmo()
     {
         switch (typeGun)
@@ -425,9 +466,11 @@ public class PlayerCombat : MonoBehaviourPun
             case GunType.rifle:
                 rifleAmmo -= 1;
                 pb.pi.UpdateAmmoUI(rifleAmmo);
+                UpdateAmmo(rifleAmmo, true, false);
                 break;
             case GunType.tommygun:
                 tommygunAmmo -= 1;
+                UpdateAmmo(tommygunAmmo, false, true);
                 pb.pi.UpdateAmmoUI(tommygunAmmo);
                 break;
             case GunType.noWeapon:
@@ -437,6 +480,27 @@ public class PlayerCombat : MonoBehaviourPun
                 break;
         }
     }
+    
+    //NEEDS ANOTHER METHOD DEFINITELY trash code
+    public void UpdateAmmo(int ammoToSync, bool isRifle, bool isTommygun)
+    {
+        pb.pv.RPC("SyncAmmo", RpcTarget.All, ammoToSync, isRifle, isTommygun);
+    }
+
+    //NEEDS ANOTHER METHOD DEFINITELY trash code
+    [PunRPC]
+    void SyncAmmo(int ammoToSync, bool isRifle, bool isTommygun)
+    {
+        if (isRifle)
+        {
+            rifleAmmo = ammoToSync;
+        }
+        if (isTommygun)
+        {
+            tommygunAmmo = ammoToSync;
+        }
+    }
+    #endregion
 
     void GunShotSound()
     {

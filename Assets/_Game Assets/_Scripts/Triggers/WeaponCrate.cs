@@ -8,6 +8,8 @@ public class WeaponCrate : MonoBehaviourPun
     public int rifleAmmoGiven;
     public int tommyAmmoGiven;
 
+    private PlayerCombat pc;
+
     void Start()
     {
         rifleAmmoGiven = Random.Range(1, 10);
@@ -18,8 +20,12 @@ public class WeaponCrate : MonoBehaviourPun
     {
         if (col.CompareTag("Player"))
         {
-            col.GetComponent<PlayerCombat>().rifleAmmo += rifleAmmoGiven;
-            col.GetComponent<PlayerCombat>().tommygunAmmo += tommyAmmoGiven;
+            pc = col.GetComponent<PlayerCombat>();
+            pc.rifleAmmo += rifleAmmoGiven;
+            pc.tommygunAmmo += tommyAmmoGiven;
+            pc.UpdateAmmo(pc.rifleAmmo, true, false);
+            pc.UpdateAmmo(pc.tommygunAmmo, false, true);
+            Debug.Log("has now " + pc.rifleAmmo + " Rifle ammo " + " and " + pc.tommygunAmmo + " tommygun ammo ");
             GetComponent<PhotonView>().RPC("DestroySelf", RpcTarget.All);
         }
     }

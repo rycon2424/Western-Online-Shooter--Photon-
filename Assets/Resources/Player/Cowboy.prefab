@@ -3619,7 +3619,7 @@ MonoBehaviour:
   weaponRange: 50
   weaponDamage: 15
   fireRate: 1
-  rifleAmmo: 5
+  rifleAmmo: 0
   tommygunAmmo: 0
   canSwitchWeapons: 1
   canShoot: 1
@@ -5908,17 +5908,12 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.1
       objectReference: {fileID: 0}
-    - target: {fileID: 1472514092889667034, guid: 56d293d57fb0bb2498c167bac52741a9,
-        type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
     - target: {fileID: 1472514092889958906, guid: 56d293d57fb0bb2498c167bac52741a9,
         type: 3}
       propertyPath: m_LocalScale.x
       value: 1.4
       objectReference: {fileID: 0}
-    - target: {fileID: 1472514092889667028, guid: 56d293d57fb0bb2498c167bac52741a9,
+    - target: {fileID: 1472514092889667034, guid: 56d293d57fb0bb2498c167bac52741a9,
         type: 3}
       propertyPath: m_Layer
       value: 9
@@ -5928,7 +5923,7 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
-    - target: {fileID: 1472514092889667024, guid: 56d293d57fb0bb2498c167bac52741a9,
+    - target: {fileID: 1472514092889667028, guid: 56d293d57fb0bb2498c167bac52741a9,
         type: 3}
       propertyPath: m_Layer
       value: 9
@@ -5938,12 +5933,17 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
-    - target: {fileID: 1472514092889667036, guid: 56d293d57fb0bb2498c167bac52741a9,
+    - target: {fileID: 1472514092889667024, guid: 56d293d57fb0bb2498c167bac52741a9,
         type: 3}
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 1472514092889667038, guid: 56d293d57fb0bb2498c167bac52741a9,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1472514092889667036, guid: 56d293d57fb0bb2498c167bac52741a9,
         type: 3}
       propertyPath: m_Layer
       value: 9
@@ -6050,6 +6050,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Wep_American_Bayonet_Sheath
       objectReference: {fileID: 0}
+    - target: {fileID: 726353251162982058, guid: 6162f69c660af534bae9e50a21debda0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4895521640092152, guid: 6162f69c660af534bae9e50a21debda0, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.13731153
@@ -6093,11 +6098,6 @@ PrefabInstance:
     - target: {fileID: 4895521640092152, guid: 6162f69c660af534bae9e50a21debda0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -5.9500003
-      objectReference: {fileID: 0}
-    - target: {fileID: 726353251162982058, guid: 6162f69c660af534bae9e50a21debda0,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6162f69c660af534bae9e50a21debda0, type: 3}
