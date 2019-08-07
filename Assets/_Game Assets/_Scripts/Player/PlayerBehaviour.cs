@@ -53,8 +53,6 @@ public class PlayerBehaviour : MonoBehaviourPun
         cam.enabled = true;
         al.enabled = true;
         oc.enabled = true;
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
     }
 
     [HideInInspector]
@@ -66,11 +64,6 @@ public class PlayerBehaviour : MonoBehaviourPun
         if (pv.IsMine == false && onlineReady == true)
         {
             return;
-        }
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
         }
         if (dead == false)
         {

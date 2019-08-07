@@ -14,8 +14,7 @@ public class OrbitCamera : MonoBehaviour
     public float minDistance = 4.0f;
     public float maxDistance = 12.0f;
     public float height = 1.5f;
-    public float horizontalRotationSpeed = 250.0f;
-    public float verticalRotationSpeed = 150.0f;
+    public float sensitivity = 150.0f;
     public float rotationDampening = 0.75f;
     public float minVerticalAngle = -60.0f;
     public float maxVerticalAngle = 60.0f;
@@ -73,8 +72,8 @@ public class OrbitCamera : MonoBehaviour
          * angles, and lock the mouse cursor */
         if (!useRMBToAim)
         {
-            h += Input.GetAxis("Mouse X") * horizontalRotationSpeed * Time.deltaTime;
-            v -= Input.GetAxis("Mouse Y") * verticalRotationSpeed * Time.deltaTime;
+            h += Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;
+            v -= Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime;
 
             h = ClampAngle(h, -360.0f, 360.0f);
             v = ClampAngle(v, minVerticalAngle, maxVerticalAngle);
@@ -85,8 +84,8 @@ public class OrbitCamera : MonoBehaviour
         {
             if (Input.GetMouseButton(1))
             {
-                h += Input.GetAxis("Mouse X") * horizontalRotationSpeed * Time.deltaTime;
-                v -= Input.GetAxis("Mouse Y") * verticalRotationSpeed * Time.deltaTime;
+                h += Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;
+                v -= Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime;
 
                 h = ClampAngle(h, -360.0f, 360.0f);
                 v = ClampAngle(v, minVerticalAngle, maxVerticalAngle);
