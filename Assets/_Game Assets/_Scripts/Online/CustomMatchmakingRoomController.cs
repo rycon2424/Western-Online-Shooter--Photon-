@@ -25,6 +25,9 @@ public class CustomMatchmakingRoomController : MonoBehaviourPunCallbacks
     [SerializeField]
     private Text roomNameDisplay; //display for the name of the room
 
+    [Header("Room Settings")]
+    public bool canJoinInProgress; //display for the name of the room
+
     void ClearPlayerListings()
     {
         for (int i = playersContainer.childCount - 1; i >= 0; i--) //loop through all child object of the playersContainer, removing each child
@@ -82,7 +85,10 @@ public class CustomMatchmakingRoomController : MonoBehaviourPunCallbacks
     {
         if(PhotonNetwork.IsMasterClient)
         {
-            PhotonNetwork.CurrentRoom.IsOpen = false; //Comment out if you want player to join after the game has started
+            if (canJoinInProgress == false)
+            {
+                PhotonNetwork.CurrentRoom.IsOpen = false; //Comment out if you want player to join after the game has started
+            }
             PhotonNetwork.LoadLevel(multiPlayerSceneIndex);   
         }
     }

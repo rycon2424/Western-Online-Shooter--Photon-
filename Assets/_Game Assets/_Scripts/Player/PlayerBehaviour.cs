@@ -57,12 +57,18 @@ public class PlayerBehaviour : MonoBehaviourPun
         oc.enabled = true;
         if (onlineReady)
         {
+            Invoke("JoinServerMessage", 1);
             pv.RPC("Respawn", RpcTarget.All);
         }
         else
         {
             Respawn();
         }
+    }
+
+    void JoinServerMessage()
+    {
+        pi.bui.JoinLeaveGame(pv.Owner.NickName, true);
     }
 
     [HideInInspector]
