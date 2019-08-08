@@ -29,7 +29,8 @@ public class CustomMatchmakingLobbyController : MonoBehaviourPunCallbacks
         PhotonNetwork.AutomaticallySyncScene = true; //Makes it so whatever scene the master client has loaded is the scene all other clients will load
         lobbyConnectButton.SetActive(true); //activate button for connecting to lobby
         roomListings = new List<RoomInfo>(); //initializing roomListing
-        
+        playerNameInput.interactable = true;
+
         //check for player name saved to player prefs
         if(PlayerPrefs.HasKey("NickName"))
         {
@@ -44,7 +45,7 @@ public class CustomMatchmakingLobbyController : MonoBehaviourPunCallbacks
         }
         else
         {
-            PhotonNetwork.NickName = "Player " + Random.Range(0, 1000); //random player name when not set
+            PhotonNetwork.NickName = "Sample Text"; //random player name when not set
         }
         playerNameInput.text = PhotonNetwork.NickName; //update input field with player name
     }

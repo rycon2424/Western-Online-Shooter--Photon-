@@ -13,6 +13,7 @@ public class HurtZone : MonoBehaviour
             col.GetComponent<PlayerBehaviour>().health -= damagePerTick;
             int health = col.GetComponent<PlayerBehaviour>().health;
             col.GetComponent<PlayerBehaviour>().pi.UpdateHealthUI(health, "killed", "world");
+            col.GetComponent<PlayerBehaviour>().pi.UpdateLog();
         }
     }
 
@@ -23,6 +24,7 @@ public class HurtZone : MonoBehaviour
             col.GetComponent<PlayerBehaviour>().health -= damagePerTick;
             int health = col.GetComponent<PlayerBehaviour>().health;
             col.GetComponent<PlayerBehaviour>().pi.UpdateHealthUI(health, "killed", "world");
+            col.GetComponent<PlayerBehaviour>().pi.UpdateLog();
         }
     }
 }

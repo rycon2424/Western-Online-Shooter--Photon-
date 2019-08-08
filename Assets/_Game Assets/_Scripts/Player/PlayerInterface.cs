@@ -6,17 +6,16 @@ using Photon.Pun;
 
 public class PlayerInterface : MonoBehaviourPun
 {
+    public BattleUI bui;
+
     // Start is called before the first frame update
     void Start()
     {
         pb = GetComponent<PlayerBehaviour>();
         oc = GetComponentInChildren<OrbitCamera>();
+        bui = FindObjectOfType<BattleUI>();
         UpdateWeaponUI();
         CloseMenu();
-        if (pb.onlineReady == false)
-        {
-            return;
-        }
         UpdateHealthUI(pb.health, "", "");
     }
 
@@ -104,7 +103,7 @@ public class PlayerInterface : MonoBehaviourPun
     }
 
     [PunRPC]
-    public void SyncHealth(int hp, string swep, string killer)
+    public void SyncHealth(int hp, string _swep, string _killer)
     {
         if (pb == null)
         {
@@ -112,15 +111,28 @@ public class PlayerInterface : MonoBehaviourPun
         }
         pb.health = hp;
         healthBar.value = pb.health;
+        killer = _killer;
+        attackType = _swep;
         pb.anim.SetInteger("Health", pb.health);
         if (pb.health <= 0)
         {
-            Debug.Log("Die");
-            Debug.Log(killer + " " + swep + " " + pb.pv.Owner.NickName);
             pb.Death();
             pb.dead = true;
         }
     }
+
+    public void UpdateLog()
+    {
+        if (pb.health <= 0)
+        {
+            bui.UpdateBattleLog(attackType, killer, pb.pv.Owner.NickName);
+        }
+    }
+
+    [Header("Recently Attacked")]
+    public string killer;
+    public string attackType;
+    
     #endregion
 
     #region Weapon Sync Stuff

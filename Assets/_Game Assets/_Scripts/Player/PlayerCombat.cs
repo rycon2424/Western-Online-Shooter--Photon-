@@ -304,6 +304,7 @@ public class PlayerCombat : MonoBehaviourPun
                 hit.collider.GetComponent<PlayerBehaviour>().health -= weaponDamage;
                 int health = hit.collider.GetComponent<PlayerBehaviour>().health;
                 hit.collider.GetComponent<PlayerBehaviour>().pi.UpdateHealthUI(health, "shot", pb.pv.Owner.NickName);
+                hit.collider.GetComponent<PlayerBehaviour>().pi.UpdateLog();
                 HitMarker();
             }
             if (hit.collider.CompareTag("Finish"))
@@ -364,20 +365,18 @@ public class PlayerCombat : MonoBehaviourPun
                 int firsthealth = knifeHit.collider.GetComponent<PlayerBehaviour>().health;
                 knifeHit.collider.GetComponent<PlayerBehaviour>().health -= weaponDamage;
                 int health = knifeHit.collider.GetComponent<PlayerBehaviour>().health;
-                Debug.Log(health);
                 knifeHit.collider.GetComponent<PlayerBehaviour>().pi.UpdateHealthUI(health, "knived", pb.pv.Owner.NickName);
-                Debug.Log(pb.pv.Owner + " did " + (firsthealth - health) + " damage!");
+                knifeHit.collider.GetComponent<PlayerBehaviour>().pi.UpdateLog();
                 HitMarker();
             }
             if (knifeHit.collider.CompareTag("Finish"))
             {
                 HitMarker();
             }
-            Debug.Log(pb.pv.Owner.NickName + " Knived " + knifeHit.collider.name);
         }
         else
         {
-            Debug.Log(pb.pv.Owner.NickName + " missed ");
+            Debug.Log("missed");
         }
         canShoot = false;
     }

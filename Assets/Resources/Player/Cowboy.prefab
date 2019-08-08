@@ -3642,6 +3642,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c8649fe6ce8372489729a67b4d04e89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bui: {fileID: 0}
   oc: {fileID: 0}
   volume: {fileID: 5215383713108897855}
   sensitivity: {fileID: 6904192381563541163}
@@ -3649,6 +3650,8 @@ MonoBehaviour:
   openMenu: 0
   healthBar: {fileID: 1746702539}
   pb: {fileID: 0}
+  killer: 
+  attackType: 
   weaponSort: {fileID: 91111208960322582}
   noWeapon: {fileID: 21300000, guid: d45db4509709b494cbb32b4202a4a09c, type: 3}
   revolver: {fileID: 21300000, guid: eeb968648016bfe4999835a3c8b9fbc4, type: 3}
