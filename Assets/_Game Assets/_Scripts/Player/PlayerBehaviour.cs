@@ -133,7 +133,7 @@ public class PlayerBehaviour : MonoBehaviourPun
         pc.AssignDamage();
         pc.HideKnife();
         pi.UpdateWeaponUI();
-        pi.UpdateHealthUI(health);
+        pi.UpdateHealthUI(health, "", "");
     }
 
     void Movement()

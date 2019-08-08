@@ -17,7 +17,7 @@ public class PlayerInterface : MonoBehaviourPun
         {
             return;
         }
-        UpdateHealthUI(pb.health);
+        UpdateHealthUI(pb.health, "", "");
     }
 
     private int currentHealth;
@@ -91,20 +91,20 @@ public class PlayerInterface : MonoBehaviourPun
     public Slider healthBar;
     public PlayerBehaviour pb;
 
-    public void UpdateHealthUI(int health)
+    public void UpdateHealthUI(int health, string weapon, string killer)
     {
         if (pb.onlineReady == true)
         {
-            pb.pv.RPC("SyncHealth", RpcTarget.All, health);
+            pb.pv.RPC("SyncHealth", RpcTarget.All, health, weapon, killer);
         }
         if (pb.onlineReady == false)
         {
-            SyncHealth(health);
+            SyncHealth(health, weapon, killer);
         }
     }
 
     [PunRPC]
-    public void SyncHealth(int hp)
+    public void SyncHealth(int hp, string swep, string killer)
     {
         if (pb == null)
         {
@@ -116,6 +116,7 @@ public class PlayerInterface : MonoBehaviourPun
         if (pb.health <= 0)
         {
             Debug.Log("Die");
+            Debug.Log(killer + " " + swep + " " + pb.pv.Owner.NickName);
             pb.Death();
             pb.dead = true;
         }

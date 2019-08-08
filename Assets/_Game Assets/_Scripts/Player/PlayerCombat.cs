@@ -303,18 +303,17 @@ public class PlayerCombat : MonoBehaviourPun
             {
                 hit.collider.GetComponent<PlayerBehaviour>().health -= weaponDamage;
                 int health = hit.collider.GetComponent<PlayerBehaviour>().health;
-                hit.collider.GetComponent<PlayerBehaviour>().pi.UpdateHealthUI(health);
+                hit.collider.GetComponent<PlayerBehaviour>().pi.UpdateHealthUI(health, "shot", pb.pv.Owner.NickName);
                 HitMarker();
             }
             if (hit.collider.CompareTag("Finish"))
             {
                 HitMarker();
             }
-            Debug.Log(pb.pv.Owner + " Shot " + hit.collider.name);
         }
         else
         {
-            Debug.Log(pb.pv.Owner + " missed ");
+            Debug.Log("missed");
         }
         GunShotSound();
         UseAmmo();
@@ -366,7 +365,7 @@ public class PlayerCombat : MonoBehaviourPun
                 knifeHit.collider.GetComponent<PlayerBehaviour>().health -= weaponDamage;
                 int health = knifeHit.collider.GetComponent<PlayerBehaviour>().health;
                 Debug.Log(health);
-                knifeHit.collider.GetComponent<PlayerBehaviour>().pi.UpdateHealthUI(health);
+                knifeHit.collider.GetComponent<PlayerBehaviour>().pi.UpdateHealthUI(health, "knived", pb.pv.Owner.NickName);
                 Debug.Log(pb.pv.Owner + " did " + (firsthealth - health) + " damage!");
                 HitMarker();
             }
@@ -374,11 +373,11 @@ public class PlayerCombat : MonoBehaviourPun
             {
                 HitMarker();
             }
-            Debug.Log(pb.pv.Owner + " Knived " + knifeHit.collider.name);
+            Debug.Log(pb.pv.Owner.NickName + " Knived " + knifeHit.collider.name);
         }
         else
         {
-            Debug.Log(pb.pv.Owner + " missed ");
+            Debug.Log(pb.pv.Owner.NickName + " missed ");
         }
         canShoot = false;
     }
@@ -484,7 +483,14 @@ public class PlayerCombat : MonoBehaviourPun
     //NEEDS ANOTHER METHOD DEFINITELY trash code
     public void UpdateAmmo(int ammoToSync, bool isRifle, bool isTommygun)
     {
-        pb.pv.RPC("SyncAmmo", RpcTarget.All, ammoToSync, isRifle, isTommygun);
+        if (pb.onlineReady)
+        {
+            pb.pv.RPC("SyncAmmo", RpcTarget.All, ammoToSync, isRifle, isTommygun);
+        }
+        else
+        {
+            SyncAmmo(ammoToSync, isRifle, isTommygun);
+        }
     }
 
     //NEEDS ANOTHER METHOD DEFINITELY trash code
