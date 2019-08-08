@@ -38,11 +38,9 @@ MonoBehaviour:
   - SpawnWeaponCrate
   - SyncAmmo
   - SyncHealth
+  - SyncKillFeed
   - SyncKnifeAnim
   - SyncWeaponCycle
   - SyncWeaponUI
-  - SyncKillFeed
-  - SyncFeed
-  - SyncTextToSync
   DisableAutoOpenWizard: 1
   ShowSettings: 1

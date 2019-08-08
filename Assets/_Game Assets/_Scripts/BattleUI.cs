@@ -21,6 +21,19 @@ public class BattleUI : MonoBehaviourPun
         savedString += oldText + killer + " " + weapon + " " + player + " to death \n";
         pv.RPC("SyncKillFeed", RpcTarget.All, savedString);
     }
+
+    public void JoinLeaveGame(string player, bool joining)
+    {
+        if (joining == true)
+        {
+            savedString += player + " has joined the game \n";
+        }
+        else
+        {
+            savedString += player + " has left the game \n";
+        }
+        pv.RPC("SyncKillFeed", RpcTarget.All, savedString);
+    }
     
     [PunRPC]
     void SyncKillFeed(string stringtoSync)

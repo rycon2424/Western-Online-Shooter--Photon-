@@ -305,10 +305,6 @@ public class PlayerCombat : MonoBehaviourPun
                 int health = hit.collider.GetComponent<PlayerBehaviour>().health;
                 hit.collider.GetComponent<PlayerBehaviour>().pi.UpdateHealthUI(health, "shot", pb.pv.Owner.NickName);
                 hit.collider.GetComponent<PlayerBehaviour>().pi.UpdateLog();
-                if (health < 1)
-                {
-                    pb.pi.UpdateKillCount();
-                }
                 HitMarker();
             }
             if (hit.collider.CompareTag("Finish"))
@@ -371,10 +367,6 @@ public class PlayerCombat : MonoBehaviourPun
                 int health = knifeHit.collider.GetComponent<PlayerBehaviour>().health;
                 knifeHit.collider.GetComponent<PlayerBehaviour>().pi.UpdateHealthUI(health, "knived", pb.pv.Owner.NickName);
                 knifeHit.collider.GetComponent<PlayerBehaviour>().pi.UpdateLog();
-                if (health < 1)
-                {
-                    pb.pi.UpdateKillCount();
-                }
                 HitMarker();
             }
             if (knifeHit.collider.CompareTag("Finish"))

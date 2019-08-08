@@ -17,15 +17,10 @@ public class PlayerInterface : MonoBehaviourPun
         UpdateWeaponUI();
         CloseMenu();
         UpdateHealthUI(pb.health, "", "");
-    }
-
-    public int kills;
-    public Text killCount;
-
-    public void UpdateKillCount()
-    {
-        kills++;
-        killCount.text = kills.ToString();
+        if (bui == null)
+        {
+            Debug.Log("There is no Battle Ui, probably because you're in offline mode");
+        }
     }
 
     private int currentHealth;
@@ -90,6 +85,10 @@ public class PlayerInterface : MonoBehaviourPun
 
     public void ExitGame()
     {
+        if (bui != null)
+        {
+            bui.JoinLeaveGame(pb.pv.Owner.NickName, false);
+        }
         Application.Quit();
     }
     #endregion
