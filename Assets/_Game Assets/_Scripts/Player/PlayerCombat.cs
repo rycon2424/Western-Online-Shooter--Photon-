@@ -195,12 +195,12 @@ public class PlayerCombat : MonoBehaviourPun
                 break;
             case GunType.rifle:
                 weaponRange = 200;
-                weaponDamage = 30;
+                weaponDamage = 40;
                 fireRate = 2;
                 break;
             case GunType.tommygun:
                 weaponRange = 30;
-                weaponDamage = 5;
+                weaponDamage = 4;
                 fireRate = 0.15f;
                 break;
             case GunType.noWeapon:
@@ -305,6 +305,10 @@ public class PlayerCombat : MonoBehaviourPun
                 int health = hit.collider.GetComponent<PlayerBehaviour>().health;
                 hit.collider.GetComponent<PlayerBehaviour>().pi.UpdateHealthUI(health, "shot", pb.pv.Owner.NickName);
                 hit.collider.GetComponent<PlayerBehaviour>().pi.UpdateLog();
+                if (health < 1)
+                {
+                    pb.pi.UpdateKillCount();
+                }
                 HitMarker();
             }
             if (hit.collider.CompareTag("Finish"))
@@ -367,6 +371,10 @@ public class PlayerCombat : MonoBehaviourPun
                 int health = knifeHit.collider.GetComponent<PlayerBehaviour>().health;
                 knifeHit.collider.GetComponent<PlayerBehaviour>().pi.UpdateHealthUI(health, "knived", pb.pv.Owner.NickName);
                 knifeHit.collider.GetComponent<PlayerBehaviour>().pi.UpdateLog();
+                if (health < 1)
+                {
+                    pb.pi.UpdateKillCount();
+                }
                 HitMarker();
             }
             if (knifeHit.collider.CompareTag("Finish"))

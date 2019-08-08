@@ -19,6 +19,15 @@ public class PlayerInterface : MonoBehaviourPun
         UpdateHealthUI(pb.health, "", "");
     }
 
+    public int kills;
+    public Text killCount;
+
+    public void UpdateKillCount()
+    {
+        kills++;
+        killCount.text = kills.ToString();
+    }
+
     private int currentHealth;
 
     // Update is called once per frame
