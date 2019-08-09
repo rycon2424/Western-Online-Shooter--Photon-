@@ -222,16 +222,19 @@ public class PlayerCombat : MonoBehaviourPun
         if (typeGun == GunType.noWeapon)
         {
             pb.anim.SetBool("Aim", false);
-            if (Input.GetMouseButton(0) && pb.onlineReady == true && canShoot)
+            if (Input.GetMouseButton(0) && canShoot)
             {
-                Debug.Log("melee");
-                pb.pv.RPC("SyncKnifeAnim", RpcTarget.All);
-            }
-            else if (Input.GetMouseButton(0) && canShoot && pb.onlineReady == false)
-            {
-                Debug.Log("melee");
-                pb.anim.Play("Knife");
-                canSwitchWeapons = false;
+                if (pb.onlineReady == true)
+                {
+                    Debug.Log("melee");
+                    pb.pv.RPC("SyncKnifeAnim", RpcTarget.All);
+                }
+                else
+                {
+                    Debug.Log("melee");
+                    pb.anim.Play("Knife");
+                    canSwitchWeapons = false;
+                }
             }
             return;
         }
