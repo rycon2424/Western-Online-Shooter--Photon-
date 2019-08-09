@@ -227,7 +227,7 @@ public class PlayerCombat : MonoBehaviourPun
                 Debug.Log("melee");
                 pb.pv.RPC("SyncKnifeAnim", RpcTarget.All);
             }
-            else if (Input.GetMouseButton(0) && canShoot)
+            else if (Input.GetMouseButton(0) && canShoot && pb.onlineReady == false)
             {
                 Debug.Log("melee");
                 pb.anim.Play("Knife");
