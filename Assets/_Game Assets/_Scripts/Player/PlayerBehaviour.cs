@@ -57,7 +57,7 @@ public class PlayerBehaviour : MonoBehaviourPun
         oc.enabled = true;
         if (onlineReady)
         {
-            Invoke("JoinServerMessage", 1);
+            Invoke("JoinServerMessage", 0.5f);
             pv.RPC("Respawn", RpcTarget.All);
         }
         else
