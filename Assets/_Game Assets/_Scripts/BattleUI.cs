@@ -7,7 +7,6 @@ using Photon.Pun;
 public class BattleUI : MonoBehaviourPun
 {
     public Text uitext;
-    public string oldText;
     private PhotonView pv;
     string savedString;
 
@@ -16,9 +15,14 @@ public class BattleUI : MonoBehaviourPun
         pv = GetComponent<PhotonView>();
     }
 
+    void Update()
+    {
+
+    }
+
     public void UpdateBattleLog(string weapon, string killer , string player)
     {
-        savedString += oldText + killer + " " + weapon + " " + player + " to death \n";
+        savedString += killer + " " + weapon + " " + player + " to death \n";
         pv.RPC("SyncKillFeed", RpcTarget.All, savedString);
     }
 
@@ -38,8 +42,7 @@ public class BattleUI : MonoBehaviourPun
     [PunRPC]
     void SyncKillFeed(string stringtoSync)
     {
-        uitext.text = stringtoSync;
-        savedString = uitext.text;
+        uitext.text += stringtoSync;
     }
 
 }
