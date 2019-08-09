@@ -8,7 +8,7 @@ public class BattleUI : MonoBehaviourPun
 {
     public Text uitext;
     private PhotonView pv;
-    string savedString;
+    private string savedString;
 
     void Start()
     {
