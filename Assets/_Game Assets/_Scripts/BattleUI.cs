@@ -14,16 +14,22 @@ public class BattleUI : MonoBehaviourPun
     {
         pv = GetComponent<PhotonView>();
     }
-    
+
     public void UpdateBattleLog(string weapon, string killer , string player)
     {
         savedString += killer + " " + weapon + " " + player + " to death \n";
         pv.RPC("SyncKillFeed", RpcTarget.All, savedString);
     }
 
+    [PunRPC]
+    void SyncKillFeed(string stringtoSync)
+    {
+        uitext.text = stringtoSync;
+        savedString = uitext.text;
+    }
+
     public void JoinLeaveGame(string player, bool joining)
     {
-        savedString = "";
         if (joining == true)
         {
             savedString += player + " has joined the game \n";
@@ -33,12 +39,6 @@ public class BattleUI : MonoBehaviourPun
             savedString += player + " has left the game \n";
         }
         pv.RPC("SyncKillFeed", RpcTarget.All, savedString);
-    }
-    
-    [PunRPC]
-    void SyncKillFeed(string stringtoSync)
-    {
-        uitext.text += stringtoSync;
     }
 
 }

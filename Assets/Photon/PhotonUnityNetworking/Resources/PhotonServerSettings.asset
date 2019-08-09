@@ -42,5 +42,6 @@ MonoBehaviour:
   - SyncKnifeAnim
   - SyncWeaponCycle
   - SyncWeaponUI
+  - SyncJoinFeed
   DisableAutoOpenWizard: 1
   ShowSettings: 1
