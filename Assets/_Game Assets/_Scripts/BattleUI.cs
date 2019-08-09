@@ -14,12 +14,7 @@ public class BattleUI : MonoBehaviourPun
     {
         pv = GetComponent<PhotonView>();
     }
-
-    void Update()
-    {
-
-    }
-
+    
     public void UpdateBattleLog(string weapon, string killer , string player)
     {
         savedString += killer + " " + weapon + " " + player + " to death \n";
@@ -28,6 +23,7 @@ public class BattleUI : MonoBehaviourPun
 
     public void JoinLeaveGame(string player, bool joining)
     {
+        savedString = "";
         if (joining == true)
         {
             savedString += player + " has joined the game \n";
