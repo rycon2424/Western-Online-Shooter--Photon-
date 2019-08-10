@@ -51,8 +51,14 @@ public class BattleUI : MonoBehaviourPun
         else
         {
             stringToAdd = player + " has left the game \n";
+            Invoke("Leave", 0.3f);
         }
         pv.RPC("SyncChatToMaster", RpcTarget.MasterClient, stringToAdd, true);
     }
-    
+
+    void Leave()
+    {
+        Application.Quit();
+    }
+
 }

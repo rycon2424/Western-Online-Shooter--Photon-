@@ -5831,16 +5831,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3347727755377809596}
     m_Modifications:
-    - target: {fileID: 8043438714619261040, guid: 56d293d57fb0bb2498c167bac52741a9,
-        type: 3}
-      propertyPath: m_Name
-      value: Thompson M1A1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8043438714619261040, guid: 56d293d57fb0bb2498c167bac52741a9,
-        type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
     - target: {fileID: 2957603116393841221, guid: 56d293d57fb0bb2498c167bac52741a9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5910,6 +5900,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8043438714619261040, guid: 56d293d57fb0bb2498c167bac52741a9,
+        type: 3}
+      propertyPath: m_Name
+      value: Thompson M1A1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8043438714619261040, guid: 56d293d57fb0bb2498c167bac52741a9,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 1472514092889958906, guid: 56d293d57fb0bb2498c167bac52741a9,
         type: 3}
@@ -6049,15 +6049,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3347414776852271040}
     m_Modifications:
-    - target: {fileID: 1491678066363698, guid: 6162f69c660af534bae9e50a21debda0, type: 3}
-      propertyPath: m_Name
-      value: SM_Wep_American_Bayonet_Sheath
-      objectReference: {fileID: 0}
-    - target: {fileID: 726353251162982058, guid: 6162f69c660af534bae9e50a21debda0,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4895521640092152, guid: 6162f69c660af534bae9e50a21debda0, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.13731153
@@ -6101,6 +6092,15 @@ PrefabInstance:
     - target: {fileID: 4895521640092152, guid: 6162f69c660af534bae9e50a21debda0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -5.9500003
+      objectReference: {fileID: 0}
+    - target: {fileID: 1491678066363698, guid: 6162f69c660af534bae9e50a21debda0, type: 3}
+      propertyPath: m_Name
+      value: SM_Wep_American_Bayonet_Sheath
+      objectReference: {fileID: 0}
+    - target: {fileID: 726353251162982058, guid: 6162f69c660af534bae9e50a21debda0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6162f69c660af534bae9e50a21debda0, type: 3}

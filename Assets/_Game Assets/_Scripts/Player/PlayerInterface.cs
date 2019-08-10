@@ -89,7 +89,6 @@ public class PlayerInterface : MonoBehaviourPun
         {
             bui.JoinLeaveGame(pb.pv.Owner.NickName, false);
         }
-        Application.Quit();
     }
     #endregion
 
