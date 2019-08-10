@@ -18,33 +18,41 @@ public class BattleUI : MonoBehaviourPun
     public void UpdateBattleLog(string weapon, string killer , string player)
     {
         savedString += killer + " " + weapon + " " + player + " to death \n";
-        pv.RPC("SyncChatToMaster", RpcTarget.MasterClient, savedString);
+        pv.RPC("SyncChatToMaster", RpcTarget.MasterClient, savedString, false);
     }
     
     [PunRPC]
-    void SyncChatToMaster(string stringtoSync)
+    void SyncChatToMaster(string stringtoSync, bool add)
     {
-        pv.RPC("SyncChatToClients", RpcTarget.AllViaServer, savedString);
+        pv.RPC("SyncChatToClients", RpcTarget.AllViaServer, stringtoSync, add);
     }
 
     [PunRPC]
-    void SyncChatToClients(string stringtoSync)
+    void SyncChatToClients(string stringtoSync, bool add)
     {
-        uitext.text = stringtoSync;
+        if (add == true)
+        {
+            uitext.text += stringtoSync;
+        }
+        else
+        {
+            uitext.text = stringtoSync;
+        }
         savedString = uitext.text;
     }
     
     public void JoinLeaveGame(string player, bool joining)
     {
+        string stringToAdd;
         if (joining == true)
         {
-            savedString += player + " has joined the game \n";
+            stringToAdd = player + " has joined the game \n";
         }
         else
         {
-            savedString += player + " has left the game \n";
+            stringToAdd = player + " has left the game \n";
         }
-        pv.RPC("SyncChatToMaster", RpcTarget.MasterClient, savedString);
+        pv.RPC("SyncChatToMaster", RpcTarget.MasterClient, stringToAdd, true);
     }
     
 }
