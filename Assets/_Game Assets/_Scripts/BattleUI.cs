@@ -8,7 +8,7 @@ public class BattleUI : MonoBehaviourPun
 {
     public Text uitext;
     private PhotonView pv;
-    private string savedString;
+    public string savedString;
 
     void Start()
     {
@@ -18,16 +18,22 @@ public class BattleUI : MonoBehaviourPun
     public void UpdateBattleLog(string weapon, string killer , string player)
     {
         savedString += killer + " " + weapon + " " + player + " to death \n";
-        pv.RPC("SyncKillFeed", RpcTarget.All, savedString);
+        pv.RPC("SyncChatToMaster", RpcTarget.MasterClient, savedString);
+    }
+    
+    [PunRPC]
+    void SyncChatToMaster(string stringtoSync)
+    {
+        pv.RPC("SyncChatToClients", RpcTarget.AllViaServer, savedString);
     }
 
     [PunRPC]
-    void SyncKillFeed(string stringtoSync)
+    void SyncChatToClients(string stringtoSync)
     {
         uitext.text = stringtoSync;
         savedString = uitext.text;
     }
-
+    
     public void JoinLeaveGame(string player, bool joining)
     {
         if (joining == true)
@@ -38,7 +44,7 @@ public class BattleUI : MonoBehaviourPun
         {
             savedString += player + " has left the game \n";
         }
-        pv.RPC("SyncKillFeed", RpcTarget.All, savedString);
+        pv.RPC("SyncChatToMaster", RpcTarget.MasterClient, savedString);
     }
-
+    
 }
