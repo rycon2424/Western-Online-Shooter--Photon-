@@ -45,5 +45,6 @@ MonoBehaviour:
   - SyncJoinMessage
   - SyncChatToClients
   - SyncChatToMaster
+  - Dodge
   DisableAutoOpenWizard: 1
   ShowSettings: 1

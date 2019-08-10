@@ -11,7 +11,7 @@ public class PlayerCombat : MonoBehaviourPun
     private Transform chest;
     public Vector3 offset;
 
-    void Start()
+    public void StartPlayerCombat()
     {
         pb = GetComponent<PlayerBehaviour>();
         chest = pb.anim.GetBoneTransform(HumanBodyBones.Chest);
@@ -219,6 +219,21 @@ public class PlayerCombat : MonoBehaviourPun
         {
             return;
         }
+        if (Input.GetKeyDown(KeyCode.Space) && canDodge)
+        {
+            if (pb.onlineReady)
+            {
+                pb.pv.RPC("Dodge", RpcTarget.All);
+            }
+            else
+            {
+                Dodge();
+            }
+        }
+        if (canDodge == false)
+        {
+            return;
+        }
         if (typeGun == GunType.noWeapon)
         {
             pb.anim.SetBool("Aim", false);
@@ -269,14 +284,40 @@ public class PlayerCombat : MonoBehaviourPun
 
     void LateUpdate()
     {
-        if (pb.anim.GetBool("Aim") == false || pb.anim.GetBool("Falling") == true || pb.dead == true)
+        if (pb.anim.GetBool("Aim") == false || pb.anim.GetBool("Falling") == true || pb.dead == true || canDodge == false)
         {
             return;
         }
         chest.LookAt(pb.lookObj.position);
         chest.rotation = chest.rotation * Quaternion.Euler(offset);
     }
-    
+
+    #region dodge
+    public bool canDodge;
+
+    [PunRPC]
+    void Dodge()
+    {
+        pb.anim.Play("Dodge");
+        HideKnife();
+        canDodge = false;
+        canSwitchWeapons = false;
+    }
+
+    public void CanDodgeAgain()
+    {
+        Invoke("CooldownDodge", 0.6f);
+        pb.cc.height = pb.defaultPlayerHeight;
+        pb.cc.center = pb.defaultHitBoxOffset;
+        canSwitchWeapons = true;
+    }
+
+    void CooldownDodge()
+    {
+        canDodge = true;
+    }
+    #endregion
+
     [Header("WeaponStats")]
     public GunType typeGun;
     public enum GunType { revolver, rifle, tommygun, noWeapon }
@@ -419,6 +460,7 @@ public class PlayerCombat : MonoBehaviourPun
     {
         knifeInHand.SetActive(false);
         sheatedKnife.SetActive(true);
+        hasKnifeOut = false;
         canSwitchWeapons = true;
         canShoot = true;
     }

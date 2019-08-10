@@ -9,6 +9,9 @@ public class PlayerBehaviour : MonoBehaviourPun
     [Header("Info")]
     public int health;
     public bool dead;
+    public CharacterController cc;
+    public float defaultPlayerHeight;
+    public Vector3 defaultHitBoxOffset;
 
     [Header("Stats")]
     public bool playerRotateWithCam;
@@ -40,12 +43,16 @@ public class PlayerBehaviour : MonoBehaviourPun
         al.enabled = false;
         oc.enabled = false;
         UI.SetActive(false);
+        cc = GetComponent<CharacterController>();
+        defaultPlayerHeight = cc.height;
+        defaultHitBoxOffset = cc.center;
         pv = GetComponent<PhotonView>();
         pi = GetComponent<PlayerInterface>();
         pc = GetComponent<PlayerCombat>();
         ps = GetComponent<PlayerSound>();
         gsc = FindObjectOfType<GameSetupController>();
         anim = GetComponent<Animator>();
+        pc.StartPlayerCombat();
         if (pv.IsMine == false && onlineReady == true)
         {
             return;
@@ -140,6 +147,7 @@ public class PlayerBehaviour : MonoBehaviourPun
         pc.HideKnife();
         pi.UpdateWeaponUI();
         pi.UpdateHealthUI(health, "", "");
+        pc.CanDodgeAgain();
     }
 
     void Movement()

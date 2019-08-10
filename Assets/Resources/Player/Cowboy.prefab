@@ -3579,6 +3579,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   dead: 0
+  cc: {fileID: 0}
+  defaultPlayerHeight: 0
+  defaultHitBoxOffset: {x: 0, y: 0, z: 0}
   playerRotateWithCam: 1
   onlineReady: 1
   anim: {fileID: 3402340705741740924}
@@ -3615,6 +3618,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pb: {fileID: 0}
   offset: {x: 0, y: -50, z: -90}
+  canDodge: 0
   typeGun: 3
   weaponRange: 50
   weaponDamage: 15
