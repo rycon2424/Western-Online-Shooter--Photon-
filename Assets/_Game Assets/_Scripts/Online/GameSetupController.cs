@@ -12,18 +12,47 @@ public class GameSetupController : MonoBehaviour
     public Transform[] ammoCratesSpawn;
     public GameObject ammoCrate;
 
+    public GameObject characterSelect;
+
     void Start()
     {
-        CreatePlayer(); //Create a networked player object for each player that loads into the multiplayer scenes.
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
         if (FFA)
         {
             StartCoroutine(SpawnAmmoCrate());
         }
     }
 
+    public int currentSelectedPlayer;
+    public void CreatePlayer()
+    {
+        switch (currentSelectedPlayer)
+        {
+            case 0:
+                PhotonNetwork.Instantiate(Path.Combine("Player", "Cowboy"), spawns[Random.Range(0, spawns.Length)].position, Quaternion.identity);
+                break;
+            case 1:
+                PhotonNetwork.Instantiate(Path.Combine("Player", "Shinobi"), spawns[Random.Range(0, spawns.Length)].position, Quaternion.identity);
+                break;
+            case 2:
+                break;
+            default:
+                break;
+        }
+        characterSelect.SetActive(false);
+        //Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.visible = false;
+
+        
+        //PhotonNetwork.Instantiate(Path.Combine("Player", "Cowboy"), Vector3.zero, Quaternion.identity);
+    }
+
+    #region ammoCrates
     IEnumerator SpawnAmmoCrate()
     {
-        yield return new WaitForSeconds(60f);
+        yield return new WaitForSeconds(30f);
         PhotonNetwork.InstantiateSceneObject(Path.Combine("Objects", "AmmoCrate"), ammoCratesSpawn[Random.Range(0, ammoCratesSpawn.Length)].position, Quaternion.identity);
         StartCoroutine(SpawnAmmoCrate());
     }
@@ -33,17 +62,5 @@ public class GameSetupController : MonoBehaviour
     {
         Instantiate(ammoCrate, ammoCratesSpawn[Random.Range(0, ammoCratesSpawn.Length)].position, Quaternion.identity);
     }
-
-    private void CreatePlayer()
-    {
-        Debug.Log("Creating Player");
-        if (FFA)
-        {
-            PhotonNetwork.Instantiate(Path.Combine("Player", "Cowboy"), spawns[Random.Range(0, spawns.Length)].position, Quaternion.identity);
-        }
-        else
-        {
-            PhotonNetwork.Instantiate(Path.Combine("Player", "Cowboy"), Vector3.zero, Quaternion.identity);
-        }
-    }
+    #endregion
 }

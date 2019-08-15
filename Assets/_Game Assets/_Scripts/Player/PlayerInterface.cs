@@ -9,13 +9,16 @@ public class PlayerInterface : MonoBehaviourPun
     public BattleUI bui;
 
     // Start is called before the first frame update
-    void Start()
+    public void StartPlayerUI()
     {
         pb = GetComponent<PlayerBehaviour>();
         oc = GetComponentInChildren<OrbitCamera>();
         bui = FindObjectOfType<BattleUI>();
         UpdateWeaponUI();
-        CloseMenu();
+        if (pb.pv.IsMine)
+        {
+            CloseMenu();
+        }
         UpdateHealthUI(pb.health, "", "");
         if (bui == null)
         {

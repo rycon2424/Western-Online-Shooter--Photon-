@@ -16,7 +16,7 @@ public class PlayerSound : MonoBehaviourPun
 
     private PlayerBehaviour pb;
 
-    void Start()
+    public void StartPlayerAudio()
     {
         pb = GetComponent<PlayerBehaviour>();
     }

@@ -54,6 +54,8 @@ public class PlayerBehaviour : MonoBehaviourPun
         gsc = FindObjectOfType<GameSetupController>();
         anim = GetComponent<Animator>();
         pc.StartPlayerCombat();
+        ps.StartPlayerAudio();
+        pi.StartPlayerUI();
         if (pv.IsMine == false && onlineReady == true)
         {
             return;
