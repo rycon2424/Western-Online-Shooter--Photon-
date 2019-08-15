@@ -18,7 +18,7 @@ public class WeaponCrate : MonoBehaviourPun
 
     void OnTriggerEnter(Collider col)
     {
-        if (col.CompareTag("Player"))
+        if (col.CompareTag("Player") && col.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
             pc = col.GetComponent<PlayerCombat>();
             pc.rifleAmmo += rifleAmmoGiven;

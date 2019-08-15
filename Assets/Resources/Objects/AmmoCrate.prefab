@@ -124,6 +124,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rifleAmmoGiven: 0
   tommyAmmoGiven: 0
+  mask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &2937030673376952392
 MonoBehaviour:
   m_ObjectHideFlags: 0

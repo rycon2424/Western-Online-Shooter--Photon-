@@ -33,18 +33,16 @@ MonoBehaviour:
   - AssignDamage
   - DestroySelf
   - DisableCollider
+  - Dodge
   - KnifeCast
   - Respawn
   - SpawnWeaponCrate
   - SyncAmmo
+  - SyncChatToClients
+  - SyncChatToMaster
   - SyncHealth
-  - SyncKillFeed
   - SyncKnifeAnim
   - SyncWeaponCycle
   - SyncWeaponUI
-  - SyncJoinMessage
-  - SyncChatToClients
-  - SyncChatToMaster
-  - Dodge
   DisableAutoOpenWizard: 1
   ShowSettings: 1

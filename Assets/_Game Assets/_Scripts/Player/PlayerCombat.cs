@@ -293,13 +293,13 @@ public class PlayerCombat : MonoBehaviourPun
         chest.rotation = chest.rotation * Quaternion.Euler(offset);
     }
 
-    int layerMask = 1 << 8;
+    public LayerMask headGlitchHit;
     RaycastHit headHit;
     bool HeadGlitchCheck()
     {
         Vector3 rayOrigin = transform.position + transform.forward * 0.1f + transform.up * 1.35f;
         Debug.DrawRay(rayOrigin, transform.forward * 1.35f, Color.blue, 2);
-        if (Physics.Raycast(rayOrigin, transform.forward, out headHit, 1.35f))
+        if (Physics.Raycast(rayOrigin, transform.forward, out headHit, 1.35f, headGlitchHit))
         {
             if (headHit.collider.tag != "")
             {
@@ -367,17 +367,48 @@ public class PlayerCombat : MonoBehaviourPun
     void AimRaycast()
     {
         Debug.DrawRay(cameraTransform.position, cameraTransform.forward * weaponRange, Color.red, 0.5f);
-        
         if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, weaponRange, canHit))
         {
             if (hit.collider.CompareTag("Player"))
             {
-                hit.collider.GetComponent<PlayerBehaviour>().health -= weaponDamage;
-                int health = hit.collider.GetComponent<PlayerBehaviour>().health;
-                hit.collider.GetComponent<PlayerBehaviour>().pi.UpdateHealthUI(health, "shot", pb.pv.Owner.NickName);
-                hit.collider.GetComponent<PlayerBehaviour>().pi.UpdateLog();
+                int damage = weaponDamage;
+                int health = hit.collider.GetComponentInParent<PlayerBehaviour>().health;
+                health = health - damage;
+                hit.collider.GetComponentInParent<PlayerBehaviour>().pi.UpdateHealthUI(health, "shot", pb.pv.Owner.NickName);
+                hit.collider.GetComponentInParent<PlayerBehaviour>().pi.UpdateLog();
+                Debug.Log(hit.collider.name);
                 HitMarker();
             }
+            /*if (hit.collider.CompareTag("Head"))
+            {
+                int damage = (weaponDamage * 2);
+                int health = hit.collider.GetComponentInParent<PlayerBehaviour>().health;
+                health = health - damage;
+                hit.collider.GetComponentInParent<PlayerBehaviour>().pi.UpdateHealthUI(health, "HEADSHOT", pb.pv.Owner.NickName);
+                hit.collider.GetComponentInParent<PlayerBehaviour>().pi.UpdateLog();
+                Debug.Log(hit.collider.name);
+                HitMarker();
+            }
+            if (hit.collider.CompareTag("Torso"))
+            {
+                int damage = weaponDamage;
+                int health = hit.collider.GetComponentInParent<PlayerBehaviour>().health;
+                health = health - damage;
+                hit.collider.GetComponentInParent<PlayerBehaviour>().pi.UpdateHealthUI(health, "Torso", pb.pv.Owner.NickName);
+                hit.collider.GetComponentInParent<PlayerBehaviour>().pi.UpdateLog();
+                Debug.Log(hit.collider.name);
+                HitMarker();
+            }
+            if (hit.collider.CompareTag("Limbs"))
+            {
+                int damage = (weaponDamage / 2);
+                int health = hit.collider.GetComponentInParent<PlayerBehaviour>().health;
+                health = health - damage;
+                hit.collider.GetComponentInParent<PlayerBehaviour>().pi.UpdateHealthUI(health, "Limbs", pb.pv.Owner.NickName);
+                hit.collider.GetComponentInParent<PlayerBehaviour>().pi.UpdateLog();
+                Debug.Log(hit.collider.name);
+                HitMarker();
+            }*/
             if (hit.collider.CompareTag("Finish"))
             {
                 HitMarker();
@@ -423,13 +454,14 @@ public class PlayerCombat : MonoBehaviourPun
         }
     }
 
+    public LayerMask knifeCanHit;
     [PunRPC]
     void KnifeCast()
     {
         Vector3 rayOrigin = transform.position + transform.forward * 0.3f + transform.up * 1f;
         Debug.DrawRay(rayOrigin, transform.forward * weaponRange, Color.blue, 1);
 
-        if (Physics.Raycast(rayOrigin, transform.forward, out knifeHit, weaponRange, canHit))
+        if (Physics.Raycast(rayOrigin, transform.forward, out knifeHit, weaponRange, knifeCanHit))
         {
             if (knifeHit.collider.CompareTag("Player"))
             {

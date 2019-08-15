@@ -12,10 +12,13 @@ public class PlayerBehaviour : MonoBehaviourPun
     public CharacterController cc;
     public float defaultPlayerHeight;
     public Vector3 defaultHitBoxOffset;
-
+    
     [Header("Stats")]
     public bool playerRotateWithCam;
     public bool onlineReady;
+
+    [Header("HitBox")]
+    public BoxCollider[] hitboxes;
 
     [Header("AnimationStuff")]
     public Animator anim;
@@ -131,6 +134,10 @@ public class PlayerBehaviour : MonoBehaviourPun
     [PunRPC]
     void DisableCollider()
     {
+        foreach (BoxCollider bx in hitboxes)
+        {
+            bx.enabled = false;
+        }
         GetComponent<CharacterController>().enabled = false;
     }
 
@@ -151,6 +158,10 @@ public class PlayerBehaviour : MonoBehaviourPun
         pi.UpdateWeaponUI();
         pi.UpdateHealthUI(health, "", "");
         pc.CanDodgeAgain();
+        foreach (BoxCollider bx in hitboxes)
+        {
+            bx.enabled = true;
+        }
     }
 
     void Movement()
@@ -172,7 +183,7 @@ public class PlayerBehaviour : MonoBehaviourPun
 
     [Header("Raycast")]
     public float raycastRange;
-    public LayerMask canHit;
+    public LayerMask groundLayers;
     public bool onGround;
     public bool coRoRunning;
 
@@ -180,7 +191,7 @@ public class PlayerBehaviour : MonoBehaviourPun
     {
         RaycastHit hit;
         
-        if (Physics.Raycast(transform.position, -transform.up, out hit, raycastRange, canHit))
+        if (Physics.Raycast(transform.position, -transform.up, out hit, raycastRange, groundLayers))
         {
             Debug.DrawRay(transform.position, -transform.up * raycastRange, Color.yellow);
             StopCoroutine("OffGround");
