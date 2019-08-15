@@ -7,6 +7,7 @@ public class PlayerBehaviour : MonoBehaviourPun
 {
 
     [Header("Info")]
+    public int maxHealth;
     public int health;
     public bool dead;
     public CharacterController cc;
@@ -59,6 +60,7 @@ public class PlayerBehaviour : MonoBehaviourPun
         pc.StartPlayerCombat();
         ps.StartPlayerAudio();
         pi.StartPlayerUI();
+        health = maxHealth;
         if (pv.IsMine == false && onlineReady == true)
         {
             return;
@@ -149,7 +151,7 @@ public class PlayerBehaviour : MonoBehaviourPun
             transform.position = gsc.spawns[Random.Range(0, gsc.spawns.Length)].position;
         }
         GetComponent<CharacterController>().enabled = true;
-        health = 100;
+        health = maxHealth;
         dead = false;
         anim.SetBool("Alive", true);
         pc.typeGun = PlayerCombat.GunType.noWeapon;

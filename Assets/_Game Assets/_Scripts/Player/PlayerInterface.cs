@@ -14,6 +14,7 @@ public class PlayerInterface : MonoBehaviourPun
         pb = GetComponent<PlayerBehaviour>();
         oc = GetComponentInChildren<OrbitCamera>();
         bui = FindObjectOfType<BattleUI>();
+        healthBar.maxValue = pb.maxHealth;
         UpdateWeaponUI();
         if (pb.pv.IsMine)
         {
