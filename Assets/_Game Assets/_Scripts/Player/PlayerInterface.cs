@@ -19,6 +19,10 @@ public class PlayerInterface : MonoBehaviourPun
         {
             CloseMenu();
         }
+        else if (pb.onlineReady == false)
+        {
+            CloseMenu();
+        }
         UpdateHealthUI(pb.health, "", "");
         if (bui == null)
         {
