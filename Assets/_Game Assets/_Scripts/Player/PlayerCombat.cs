@@ -266,12 +266,12 @@ public class PlayerCombat : MonoBehaviourPun
     public void EnterCombat()
     {
         pb.anim.SetBool("Aim", true);
-
-        if (Input.GetMouseButton(0) && canShoot == true && pb.onlineReady && CheckAmmunition())
+        HeadGlitchCheck();
+        if (Input.GetMouseButton(0) && canShoot == true && pb.onlineReady && CheckAmmunition() && HeadGlitchCheck() == false)
         {
             pb.pv.RPC("AimRaycast", RpcTarget.All);
         }
-        else if (Input.GetMouseButton(0) && canShoot == true && pb.onlineReady == false && CheckAmmunition())
+        else if (Input.GetMouseButton(0) && canShoot == true && pb.onlineReady == false && CheckAmmunition() && HeadGlitchCheck() == false)
         {
             AimRaycast();
         }
@@ -280,6 +280,7 @@ public class PlayerCombat : MonoBehaviourPun
     public void ExitCombat()
     {
         pb.anim.SetBool("Aim", false);
+        pb.blocked.SetActive(false);
     }
 
     void LateUpdate()
@@ -290,6 +291,32 @@ public class PlayerCombat : MonoBehaviourPun
         }
         chest.LookAt(pb.lookObj.position);
         chest.rotation = chest.rotation * Quaternion.Euler(offset);
+    }
+
+    int layerMask = 1 << 8;
+    RaycastHit headHit;
+    bool HeadGlitchCheck()
+    {
+        Vector3 rayOrigin = transform.position + transform.forward * 0.1f + transform.up * 1.35f;
+        Debug.DrawRay(rayOrigin, transform.forward * 1.35f, Color.blue, 2);
+        if (Physics.Raycast(rayOrigin, transform.forward, out headHit, 1.35f))
+        {
+            if (headHit.collider.tag != "")
+            {
+                pb.blocked.SetActive(true);
+                return true;
+            }
+            else
+            {
+                pb.blocked.SetActive(false);
+                return false;
+            }
+        }
+        else
+        {
+            pb.blocked.SetActive(false);
+            return false;
+        }
     }
 
     #region dodge

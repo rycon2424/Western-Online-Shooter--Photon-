@@ -24,6 +24,7 @@ public class PlayerBehaviour : MonoBehaviourPun
     [Header("CameraStuff")]
     public GameObject UI;
     public GameObject hitmarker;
+    public GameObject blocked;
     public Camera cam;
     public AudioListener al;
     public OrbitCamera oc;
