@@ -23,8 +23,8 @@ public class WeaponCrate : MonoBehaviourPun
             pc = col.GetComponent<PlayerCombat>();
             pc.rifleAmmo += rifleAmmoGiven;
             pc.tommygunAmmo += tommyAmmoGiven;
-            pc.UpdateAmmo(pc.rifleAmmo, true, false);
-            pc.UpdateAmmo(pc.tommygunAmmo, false, true);
+            pc.UpdateAmmo(pc.rifleAmmo, PlayerCombat.GunType.rifle);
+            pc.UpdateAmmo(pc.tommygunAmmo, PlayerCombat.GunType.tommygun);
             //Debug.Log("has now " + pc.rifleAmmo + " Rifle ammo" + " and " + pc.tommygunAmmo + " tommygun ammo ");
             GetComponent<PhotonView>().RPC("DestroySelf", RpcTarget.All);
         }

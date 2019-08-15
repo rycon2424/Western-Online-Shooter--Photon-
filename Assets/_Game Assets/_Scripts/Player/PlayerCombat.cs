@@ -568,11 +568,11 @@ public class PlayerCombat : MonoBehaviourPun
             case GunType.rifle:
                 rifleAmmo -= 1;
                 pb.pi.UpdateAmmoUI(rifleAmmo);
-                UpdateAmmo(rifleAmmo, true, false);
+                UpdateAmmo(rifleAmmo, GunType.rifle);
                 break;
             case GunType.tommygun:
                 tommygunAmmo -= 1;
-                UpdateAmmo(tommygunAmmo, false, true);
+                UpdateAmmo(tommygunAmmo, GunType.tommygun);
                 pb.pi.UpdateAmmoUI(tommygunAmmo);
                 break;
             case GunType.noWeapon:
@@ -583,30 +583,35 @@ public class PlayerCombat : MonoBehaviourPun
         }
     }
     
-    //NEEDS ANOTHER METHOD DEFINITELY trash code
-    public void UpdateAmmo(int ammoToSync, bool isRifle, bool isTommygun)
+    public void UpdateAmmo(int ammoToSync, GunType gunType)
     {
         if (pb.onlineReady)
         {
-            pb.pv.RPC("SyncAmmo", RpcTarget.All, ammoToSync, isRifle, isTommygun);
+            pb.pv.RPC("SyncAmmo", RpcTarget.All, ammoToSync, gunType);
         }
         else
         {
-            SyncAmmo(ammoToSync, isRifle, isTommygun);
+            SyncAmmo(ammoToSync, gunType);
         }
     }
-
-    //NEEDS ANOTHER METHOD DEFINITELY trash code
+    
     [PunRPC]
-    void SyncAmmo(int ammoToSync, bool isRifle, bool isTommygun)
+    void SyncAmmo(int ammoToSync, GunType gun)
     {
-        if (isRifle)
+        switch (gun)
         {
-            rifleAmmo = ammoToSync;
-        }
-        if (isTommygun)
-        {
-            tommygunAmmo = ammoToSync;
+            case GunType.revolver:
+                break;
+            case GunType.rifle:
+                rifleAmmo = ammoToSync;
+                break;
+            case GunType.tommygun:
+                tommygunAmmo = ammoToSync;
+                break;
+            case GunType.noWeapon:
+                break;
+            default:
+                break;
         }
     }
     #endregion
