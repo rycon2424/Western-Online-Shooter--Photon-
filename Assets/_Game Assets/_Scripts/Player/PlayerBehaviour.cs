@@ -10,6 +10,7 @@ public class PlayerBehaviour : MonoBehaviourPun
     public int maxHealth;
     public int health;
     public bool dead;
+    public bool canRespawn;
     public CharacterController cc;
     public float defaultPlayerHeight;
     public Vector3 defaultHitBoxOffset;
@@ -70,7 +71,7 @@ public class PlayerBehaviour : MonoBehaviourPun
         cam.enabled = true;
         al.enabled = true;
         oc.enabled = true;
-        if (onlineReady)
+        if (onlineReady && canRespawn)
         {
             Invoke("JoinServerMessage", 0.5f);
             pv.RPC("Respawn", RpcTarget.All);
@@ -119,7 +120,7 @@ public class PlayerBehaviour : MonoBehaviourPun
         }
         else
         {
-            if (Input.GetKeyDown(KeyCode.P))
+            if (Input.GetKeyDown(KeyCode.P) && canRespawn == true)
             {
                 pv.RPC("Respawn", RpcTarget.All);
             }
@@ -143,6 +144,11 @@ public class PlayerBehaviour : MonoBehaviourPun
         GetComponent<CharacterController>().enabled = false;
     }
 
+    public void EnableRespawn()
+    {
+        canRespawn = true;
+    }
+
     [PunRPC]
     void Respawn()
     {
@@ -164,6 +170,7 @@ public class PlayerBehaviour : MonoBehaviourPun
         {
             bx.enabled = true;
         }
+        canRespawn = false;
     }
 
     void Movement()

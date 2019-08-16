@@ -3766,6 +3766,7 @@ MonoBehaviour:
   maxHealth: 100
   health: 100
   dead: 0
+  canRespawn: 1
   cc: {fileID: 0}
   defaultPlayerHeight: 0
   defaultHitBoxOffset: {x: 0, y: 0, z: 0}
