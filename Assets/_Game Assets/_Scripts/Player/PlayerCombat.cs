@@ -19,6 +19,7 @@ public class PlayerCombat : MonoBehaviourPun
 
     void Update()
     {
+        //Shotgun();
         if (pb.pv.IsMine == false && pb.onlineReady == true)
         {
             return;
@@ -454,12 +455,26 @@ public class PlayerCombat : MonoBehaviourPun
         }
     }
 
+    void Shotgun()
+    {
+        Vector3 Width1 = cameraTransform.position + cameraTransform.forward + cameraTransform.right * 0.35f;
+        Vector3 Width2 = cameraTransform.position + cameraTransform.forward + cameraTransform.right * -0.35f;
+        Vector3 Width3 = cameraTransform.position + cameraTransform.forward + cameraTransform.up * 0.35f;
+        Vector3 Width4 = cameraTransform.position + cameraTransform.forward + cameraTransform.up * -0.35f;
+        Vector3 Width5 = cameraTransform.position + cameraTransform.forward;
+        Debug.DrawRay(Width1, cameraTransform.forward * 30, Color.red, 0.2f);
+        Debug.DrawRay(Width2, cameraTransform.forward * 30, Color.red, 0.2f);
+        Debug.DrawRay(Width3, cameraTransform.forward * 30, Color.red, 0.2f);
+        Debug.DrawRay(Width4, cameraTransform.forward * 30, Color.red, 0.2f);
+        Debug.DrawRay(Width5, cameraTransform.forward * 30, Color.red, 0.2f);
+    }
+
     public LayerMask knifeCanHit;
     [PunRPC]
     void KnifeCast()
     {
         Vector3 rayOrigin = transform.position + transform.forward * -0.2f + transform.up * 1.1f;
-        Debug.DrawRay(rayOrigin, transform.forward * weaponRange, Color.blue, 1);
+        Debug.DrawRay(rayOrigin, transform.forward * weaponRange, Color.yellow, 1);
 
         if (Physics.SphereCast(rayOrigin, 0.3f, transform.forward, out knifeHit, weaponRange, knifeCanHit))
         {
