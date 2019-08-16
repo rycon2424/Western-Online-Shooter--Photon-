@@ -1365,7 +1365,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   character: 2
   characterHP: 120
-  characterName: Jim Hoppers
+  characterName: Jim Hopper
   characterSpeed: Slow
   playButton: {fileID: 289607820}
   currentselectedChar: {fileID: 1013833432}
@@ -16768,7 +16768,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Jim Hoppers
+  m_Text: Jim Hopper
 --- !u!222 &1605575301
 CanvasRenderer:
   m_ObjectHideFlags: 0
