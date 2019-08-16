@@ -1300,6 +1300,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Doctor
       objectReference: {fileID: 0}
+    - target: {fileID: 2337958863006545217, guid: 3962cb920fcc48345bb6ed8b9a91eceb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2334241566555305691, guid: 3962cb920fcc48345bb6ed8b9a91eceb,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1374,6 +1379,11 @@ PrefabInstance:
         type: 3}
       propertyPath: viewIdField
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6396065130784087512, guid: 3962cb920fcc48345bb6ed8b9a91eceb,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1013786057109230870, guid: 3962cb920fcc48345bb6ed8b9a91eceb,
         type: 3}
