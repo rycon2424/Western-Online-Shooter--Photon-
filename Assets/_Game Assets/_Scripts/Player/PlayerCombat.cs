@@ -195,7 +195,7 @@ public class PlayerCombat : MonoBehaviourPun
                 break;
             case GunType.rifle:
                 weaponRange = 200;
-                weaponDamage = 40;
+                weaponDamage = 38;
                 fireRate = 2;
                 break;
             case GunType.tommygun:
