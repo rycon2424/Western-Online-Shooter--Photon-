@@ -238,6 +238,7 @@ public class PlayerCombat : MonoBehaviourPun
         if (typeGun == GunType.noWeapon)
         {
             pb.anim.SetBool("Aim", false);
+            pb.blocked.SetActive(false);
             if (Input.GetMouseButton(0) && canShoot)
             {
                 if (pb.onlineReady == true)
