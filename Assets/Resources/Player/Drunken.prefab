@@ -3114,6 +3114,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bui: {fileID: 0}
+  scoreBoard: {fileID: 0}
   oc: {fileID: 0}
   volume: {fileID: 8472596734681110230}
   sensitivity: {fileID: 7072032856456196162}

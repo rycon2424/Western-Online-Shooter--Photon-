@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
+using Photon.Pun.UtilityScripts;
+using System.Text;
 
 public class PlayerInterface : MonoBehaviourPun
 {
     public BattleUI bui;
+    public GameObject scoreBoard;
+    private bool scoreboardfound = false;
 
     // Start is called before the first frame update
     public void StartPlayerUI()
@@ -29,6 +33,11 @@ public class PlayerInterface : MonoBehaviourPun
         {
             Debug.Log("There is no Battle Ui, probably because you're in offline mode");
         }
+        else
+        {
+            scoreBoard = GameObject.Find("GlobalUI").transform.Find("ScoreBoard").gameObject;
+            scoreboardfound = true;
+        }
     }
 
     private int currentHealth;
@@ -44,7 +53,42 @@ public class PlayerInterface : MonoBehaviourPun
         {
             OpenCloseMenu();
         }
+        if (Input.GetKey(KeyCode.Tab) && scoreboardfound)
+        {
+            scoreBoard.SetActive(true);
+            UpdateScoreBoard();
+        }
+        if (Input.GetKeyUp(KeyCode.Tab) && scoreboardfound)
+        {
+            scoreBoard.SetActive(false);
+        }
     }
+
+    #region ScoreBoard
+
+    int playerCount;
+
+    void UpdateScoreBoard()
+    {
+        //Get playerCount
+        playerCount = PhotonNetwork.PlayerList.Length;
+
+        //Get playerNames
+        var playerNames = new StringBuilder();
+        foreach (var player in PhotonNetwork.PlayerList)
+        {
+            playerNames.Append(player.NickName + " Kills: " + player.GetScore() + "\n" + "\n");
+        }
+
+        //Update Text of playernames
+        scoreBoard.transform.Find("PlayerNames").GetComponent<Text>().text = playerNames.ToString();
+
+        //Update total players playing currently
+        string playerCountText = "Total Players: " + playerCount.ToString();
+        scoreBoard.transform.Find("PlayerCount").GetComponent<Text>().text = playerCountText;
+    }
+
+    #endregion
 
     #region optionsMenu
     [Header("Menu")]

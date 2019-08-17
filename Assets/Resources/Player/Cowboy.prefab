@@ -3827,6 +3827,7 @@ MonoBehaviour:
   weaponRange: 50
   weaponDamage: 15
   fireRate: 1
+  weaponZoom: 0
   rifleAmmo: 0
   tommygunAmmo: 0
   canSwitchWeapons: 1
@@ -3854,6 +3855,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bui: {fileID: 0}
+  scoreBoard: {fileID: 0}
   oc: {fileID: 0}
   volume: {fileID: 5215383713108897855}
   sensitivity: {fileID: 6904192381563541163}
@@ -6048,7 +6050,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 95.81699
       objectReference: {fileID: 0}
-    - target: {fileID: 1933035755292984, guid: f8179cff3ce8de647b569f1f9f134767, type: 3}
+    - target: {fileID: 1015571349879316, guid: f8179cff3ce8de647b569f1f9f134767, type: 3}
       propertyPath: m_Layer
       value: 11
       objectReference: {fileID: 0}
@@ -6060,7 +6062,7 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 11
       objectReference: {fileID: 0}
-    - target: {fileID: 1015571349879316, guid: f8179cff3ce8de647b569f1f9f134767, type: 3}
+    - target: {fileID: 1933035755292984, guid: f8179cff3ce8de647b569f1f9f134767, type: 3}
       propertyPath: m_Layer
       value: 11
       objectReference: {fileID: 0}
@@ -6175,22 +6177,7 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 11
       objectReference: {fileID: 0}
-    - target: {fileID: 1472514092889667028, guid: 56d293d57fb0bb2498c167bac52741a9,
-        type: 3}
-      propertyPath: m_Layer
-      value: 11
-      objectReference: {fileID: 0}
-    - target: {fileID: 1472514092889667030, guid: 56d293d57fb0bb2498c167bac52741a9,
-        type: 3}
-      propertyPath: m_Layer
-      value: 11
-      objectReference: {fileID: 0}
-    - target: {fileID: 1472514092889667024, guid: 56d293d57fb0bb2498c167bac52741a9,
-        type: 3}
-      propertyPath: m_Layer
-      value: 11
-      objectReference: {fileID: 0}
-    - target: {fileID: 1472514092889667026, guid: 56d293d57fb0bb2498c167bac52741a9,
+    - target: {fileID: 1472514092889667038, guid: 56d293d57fb0bb2498c167bac52741a9,
         type: 3}
       propertyPath: m_Layer
       value: 11
@@ -6200,12 +6187,27 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 11
       objectReference: {fileID: 0}
-    - target: {fileID: 1472514092889667038, guid: 56d293d57fb0bb2498c167bac52741a9,
+    - target: {fileID: 1472514092889667032, guid: 56d293d57fb0bb2498c167bac52741a9,
         type: 3}
       propertyPath: m_Layer
       value: 11
       objectReference: {fileID: 0}
-    - target: {fileID: 1472514092889667032, guid: 56d293d57fb0bb2498c167bac52741a9,
+    - target: {fileID: 1472514092889667030, guid: 56d293d57fb0bb2498c167bac52741a9,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 1472514092889667028, guid: 56d293d57fb0bb2498c167bac52741a9,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 1472514092889667026, guid: 56d293d57fb0bb2498c167bac52741a9,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 1472514092889667024, guid: 56d293d57fb0bb2498c167bac52741a9,
         type: 3}
       propertyPath: m_Layer
       value: 11
@@ -6438,15 +6440,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 92.27599
       objectReference: {fileID: 0}
-    - target: {fileID: 1929823049446964, guid: 06d5955ec0ad0a647971bfeea7cd9f8a, type: 3}
-      propertyPath: m_Layer
-      value: 11
-      objectReference: {fileID: 0}
     - target: {fileID: 1485767846719454, guid: 06d5955ec0ad0a647971bfeea7cd9f8a, type: 3}
       propertyPath: m_Layer
       value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 1162447621083090, guid: 06d5955ec0ad0a647971bfeea7cd9f8a, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 1929823049446964, guid: 06d5955ec0ad0a647971bfeea7cd9f8a, type: 3}
       propertyPath: m_Layer
       value: 11
       objectReference: {fileID: 0}

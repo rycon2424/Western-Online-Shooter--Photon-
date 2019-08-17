@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using Photon.Pun.UtilityScripts;
 
 public class PlayerCombat : MonoBehaviourPun
 {
@@ -426,9 +427,10 @@ public class PlayerCombat : MonoBehaviourPun
                 health = health - damage;
                 hit.collider.GetComponentInParent<PlayerBehaviour>().pi.UpdateHealthUI(health, "shot", pb.pv.Owner.NickName);
                 hit.collider.GetComponentInParent<PlayerBehaviour>().pi.UpdateLog();
-                Debug.Log(hit.collider.name);
+                CheckIfKilled(health);
                 HitMarker();
             }
+            #region commented hit tags
             /*if (hit.collider.CompareTag("Head"))
             {
                 int damage = (weaponDamage * 2);
@@ -459,6 +461,7 @@ public class PlayerCombat : MonoBehaviourPun
                 Debug.Log(hit.collider.name);
                 HitMarker();
             }*/
+            #endregion
             if (hit.collider.CompareTag("Finish"))
             {
                 HitMarker();
@@ -534,6 +537,7 @@ public class PlayerCombat : MonoBehaviourPun
                 int health = knifeHit.collider.GetComponent<PlayerBehaviour>().health;
                 knifeHit.collider.GetComponent<PlayerBehaviour>().pi.UpdateHealthUI(health, "knived", pb.pv.Owner.NickName);
                 knifeHit.collider.GetComponent<PlayerBehaviour>().pi.UpdateLog();
+                CheckIfKilled(health);
                 HitMarker();
             }
             if (knifeHit.collider.CompareTag("Finish"))
@@ -679,6 +683,18 @@ public class PlayerCombat : MonoBehaviourPun
         }
     }
     #endregion
+
+    void CheckIfKilled(int health)
+    {
+        if (pb.pv.IsMine == false)
+        {
+            return;
+        }
+        if (health < 1)
+        {
+            PhotonNetwork.LocalPlayer.AddScore(1);
+        }
+    }
 
     void GunShotSound()
     {
