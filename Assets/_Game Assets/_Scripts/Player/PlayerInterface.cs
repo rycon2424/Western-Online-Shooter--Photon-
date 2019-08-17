@@ -62,6 +62,10 @@ public class PlayerInterface : MonoBehaviourPun
         {
             scoreBoard.SetActive(false);
         }
+        if (pb.dead && Input.GetKeyDown(KeyCode.H))
+        {
+            SwitchCharacter();
+        }
     }
 
     #region ScoreBoard
@@ -133,6 +137,14 @@ public class PlayerInterface : MonoBehaviourPun
     {
         AudioListener.volume = volume.value;
         oc.sensitivity = sensitivity.value;
+    }
+
+    void SwitchCharacter()
+    {
+        pb.gsc.characterSelect.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        PhotonNetwork.Destroy(this.gameObject);
     }
 
     public void ExitGame()
