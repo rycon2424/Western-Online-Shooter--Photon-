@@ -193,21 +193,25 @@ public class PlayerCombat : MonoBehaviourPun
                 weaponRange = 50;
                 weaponDamage = 15;
                 fireRate = 1;
+                weaponZoom = 3.5f;
                 break;
             case GunType.rifle:
                 weaponRange = 200;
                 weaponDamage = 38;
                 fireRate = 2;
+                weaponZoom = 2;
                 break;
             case GunType.tommygun:
                 weaponRange = 30;
                 weaponDamage = 4;
                 fireRate = 0.15f;
+                weaponZoom = 3.5f;
                 break;
             case GunType.noWeapon:
                 weaponRange = 1.8f;
                 weaponDamage = 80;
                 fireRate = 0;
+                weaponZoom = 4;
                 break;
             default:
                 break;
@@ -222,6 +226,7 @@ public class PlayerCombat : MonoBehaviourPun
         }
         if (Input.GetKeyDown(KeyCode.Space) && canDodge)
         {
+            ZoomIn(false, 0);
             if (pb.onlineReady)
             {
                 pb.pv.RPC("Dodge", RpcTarget.All);
@@ -238,6 +243,7 @@ public class PlayerCombat : MonoBehaviourPun
         if (typeGun == GunType.noWeapon)
         {
             pb.anim.SetBool("Aim", false);
+            ZoomIn(false, 0);
             pb.blocked.SetActive(false);
             if (Input.GetMouseButton(0) && canShoot)
             {
@@ -277,11 +283,13 @@ public class PlayerCombat : MonoBehaviourPun
         {
             AimRaycast();
         }
+        CheckWeaponZoom();
     }
 
     public void ExitCombat()
     {
         pb.anim.SetBool("Aim", false);
+        ZoomIn(false, 0);
         pb.blocked.SetActive(false);
     }
 
@@ -294,6 +302,45 @@ public class PlayerCombat : MonoBehaviourPun
         chest.LookAt(pb.lookObj.position);
         chest.rotation = chest.rotation * Quaternion.Euler(offset);
     }
+
+    #region zooming
+
+    void CheckWeaponZoom()
+    {
+        switch (typeGun)
+        {
+            case GunType.revolver:
+                ZoomIn(true, weaponZoom);
+                break;
+            case GunType.rifle:
+                ZoomIn(true, weaponZoom);
+                break;
+            case GunType.tommygun:
+                ZoomIn(true, weaponZoom);
+                break;
+            case GunType.noWeapon:
+                ZoomIn(true, weaponZoom);
+                break;
+            default:
+                break;
+        }
+    }
+
+    void ZoomIn(bool zooming, float zoomDistance)
+    {
+        if (zooming)
+        {
+            pb.oc.minDistance = zoomDistance;
+            pb.oc.maxDistance = zoomDistance;
+        }
+        else
+        {
+            pb.oc.minDistance = 4;
+            pb.oc.maxDistance = 4;
+        }
+    }
+
+    #endregion
 
     public LayerMask headGlitchHit;
     RaycastHit headHit;
@@ -353,6 +400,7 @@ public class PlayerCombat : MonoBehaviourPun
     public float weaponRange;
     public int weaponDamage;
     public float fireRate;
+    public float weaponZoom;
 
     [Header("Ammunition")]
     public int rifleAmmo;

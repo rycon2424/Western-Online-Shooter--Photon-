@@ -42,15 +42,13 @@ public class GameSetupController : MonoBehaviour
             case 3:
                 PhotonNetwork.Instantiate(Path.Combine("Player", "Doctor"), spawns[Random.Range(0, spawns.Length)].position, Quaternion.identity);
                 break;
+            case 4:
+                PhotonNetwork.Instantiate(Path.Combine("Player", "Drunken"), spawns[Random.Range(0, spawns.Length)].position, Quaternion.identity);
+                break;
             default:
                 break;
         }
         characterSelect.SetActive(false);
-        //Cursor.lockState = CursorLockMode.Locked;
-        //Cursor.visible = false;
-
-        
-        //PhotonNetwork.Instantiate(Path.Combine("Player", "Cowboy"), Vector3.zero, Quaternion.identity);
     }
 
     #region ammoCrates
