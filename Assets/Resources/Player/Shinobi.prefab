@@ -2354,6 +2354,7 @@ MonoBehaviour:
   weaponRange: 50
   weaponDamage: 15
   fireRate: 1
+  weaponZoom: 0
   rifleAmmo: 0
   tommygunAmmo: 0
   canSwitchWeapons: 1
