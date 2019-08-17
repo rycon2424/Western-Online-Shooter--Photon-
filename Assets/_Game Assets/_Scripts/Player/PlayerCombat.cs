@@ -190,7 +190,7 @@ public class PlayerCombat : MonoBehaviourPun
         switch (typeGun)
         {
             case GunType.revolver:
-                weaponRange = 50;
+                weaponRange = 43;
                 weaponDamage = 15;
                 fireRate = 1;
                 weaponZoom = 3.5f;
