@@ -7194,6 +7194,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damagePerTick: 200
+  killer: Train
+  killmethod: hit
 --- !u!65 &572681046
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10952,14 +10954,14 @@ Transform:
   - {fileID: 1183644960}
   - {fileID: 189254627}
   - {fileID: 944630795}
-  - {fileID: 1315443943}
+  - {fileID: 1247444690}
   - {fileID: 188619113}
+  - {fileID: 1315443943}
+  - {fileID: 1734845894}
   - {fileID: 831564353}
   - {fileID: 884689416}
-  - {fileID: 1247444690}
-  - {fileID: 1734845894}
-  - {fileID: 1446764805}
   - {fileID: 1063836267}
+  - {fileID: 1446764805}
   - {fileID: 871553423}
   m_Father: {fileID: 0}
   m_RootOrder: 4
@@ -13823,7 +13825,7 @@ Transform:
   m_LocalScale: {x: 3.5161586, y: 11.112823, z: 2.8837762}
   m_Children: []
   m_Father: {fileID: 906480829}
-  m_RootOrder: 178
+  m_RootOrder: 174
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1247444691
 BoxCollider:
@@ -18181,7 +18183,7 @@ Transform:
   m_LocalScale: {x: 3.5161586, y: 11.112823, z: 2.8837762}
   m_Children: []
   m_Father: {fileID: 906480829}
-  m_RootOrder: 179
+  m_RootOrder: 177
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1734845895
 BoxCollider:
@@ -18272,6 +18274,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damagePerTick: 200
+  killer: 
+  killmethod: 
 --- !u!65 &1736801031
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -5,6 +5,8 @@ using UnityEngine;
 public class HurtZone : MonoBehaviour
 {
     public int damagePerTick;
+    public string killer;
+    public string killmethod;
 
     void OnTriggerEnter(Collider col)
     {
@@ -12,7 +14,7 @@ public class HurtZone : MonoBehaviour
         {
             col.GetComponent<PlayerBehaviour>().health -= damagePerTick;
             int health = col.GetComponent<PlayerBehaviour>().health;
-            col.GetComponent<PlayerBehaviour>().pi.UpdateHealthUI(health, "beated", "World");
+            col.GetComponent<PlayerBehaviour>().pi.UpdateHealthUI(health, killmethod, killer);
             col.GetComponent<PlayerBehaviour>().pi.UpdateLog();
         }
     }
@@ -23,7 +25,7 @@ public class HurtZone : MonoBehaviour
         {
             col.GetComponent<PlayerBehaviour>().health -= damagePerTick;
             int health = col.GetComponent<PlayerBehaviour>().health;
-            col.GetComponent<PlayerBehaviour>().pi.UpdateHealthUI(health, "beated", "World");
+            col.GetComponent<PlayerBehaviour>().pi.UpdateHealthUI(health, killmethod, killer);
             col.GetComponent<PlayerBehaviour>().pi.UpdateLog();
         }
     }
