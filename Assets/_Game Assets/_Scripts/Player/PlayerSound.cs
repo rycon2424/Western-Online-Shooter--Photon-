@@ -10,6 +10,8 @@ public class PlayerSound : MonoBehaviourPun
     public AudioClip[] revolverShots;
     public AudioClip[] rifleShots;
     public AudioClip[] tommygunShots;
+    public AudioClip[] shotgunShots;
+    public AudioClip[] sniperShots;
     public AudioSource playerSource;
     public AudioSource gunSource;
     public AudioSource hitmarkerSource;
@@ -42,6 +44,18 @@ public class PlayerSound : MonoBehaviourPun
     public void Audio_TommygunShot()
     {
         gunSource.clip = tommygunShots[Random.Range(0, tommygunShots.Length)];
+        gunSource.Play();
+    }
+
+    public void Audio_ShotgunShot()
+    {
+        gunSource.clip = shotgunShots[Random.Range(0, shotgunShots.Length)];
+        gunSource.Play();
+    }
+
+    public void Audio_SniperShot()
+    {
+        gunSource.clip = sniperShots[Random.Range(0, sniperShots.Length)];
         gunSource.Play();
     }
 

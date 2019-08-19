@@ -20,7 +20,6 @@ public class PlayerCombat : MonoBehaviourPun
 
     void Update()
     {
-        //Shotgun();
         if (pb.pv.IsMine == false && pb.onlineReady == true)
         {
             return;
@@ -77,6 +76,14 @@ public class PlayerCombat : MonoBehaviourPun
             }
             else if (typeGun == GunType.tommygun)
             {
+                typeGun = GunType.shotgun;
+            }
+            else if (typeGun == GunType.shotgun)
+            {
+                typeGun = GunType.sniper;
+            }
+            else if (typeGun == GunType.sniper)
+            {
                 typeGun = GunType.noWeapon;
             }
         }
@@ -94,9 +101,17 @@ public class PlayerCombat : MonoBehaviourPun
             {
                 typeGun = GunType.rifle;
             }
-            else if (typeGun == GunType.noWeapon)
+            else if (typeGun == GunType.shotgun)
             {
                 typeGun = GunType.tommygun;
+            }
+            else if (typeGun == GunType.sniper)
+            {
+                typeGun = GunType.shotgun;
+            }
+            else if (typeGun == GunType.noWeapon)
+            {
+                typeGun = GunType.sniper;
             }
         }
         #region old version
@@ -192,14 +207,14 @@ public class PlayerCombat : MonoBehaviourPun
         {
             case GunType.revolver:
                 weaponRange = 43;
-                weaponDamage = 15;
+                weaponDamage = 13;
                 fireRate = 1;
                 weaponZoom = 3.5f;
                 break;
             case GunType.rifle:
-                weaponRange = 200;
-                weaponDamage = 38;
-                fireRate = 2;
+                weaponRange = 150;
+                weaponDamage = 20;
+                fireRate = 1.33f;
                 weaponZoom = 2;
                 break;
             case GunType.tommygun:
@@ -207,6 +222,18 @@ public class PlayerCombat : MonoBehaviourPun
                 weaponDamage = 4;
                 fireRate = 0.15f;
                 weaponZoom = 3.5f;
+                break;
+            case GunType.shotgun:
+                weaponRange = 5;
+                weaponDamage = 45;
+                fireRate = 1.5f;
+                weaponZoom = 3.5f;
+                break;
+            case GunType.sniper:
+                weaponRange = 400;
+                weaponDamage = 70;
+                fireRate = 3;
+                weaponZoom = 1f;
                 break;
             case GunType.noWeapon:
                 weaponRange = 1.8f;
@@ -284,7 +311,7 @@ public class PlayerCombat : MonoBehaviourPun
         {
             AimRaycast();
         }
-        CheckWeaponZoom();
+        ZoomIn(true, weaponZoom);
     }
 
     public void ExitCombat()
@@ -303,30 +330,7 @@ public class PlayerCombat : MonoBehaviourPun
         chest.LookAt(pb.lookObj.position);
         chest.rotation = chest.rotation * Quaternion.Euler(offset);
     }
-
-    #region zooming
-
-    void CheckWeaponZoom()
-    {
-        switch (typeGun)
-        {
-            case GunType.revolver:
-                ZoomIn(true, weaponZoom);
-                break;
-            case GunType.rifle:
-                ZoomIn(true, weaponZoom);
-                break;
-            case GunType.tommygun:
-                ZoomIn(true, weaponZoom);
-                break;
-            case GunType.noWeapon:
-                ZoomIn(true, weaponZoom);
-                break;
-            default:
-                break;
-        }
-    }
-
+    
     void ZoomIn(bool zooming, float zoomDistance)
     {
         if (zooming)
@@ -340,8 +344,6 @@ public class PlayerCombat : MonoBehaviourPun
             pb.oc.maxDistance = 4;
         }
     }
-
-    #endregion
 
     public LayerMask headGlitchHit;
     RaycastHit headHit;
@@ -397,7 +399,7 @@ public class PlayerCombat : MonoBehaviourPun
 
     [Header("WeaponStats")]
     public GunType typeGun;
-    public enum GunType { revolver, rifle, tommygun, noWeapon }
+    public enum GunType { revolver, rifle, tommygun, shotgun, sniper, noWeapon }
     public float weaponRange;
     public int weaponDamage;
     public float fireRate;
@@ -406,6 +408,8 @@ public class PlayerCombat : MonoBehaviourPun
     [Header("Ammunition")]
     public int rifleAmmo;
     public int tommygunAmmo;
+    public int shotgunAmmo;
+    public int sniperAmmo;
 
     [Header("Other Stats")]
     public bool canSwitchWeapons = true;
@@ -507,21 +511,7 @@ public class PlayerCombat : MonoBehaviourPun
             KnifeCast();
         }
     }
-
-    void Shotgun()
-    {
-        Vector3 Width1 = cameraTransform.position + cameraTransform.forward + cameraTransform.right * 0.35f;
-        Vector3 Width2 = cameraTransform.position + cameraTransform.forward + cameraTransform.right * -0.35f;
-        Vector3 Width3 = cameraTransform.position + cameraTransform.forward + cameraTransform.up * 0.35f;
-        Vector3 Width4 = cameraTransform.position + cameraTransform.forward + cameraTransform.up * -0.35f;
-        Vector3 Width5 = cameraTransform.position + cameraTransform.forward;
-        Debug.DrawRay(Width1, cameraTransform.forward * 30, Color.red, 0.2f);
-        Debug.DrawRay(Width2, cameraTransform.forward * 30, Color.red, 0.2f);
-        Debug.DrawRay(Width3, cameraTransform.forward * 30, Color.red, 0.2f);
-        Debug.DrawRay(Width4, cameraTransform.forward * 30, Color.red, 0.2f);
-        Debug.DrawRay(Width5, cameraTransform.forward * 30, Color.red, 0.2f);
-    }
-
+    
     public LayerMask knifeCanHit;
     [PunRPC]
     void KnifeCast()
@@ -620,6 +610,24 @@ public class PlayerCombat : MonoBehaviourPun
                 {
                     return false;
                 }
+            case GunType.shotgun:
+                if (shotgunAmmo > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            case GunType.sniper:
+                if (sniperAmmo > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             case GunType.noWeapon:
                 return false;
             default:
@@ -643,6 +651,16 @@ public class PlayerCombat : MonoBehaviourPun
                 tommygunAmmo -= 1;
                 UpdateAmmo(tommygunAmmo, GunType.tommygun);
                 pb.pi.UpdateAmmoUI(tommygunAmmo);
+                break;
+            case GunType.shotgun:
+                shotgunAmmo -= 1;
+                UpdateAmmo(shotgunAmmo, GunType.shotgun);
+                pb.pi.UpdateAmmoUI(shotgunAmmo);
+                break;
+            case GunType.sniper:
+                sniperAmmo -= 1;
+                UpdateAmmo(sniperAmmo, GunType.sniper);
+                pb.pi.UpdateAmmoUI(sniperAmmo);
                 break;
             case GunType.noWeapon:
                 pb.pi.UpdateAmmoUI(-1);
@@ -677,6 +695,12 @@ public class PlayerCombat : MonoBehaviourPun
             case GunType.tommygun:
                 tommygunAmmo = ammoToSync;
                 break;
+            case GunType.shotgun:
+                shotgunAmmo = ammoToSync;
+                break;
+            case GunType.sniper:
+                sniperAmmo = ammoToSync;
+                break;
             case GunType.noWeapon:
                 break;
             default:
@@ -709,6 +733,12 @@ public class PlayerCombat : MonoBehaviourPun
                 break;
             case GunType.tommygun:
                 pb.ps.Audio_TommygunShot();
+                break;
+            case GunType.shotgun:
+                pb.ps.Audio_ShotgunShot();
+                break;
+            case GunType.sniper:
+                pb.ps.Audio_SniperShot();
                 break;
             case GunType.noWeapon:
                 break;

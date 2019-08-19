@@ -213,6 +213,8 @@ public class PlayerInterface : MonoBehaviourPun
     public Sprite revolver;
     public Sprite rifle;
     public Sprite tommygun;
+    public Sprite shotgun;
+    public Sprite sniper;
 
     [Header("Weapon Ammo")]
     public Text ammoText;
@@ -264,6 +266,33 @@ public class PlayerInterface : MonoBehaviourPun
                 }
                 UpdateAmmoUI(pb.pc.tommygunAmmo);
                 break;
+
+            case PlayerCombat.GunType.shotgun:
+                weaponSort.sprite = shotgun;
+                pb.anim.SetInteger("WeaponType", 4);
+                if (pb.onlineReady && pb.pv.IsMine)
+                {
+                    pb.pv.RPC("SyncWeaponUI", RpcTarget.All, pb.anim.GetInteger("WeaponType"));
+                }
+                else
+                {
+                    SyncWeaponUI(pb.anim.GetInteger("WeaponType"));
+                }
+                UpdateAmmoUI(pb.pc.shotgunAmmo);
+                break;
+            case PlayerCombat.GunType.sniper:
+                weaponSort.sprite = sniper;
+                pb.anim.SetInteger("WeaponType", 5);
+                if (pb.onlineReady && pb.pv.IsMine)
+                {
+                    pb.pv.RPC("SyncWeaponUI", RpcTarget.All, pb.anim.GetInteger("WeaponType"));
+                }
+                else
+                {
+                    SyncWeaponUI(pb.anim.GetInteger("WeaponType"));
+                }
+                UpdateAmmoUI(pb.pc.sniperAmmo);
+                break;
             case PlayerCombat.GunType.noWeapon:
                 weaponSort.sprite = noWeapon;
                 pb.anim.SetInteger("WeaponType", 0);
@@ -298,6 +327,8 @@ public class PlayerInterface : MonoBehaviourPun
     public GameObject revolverModel;
     public GameObject rifleModel;
     public GameObject tommygunModel;
+    public GameObject shotgunModel;
+    public GameObject sniperModel;
 
     [PunRPC]
     public void SyncWeaponUI(int weaponType)
@@ -308,21 +339,43 @@ public class PlayerInterface : MonoBehaviourPun
                 revolverModel.SetActive(false);
                 rifleModel.SetActive(false);
                 tommygunModel.SetActive(false);
+                shotgunModel.SetActive(false);
+                sniperModel.SetActive(false);
                 break;
             case 1:
                 revolverModel.SetActive(true);
                 rifleModel.SetActive(false);
                 tommygunModel.SetActive(false);
+                shotgunModel.SetActive(false);
+                sniperModel.SetActive(false);
                 break;
             case 2:
                 revolverModel.SetActive(false);
                 rifleModel.SetActive(true);
                 tommygunModel.SetActive(false);
+                shotgunModel.SetActive(false);
+                sniperModel.SetActive(false);
                 break;
             case 3:
                 revolverModel.SetActive(false);
                 rifleModel.SetActive(false);
                 tommygunModel.SetActive(true);
+                shotgunModel.SetActive(false);
+                sniperModel.SetActive(false);
+                break;
+            case 4:
+                revolverModel.SetActive(false);
+                rifleModel.SetActive(false);
+                tommygunModel.SetActive(false);
+                shotgunModel.SetActive(true);
+                sniperModel.SetActive(false);
+                break;
+            case 5:
+                revolverModel.SetActive(false);
+                rifleModel.SetActive(false);
+                tommygunModel.SetActive(false);
+                shotgunModel.SetActive(false);
+                sniperModel.SetActive(true);
                 break;
             default:
                 break;
