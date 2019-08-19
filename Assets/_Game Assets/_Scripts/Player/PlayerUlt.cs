@@ -10,6 +10,10 @@ public class PlayerUlt : MonoBehaviourPun
     public enum Character {Cowboy, Shinobi, Sherrif, Doctor, Drunken }
     public Character currentCharacter;
 
+    private PlayerBehaviour pb;
+    private PlayerCombat pc;
+    private PlayerInterface pi;
+
     [Header("Global Stats")]
     public bool isUlting;
     public float ultCharge;
@@ -23,6 +27,10 @@ public class PlayerUlt : MonoBehaviourPun
 
     void Start()
     {
+        pb = GetComponent<PlayerBehaviour>();
+        pc = GetComponent<PlayerCombat>();
+        pi = GetComponent<PlayerInterface>();
+
         ultBar.value = ultCharge;
         UpdateUI();
     }
@@ -71,7 +79,14 @@ public class PlayerUlt : MonoBehaviourPun
             ultCharge = 0;
             UpdateUI();
             StartUltimateScript();
-            halo.SetActive(false);
+            if (pb.onlineReady)
+            {
+                pb.pv.RPC("EndUlt", RpcTarget.All);
+            }
+            else
+            {
+                EndUlt();
+            }
         }
         curlerp += Time.deltaTime / ultDuration;
         ultCharge = (int)Mathf.Lerp(100, 0, curlerp);
@@ -97,48 +112,119 @@ public class PlayerUlt : MonoBehaviourPun
         switch (currentCharacter)
         {
             case Character.Cowboy:
-                CowboyUlt();
+                if (pb.onlineReady)
+                {
+                    pb.pv.RPC("CowboyUlt", RpcTarget.All);
+                }
+                else
+                {
+                    CowboyUlt();
+                }
                 break;
             case Character.Shinobi:
-                ShinobiUlt();
+                if (pb.onlineReady)
+                {
+                    pb.pv.RPC("ShinobiUlt", RpcTarget.All);
+                }
+                else
+                {
+                    ShinobiUlt();
+                }
                 break;
             case Character.Sherrif:
-                SherrifUlt();
+                if (pb.onlineReady)
+                {
+                    pb.pv.RPC("SherrifUlt", RpcTarget.All);
+                }
+                else
+                {
+                    SherrifUlt();
+                }
                 break;
             case Character.Doctor:
-                DoctorUlt();
+                if (pb.onlineReady)
+                {
+                    pb.pv.RPC("CowboyUlt", RpcTarget.All);
+                }
+                else
+                {
+                    CowboyUlt();
+                }
                 break;
             case Character.Drunken:
-                DrunkenUlt();
+                if (pb.onlineReady)
+                {
+                    pb.pv.RPC("DrunkenUlt", RpcTarget.All);
+                }
+                else
+                {
+                    DrunkenUlt();
+                }
                 break;
             default:
                 break;
         }
     }
 
+    [PunRPC]
     void CowboyUlt()
     {
         halo.SetActive(true);
+        pc.typeGun = PlayerCombat.GunType.revolver;
+        pc.AssignDamage();
+        pc.canSwitchWeapons = false;
+        pi.UpdateWeaponUI();
+        pc.weaponDamage = 20;
+        pc.weaponRange = 200;
+        pc.weaponZoom = 5f;
+        pc.fireRate = 0.4f;
     }
 
+    [PunRPC]
     void ShinobiUlt()
     {
 
     }
 
+    [PunRPC]
     void SherrifUlt()
     {
 
     }
 
+    [PunRPC]
     void DoctorUlt()
     {
 
     }
 
+    [PunRPC]
     void DrunkenUlt()
     {
 
+    }
+
+    [PunRPC]
+    void EndUlt()
+    {
+        switch (currentCharacter)
+        {
+            case Character.Cowboy:
+                halo.SetActive(false);
+                pc.AssignDamage();
+                pc.canSwitchWeapons = true;
+                break;
+            case Character.Shinobi:
+                break;
+            case Character.Sherrif:
+                break;
+            case Character.Doctor:
+                break;
+            case Character.Drunken:
+                break;
+            default:
+                break;
+        }
     }
 
 }

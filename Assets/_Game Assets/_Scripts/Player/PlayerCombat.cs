@@ -228,6 +228,7 @@ public class PlayerCombat : MonoBehaviourPun
                 weaponDamage = 45;
                 fireRate = 1.5f;
                 weaponZoom = 3.5f;
+                weaponSpray = 0.8f;
                 break;
             case GunType.sniper:
                 weaponRange = 400;
@@ -442,6 +443,7 @@ public class PlayerCombat : MonoBehaviourPun
     public int weaponDamage;
     public float fireRate;
     public float weaponZoom;
+    public float weaponSpray;
 
     [Header("Ammunition")]
     public int rifleAmmo;
@@ -463,7 +465,7 @@ public class PlayerCombat : MonoBehaviourPun
         Vector3 offset = new Vector3(cameraTransform.position.x, cameraTransform.position.y + 0.5f ,cameraTransform.position.z);
         if (typeGun == GunType.shotgun)
         {
-            if (Physics.SphereCast(offset, 0.8f ,cameraTransform.forward, out hit, weaponRange, canHit))
+            if (Physics.SphereCast(offset, weaponSpray, cameraTransform.forward, out hit, weaponRange, canHit))
             {
                 if (hit.collider.CompareTag("Player"))
                 {
