@@ -38,6 +38,7 @@ public class PlayerBehaviour : MonoBehaviourPun
     public PlayerCombat pc;
     public PlayerInterface pi;
     public PlayerSound ps;
+    public PlayerUlt pu;
     public GameSetupController gsc;
 
     [HideInInspector]
@@ -56,11 +57,13 @@ public class PlayerBehaviour : MonoBehaviourPun
         pi = GetComponent<PlayerInterface>();
         pc = GetComponent<PlayerCombat>();
         ps = GetComponent<PlayerSound>();
+        pu = GetComponent<PlayerUlt>();
         gsc = FindObjectOfType<GameSetupController>();
         anim = GetComponent<Animator>();
         pc.StartPlayerCombat();
         ps.StartPlayerAudio();
         pi.StartPlayerUI();
+        pu.StartUltimateScript();
         health = maxHealth;
         if (pv.IsMine == false && onlineReady == true)
         {
@@ -107,6 +110,7 @@ public class PlayerBehaviour : MonoBehaviourPun
             if (onGround == true && anim.GetBool("Falling") == false)
             {
                 Movement();
+                pu.CastUltimate();
                 pc.Combat();
             }
             if (Input.GetKey(KeyCode.LeftShift))
