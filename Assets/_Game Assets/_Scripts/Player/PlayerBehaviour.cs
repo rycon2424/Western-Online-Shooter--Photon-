@@ -93,6 +93,10 @@ public class PlayerBehaviour : MonoBehaviourPun
     public float z;
     public void Update()
     {
+        if (health > maxHealth)
+        {
+            health = maxHealth;
+        }
         if (pv.IsMine == false && onlineReady == true)
         {
             return;
