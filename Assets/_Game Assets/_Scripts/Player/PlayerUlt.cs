@@ -39,6 +39,7 @@ public class PlayerUlt : MonoBehaviourPun
 
     void UltGain()
     {
+        if (isUlting){ return; }
         ultCharge += ultChargeGainedSecond;
         UpdateUI();
         StartUltimateScript();
@@ -46,6 +47,7 @@ public class PlayerUlt : MonoBehaviourPun
 
     public void UltGainShot()
     {
+        if (isUlting) { return; }
         if (ultCharge >= 100)
         {
             ultCharge = 100;
@@ -69,6 +71,7 @@ public class PlayerUlt : MonoBehaviourPun
             ultCharge = 0;
             UpdateUI();
             StartUltimateScript();
+            halo.SetActive(false);
         }
         curlerp += Time.deltaTime / ultDuration;
         ultCharge = (int)Mathf.Lerp(100, 0, curlerp);
@@ -115,7 +118,7 @@ public class PlayerUlt : MonoBehaviourPun
 
     void CowboyUlt()
     {
-        //halo.SetActive(true);
+        halo.SetActive(true);
     }
 
     void ShinobiUlt()
