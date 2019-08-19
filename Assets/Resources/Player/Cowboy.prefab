@@ -3902,10 +3902,10 @@ MonoBehaviour:
   isUlting: 0
   ultCharge: 0
   ultDuration: 5
-  ultChargeGainedSecond: 100
-  ultChargeGainedOnShot: 2
+  ultChargeGainedSecond: 2
+  ultChargeGainedOnShot: 10
   ultBar: {fileID: 5161178108578027267}
-  halo: {fileID: 0}
+  halo: {fileID: 4737730767936421494}
 --- !u!114 &5854541292995105012
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5124,7 +5124,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8372050160518096062
 Transform:
   m_ObjectHideFlags: 0

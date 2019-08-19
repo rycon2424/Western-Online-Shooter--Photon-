@@ -1823,27 +1823,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6312096451438095561, guid: a3bf83496238e654b975788535ce18a2,
         type: 3}
-      propertyPath: halo
-      value: 
-      objectReference: {fileID: 3343304055586621163}
+      propertyPath: ultChargeGainedSecond
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4631610755540932777, guid: a3bf83496238e654b975788535ce18a2,
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4737730767936421494, guid: a3bf83496238e654b975788535ce18a2,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a3bf83496238e654b975788535ce18a2, type: 3}
---- !u!1 &3343304055586621163 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4737730767936421494, guid: a3bf83496238e654b975788535ce18a2,
-    type: 3}
-  m_PrefabInstance: {fileID: 3343304055586621162}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4464322931744708056
 PrefabInstance:
   m_ObjectHideFlags: 0

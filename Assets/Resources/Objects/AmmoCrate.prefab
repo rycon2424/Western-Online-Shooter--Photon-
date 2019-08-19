@@ -124,6 +124,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rifleAmmoGiven: 0
   tommyAmmoGiven: 0
+  shotgunAmmoGiven: 0
+  sniperAmmoGiven: 0
 --- !u!114 &2937030673376952392
 MonoBehaviour:
   m_ObjectHideFlags: 0
