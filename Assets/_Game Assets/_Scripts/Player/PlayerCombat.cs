@@ -233,7 +233,7 @@ public class PlayerCombat : MonoBehaviourPun
                 weaponRange = 400;
                 weaponDamage = 70;
                 fireRate = 3;
-                weaponZoom = 1f;
+                weaponZoom = -1f;
                 break;
             case GunType.noWeapon:
                 weaponRange = 1.8f;
@@ -254,7 +254,7 @@ public class PlayerCombat : MonoBehaviourPun
         }
         if (Input.GetKeyDown(KeyCode.Space) && canDodge)
         {
-            ZoomIn(false, 0);
+            ZoomIn(false, 0, 60);
             if (pb.onlineReady)
             {
                 pb.pv.RPC("Dodge", RpcTarget.All);
@@ -271,7 +271,7 @@ public class PlayerCombat : MonoBehaviourPun
         if (typeGun == GunType.noWeapon)
         {
             pb.anim.SetBool("Aim", false);
-            ZoomIn(false, 0);
+            ZoomIn(false, 0, 60);
             pb.blocked.SetActive(false);
             if (Input.GetMouseButton(0) && canShoot)
             {
@@ -311,13 +311,13 @@ public class PlayerCombat : MonoBehaviourPun
         {
             AimRaycast();
         }
-        ZoomIn(true, weaponZoom);
+        CheckWeaponZoom();
     }
 
     public void ExitCombat()
     {
         pb.anim.SetBool("Aim", false);
-        ZoomIn(false, 0);
+        ZoomIn(false, 0, 60);
         pb.blocked.SetActive(false);
     }
 
@@ -330,8 +330,44 @@ public class PlayerCombat : MonoBehaviourPun
         chest.LookAt(pb.lookObj.position);
         chest.rotation = chest.rotation * Quaternion.Euler(offset);
     }
-    
-    void ZoomIn(bool zooming, float zoomDistance)
+
+
+    public GameObject sniperScopeUI;
+    public Camera mainCamera;
+    void CheckWeaponZoom()
+    {
+        switch (typeGun)
+        {
+            case GunType.revolver:
+                sniperScopeUI.SetActive(false);
+                ZoomIn(true, weaponZoom, 60);
+                break;
+            case GunType.rifle:
+                sniperScopeUI.SetActive(false);
+                ZoomIn(true, weaponZoom, 60);
+                break;
+            case GunType.tommygun:
+                sniperScopeUI.SetActive(false);
+                ZoomIn(true, weaponZoom, 60);
+                break;
+            case GunType.shotgun:
+                sniperScopeUI.SetActive(false);
+                ZoomIn(true, weaponZoom, 60);
+                break;
+            case GunType.sniper:
+                sniperScopeUI.SetActive(true);
+                ZoomIn(true, weaponZoom, 5);
+                break;
+            case GunType.noWeapon:
+                sniperScopeUI.SetActive(false);
+                ZoomIn(true, weaponZoom, 60);
+                break;
+            default:
+                break;
+        }
+    }
+
+    void ZoomIn(bool zooming, float zoomDistance, float fov)
     {
         if (zooming)
         {
@@ -340,9 +376,11 @@ public class PlayerCombat : MonoBehaviourPun
         }
         else
         {
+            sniperScopeUI.SetActive(false);
             pb.oc.minDistance = 4;
             pb.oc.maxDistance = 4;
         }
+        mainCamera.fieldOfView = fov;
     }
 
     public LayerMask headGlitchHit;

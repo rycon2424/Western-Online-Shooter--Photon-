@@ -104,7 +104,7 @@ RectTransform:
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_Children: []
   m_Father: {fileID: 6396065130784087512}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -543,7 +543,7 @@ RectTransform:
   - {fileID: 1013786056901566633}
   - {fileID: 1013786057808282803}
   m_Father: {fileID: 6396065130784087512}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2616,6 +2616,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pb: {fileID: 0}
   offset: {x: 0, y: -50, z: -90}
+  sniperScopeUI: {fileID: 2718654846790862663}
+  mainCamera: {fileID: 1013786057477235591}
   headGlitchHit:
     serializedVersion: 2
     m_Bits: 311
@@ -2705,8 +2707,12 @@ MonoBehaviour:
   - {fileID: 8300000, guid: c7883537dca685c47a01c54717f4e34a, type: 3}
   tommygunShots:
   - {fileID: 8300000, guid: b635b78e1bda9bf4c89c1f8e1ea48084, type: 3}
-  shotgunShots: []
-  sniperShots: []
+  shotgunShots:
+  - {fileID: 8300000, guid: 448de14ec38c8c044aebf716478a11ea, type: 3}
+  - {fileID: 8300000, guid: 9270a865ec55bcc4a8c28d50d514c6de, type: 3}
+  - {fileID: 8300000, guid: e9ed8d7cb0bafd845abb142462dc2691, type: 3}
+  sniperShots:
+  - {fileID: 8300000, guid: 3efb1d5e3735e5140b5e660abfeef99c, type: 3}
   playerSource: {fileID: 8946885997499645784}
   gunSource: {fileID: 4083258919939895282}
   hitmarkerSource: {fileID: 88168865841897424}
@@ -4415,7 +4421,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6396065130784087512}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4451,6 +4457,80 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 21300000, guid: d45db4509709b494cbb32b4202a4a09c, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+--- !u!1 &2718654846790862663
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7097450020142302645}
+  - component: {fileID: 878575622742841889}
+  - component: {fileID: 2750272311550480645}
+  m_Layer: 9
+  m_Name: SniperScope
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &7097450020142302645
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2718654846790862663}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6396065130784087512}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -0.00021362, y: -0.0014801}
+  m_SizeDelta: {x: 800, y: 450.12}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &878575622742841889
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2718654846790862663}
+  m_CullTransparentMesh: 0
+--- !u!114 &2750272311550480645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2718654846790862663}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300000, guid: 6ebca7eb029260f4296f225ee261b5f6, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4737,7 +4817,7 @@ RectTransform:
   - {fileID: 8063295174970004129}
   - {fileID: 5403912775192842247}
   m_Father: {fileID: 6396065130784087512}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5148,7 +5228,7 @@ RectTransform:
   m_Children:
   - {fileID: 514029462006354805}
   m_Father: {fileID: 6396065130784087512}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -5568,6 +5648,7 @@ RectTransform:
   m_Children:
   - {fileID: 4376944170312615741}
   - {fileID: 7337703958504289807}
+  - {fileID: 7097450020142302645}
   - {fileID: 5583937938696863993}
   - {fileID: 1013786057784101635}
   - {fileID: 9110572675694392206}
@@ -6566,15 +6647,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 44d9a771ea77962428c00799a4ef59a6, type: 3}
---- !u!4 &8642796020101058089 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4798215847727659546, guid: 44d9a771ea77962428c00799a4ef59a6,
-    type: 3}
-  m_PrefabInstance: {fileID: 3848271818204673075}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &8642796020101485065 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4798215847727556154, guid: 44d9a771ea77962428c00799a4ef59a6,
+    type: 3}
+  m_PrefabInstance: {fileID: 3848271818204673075}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8642796020101058089 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4798215847727659546, guid: 44d9a771ea77962428c00799a4ef59a6,
     type: 3}
   m_PrefabInstance: {fileID: 3848271818204673075}
   m_PrefabAsset: {fileID: 0}
