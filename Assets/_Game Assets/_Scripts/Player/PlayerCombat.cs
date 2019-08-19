@@ -207,15 +207,15 @@ public class PlayerCombat : MonoBehaviourPun
         {
             case GunType.revolver:
                 weaponRange = 43;
-                weaponDamage = 13;
-                fireRate = 1;
+                weaponDamage = 10;
+                fireRate = 0.75f;
                 weaponZoom = 3.5f;
                 break;
             case GunType.rifle:
                 weaponRange = 150;
                 weaponDamage = 20;
-                fireRate = 1.33f;
-                weaponZoom = 2;
+                fireRate = 1.25f;
+                weaponZoom = 2.75f;
                 break;
             case GunType.tommygun:
                 weaponRange = 30;
