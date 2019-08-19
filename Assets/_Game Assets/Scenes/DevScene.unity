@@ -1753,6 +1753,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Drunken
       objectReference: {fileID: 0}
+    - target: {fileID: 1411841319506757729, guid: ce13b936f819e0c47b07369e89a69ffa,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1405443418018712571, guid: ce13b936f819e0c47b07369e89a69ffa,
         type: 3}
       propertyPath: m_LocalPosition.x
