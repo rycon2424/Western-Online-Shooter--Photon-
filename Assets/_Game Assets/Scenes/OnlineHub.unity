@@ -14799,7 +14799,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: 1
-  characterHP: 90
+  characterHP: 80
   characterName: Shinobi
   characterSpeed: Fast
   playButton: {fileID: 289607820}

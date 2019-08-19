@@ -210,7 +210,7 @@ public class PlayerCombat : MonoBehaviourPun
                 break;
             case GunType.noWeapon:
                 weaponRange = 1.8f;
-                weaponDamage = 80;
+                weaponDamage = 0;
                 fireRate = 0;
                 weaponZoom = 4;
                 break;
@@ -480,6 +480,7 @@ public class PlayerCombat : MonoBehaviourPun
     #region knife
 
     [Header("Knife")]
+    public int knifeDamage;
     public GameObject sheatedKnife;
     public GameObject knifeInHand;
     RaycastHit knifeHit;
@@ -533,7 +534,7 @@ public class PlayerCombat : MonoBehaviourPun
             if (knifeHit.collider.CompareTag("Player"))
             {
                 int firsthealth = knifeHit.collider.GetComponent<PlayerBehaviour>().health;
-                knifeHit.collider.GetComponent<PlayerBehaviour>().health -= weaponDamage;
+                knifeHit.collider.GetComponent<PlayerBehaviour>().health -= knifeDamage;
                 int health = knifeHit.collider.GetComponent<PlayerBehaviour>().health;
                 knifeHit.collider.GetComponent<PlayerBehaviour>().pi.UpdateHealthUI(health, "knived", pb.pv.Owner.NickName);
                 knifeHit.collider.GetComponent<PlayerBehaviour>().pi.UpdateLog();

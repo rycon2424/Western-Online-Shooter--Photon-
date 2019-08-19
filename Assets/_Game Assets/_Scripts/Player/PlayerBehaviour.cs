@@ -160,7 +160,7 @@ public class PlayerBehaviour : MonoBehaviourPun
         health = maxHealth;
         dead = false;
         anim.SetBool("Alive", true);
-        pc.typeGun = PlayerCombat.GunType.noWeapon;
+        pc.typeGun = PlayerCombat.GunType.revolver;
         pc.AssignDamage();
         pc.HideKnife();
         pi.UpdateWeaponUI();
