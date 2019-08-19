@@ -224,7 +224,7 @@ public class PlayerCombat : MonoBehaviourPun
                 weaponZoom = 3.5f;
                 break;
             case GunType.shotgun:
-                weaponRange = 5;
+                weaponRange = 10;
                 weaponDamage = 45;
                 fireRate = 1.5f;
                 weaponZoom = 3.5f;
@@ -460,58 +460,118 @@ public class PlayerCombat : MonoBehaviourPun
     void AimRaycast()
     {
         Debug.DrawRay(cameraTransform.position, cameraTransform.forward * weaponRange, Color.red, 0.5f);
-        if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, weaponRange, canHit))
+        Vector3 offset = new Vector3(cameraTransform.position.x, cameraTransform.position.y + 0.5f ,cameraTransform.position.z);
+        if (typeGun == GunType.shotgun)
         {
-            if (hit.collider.CompareTag("Player"))
+            if (Physics.SphereCast(offset, 0.8f ,cameraTransform.forward, out hit, weaponRange, canHit))
             {
-                int damage = weaponDamage;
-                int health = hit.collider.GetComponentInParent<PlayerBehaviour>().health;
-                health = health - damage;
-                hit.collider.GetComponentInParent<PlayerBehaviour>().pi.UpdateHealthUI(health, "shot", pb.pv.Owner.NickName);
-                hit.collider.GetComponentInParent<PlayerBehaviour>().pi.UpdateLog();
-                CheckIfKilled(health);
-                HitMarker();
+                if (hit.collider.CompareTag("Player"))
+                {
+                    int damage = weaponDamage;
+                    int health = hit.collider.GetComponentInParent<PlayerBehaviour>().health;
+                    health = health - damage;
+                    hit.collider.GetComponentInParent<PlayerBehaviour>().pi.UpdateHealthUI(health, "shot", pb.pv.Owner.NickName);
+                    hit.collider.GetComponentInParent<PlayerBehaviour>().pi.UpdateLog();
+                    CheckIfKilled(health);
+                    HitMarker();
+                }
+                #region commented hit tags
+                /*if (hit.collider.CompareTag("Head"))
+                {
+                    int damage = (weaponDamage * 2);
+                    int health = hit.collider.GetComponentInParent<PlayerBehaviour>().health;
+                    health = health - damage;
+                    hit.collider.GetComponentInParent<PlayerBehaviour>().pi.UpdateHealthUI(health, "HEADSHOT", pb.pv.Owner.NickName);
+                    hit.collider.GetComponentInParent<PlayerBehaviour>().pi.UpdateLog();
+                    Debug.Log(hit.collider.name);
+                    HitMarker();
+                }
+                if (hit.collider.CompareTag("Torso"))
+                {
+                    int damage = weaponDamage;
+                    int health = hit.collider.GetComponentInParent<PlayerBehaviour>().health;
+                    health = health - damage;
+                    hit.collider.GetComponentInParent<PlayerBehaviour>().pi.UpdateHealthUI(health, "Torso", pb.pv.Owner.NickName);
+                    hit.collider.GetComponentInParent<PlayerBehaviour>().pi.UpdateLog();
+                    Debug.Log(hit.collider.name);
+                    HitMarker();
+                }
+                if (hit.collider.CompareTag("Limbs"))
+                {
+                    int damage = (weaponDamage / 2);
+                    int health = hit.collider.GetComponentInParent<PlayerBehaviour>().health;
+                    health = health - damage;
+                    hit.collider.GetComponentInParent<PlayerBehaviour>().pi.UpdateHealthUI(health, "Limbs", pb.pv.Owner.NickName);
+                    hit.collider.GetComponentInParent<PlayerBehaviour>().pi.UpdateLog();
+                    Debug.Log(hit.collider.name);
+                    HitMarker();
+                }*/
+                #endregion
+                if (hit.collider.CompareTag("Finish"))
+                {
+                    HitMarker();
+                }
             }
-            #region commented hit tags
-            /*if (hit.collider.CompareTag("Head"))
+            else
             {
-                int damage = (weaponDamage * 2);
-                int health = hit.collider.GetComponentInParent<PlayerBehaviour>().health;
-                health = health - damage;
-                hit.collider.GetComponentInParent<PlayerBehaviour>().pi.UpdateHealthUI(health, "HEADSHOT", pb.pv.Owner.NickName);
-                hit.collider.GetComponentInParent<PlayerBehaviour>().pi.UpdateLog();
-                Debug.Log(hit.collider.name);
-                HitMarker();
-            }
-            if (hit.collider.CompareTag("Torso"))
-            {
-                int damage = weaponDamage;
-                int health = hit.collider.GetComponentInParent<PlayerBehaviour>().health;
-                health = health - damage;
-                hit.collider.GetComponentInParent<PlayerBehaviour>().pi.UpdateHealthUI(health, "Torso", pb.pv.Owner.NickName);
-                hit.collider.GetComponentInParent<PlayerBehaviour>().pi.UpdateLog();
-                Debug.Log(hit.collider.name);
-                HitMarker();
-            }
-            if (hit.collider.CompareTag("Limbs"))
-            {
-                int damage = (weaponDamage / 2);
-                int health = hit.collider.GetComponentInParent<PlayerBehaviour>().health;
-                health = health - damage;
-                hit.collider.GetComponentInParent<PlayerBehaviour>().pi.UpdateHealthUI(health, "Limbs", pb.pv.Owner.NickName);
-                hit.collider.GetComponentInParent<PlayerBehaviour>().pi.UpdateLog();
-                Debug.Log(hit.collider.name);
-                HitMarker();
-            }*/
-            #endregion
-            if (hit.collider.CompareTag("Finish"))
-            {
-                HitMarker();
+                Debug.Log("missed");
             }
         }
         else
         {
-            Debug.Log("missed");
+            if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, weaponRange, canHit))
+            {
+                if (hit.collider.CompareTag("Player"))
+                {
+                    int damage = weaponDamage;
+                    int health = hit.collider.GetComponentInParent<PlayerBehaviour>().health;
+                    health = health - damage;
+                    hit.collider.GetComponentInParent<PlayerBehaviour>().pi.UpdateHealthUI(health, "shot", pb.pv.Owner.NickName);
+                    hit.collider.GetComponentInParent<PlayerBehaviour>().pi.UpdateLog();
+                    CheckIfKilled(health);
+                    HitMarker();
+                }
+                #region commented hit tags
+                /*if (hit.collider.CompareTag("Head"))
+                {
+                    int damage = (weaponDamage * 2);
+                    int health = hit.collider.GetComponentInParent<PlayerBehaviour>().health;
+                    health = health - damage;
+                    hit.collider.GetComponentInParent<PlayerBehaviour>().pi.UpdateHealthUI(health, "HEADSHOT", pb.pv.Owner.NickName);
+                    hit.collider.GetComponentInParent<PlayerBehaviour>().pi.UpdateLog();
+                    Debug.Log(hit.collider.name);
+                    HitMarker();
+                }
+                if (hit.collider.CompareTag("Torso"))
+                {
+                    int damage = weaponDamage;
+                    int health = hit.collider.GetComponentInParent<PlayerBehaviour>().health;
+                    health = health - damage;
+                    hit.collider.GetComponentInParent<PlayerBehaviour>().pi.UpdateHealthUI(health, "Torso", pb.pv.Owner.NickName);
+                    hit.collider.GetComponentInParent<PlayerBehaviour>().pi.UpdateLog();
+                    Debug.Log(hit.collider.name);
+                    HitMarker();
+                }
+                if (hit.collider.CompareTag("Limbs"))
+                {
+                    int damage = (weaponDamage / 2);
+                    int health = hit.collider.GetComponentInParent<PlayerBehaviour>().health;
+                    health = health - damage;
+                    hit.collider.GetComponentInParent<PlayerBehaviour>().pi.UpdateHealthUI(health, "Limbs", pb.pv.Owner.NickName);
+                    hit.collider.GetComponentInParent<PlayerBehaviour>().pi.UpdateLog();
+                    Debug.Log(hit.collider.name);
+                    HitMarker();
+                }*/
+                #endregion
+                if (hit.collider.CompareTag("Finish"))
+                {
+                    HitMarker();
+                }
+            }
+            else
+            {
+                Debug.Log("missed");
+            }
         }
         GunShotSound();
         UseAmmo();

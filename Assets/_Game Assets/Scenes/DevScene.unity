@@ -1813,35 +1813,10 @@ PrefabInstance:
       propertyPath: onlineReady
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5700385538670725379, guid: ce13b936f819e0c47b07369e89a69ffa,
-        type: 3}
-      propertyPath: rifleAmmo
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5700385538670725379, guid: ce13b936f819e0c47b07369e89a69ffa,
-        type: 3}
-      propertyPath: tommygunAmmo
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5700385538670725379, guid: ce13b936f819e0c47b07369e89a69ffa,
-        type: 3}
-      propertyPath: shotgunAmmo
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5700385538670725379, guid: ce13b936f819e0c47b07369e89a69ffa,
-        type: 3}
-      propertyPath: sniperAmmo
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 7134417914770077960, guid: ce13b936f819e0c47b07369e89a69ffa,
         type: 3}
       propertyPath: viewIdField
       value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 7721039311188369656, guid: ce13b936f819e0c47b07369e89a69ffa,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4464322932942645302, guid: ce13b936f819e0c47b07369e89a69ffa,
         type: 3}
