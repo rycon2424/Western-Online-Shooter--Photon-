@@ -334,6 +334,7 @@ public class PlayerCombat : MonoBehaviourPun
 
 
     public GameObject sniperScopeUI;
+    public GameObject shotGunUI;
     public Camera mainCamera;
     void CheckWeaponZoom()
     {
@@ -341,26 +342,32 @@ public class PlayerCombat : MonoBehaviourPun
         {
             case GunType.revolver:
                 sniperScopeUI.SetActive(false);
+                shotGunUI.SetActive(false);
                 ZoomIn(true, weaponZoom, 60);
                 break;
             case GunType.rifle:
                 sniperScopeUI.SetActive(false);
+                shotGunUI.SetActive(false);
                 ZoomIn(true, weaponZoom, 60);
                 break;
             case GunType.tommygun:
                 sniperScopeUI.SetActive(false);
+                shotGunUI.SetActive(false);
                 ZoomIn(true, weaponZoom, 60);
                 break;
             case GunType.shotgun:
                 sniperScopeUI.SetActive(false);
+                shotGunUI.SetActive(true);
                 ZoomIn(true, weaponZoom, 60);
                 break;
             case GunType.sniper:
                 sniperScopeUI.SetActive(true);
+                shotGunUI.SetActive(false);
                 ZoomIn(true, weaponZoom, 10);
                 break;
             case GunType.noWeapon:
                 sniperScopeUI.SetActive(false);
+                shotGunUI.SetActive(false);
                 ZoomIn(true, weaponZoom, 60);
                 break;
             default:
@@ -378,6 +385,7 @@ public class PlayerCombat : MonoBehaviourPun
         else
         {
             sniperScopeUI.SetActive(false);
+            shotGunUI.SetActive(false);
             pb.oc.minDistance = 4;
             pb.oc.maxDistance = 4;
         }
