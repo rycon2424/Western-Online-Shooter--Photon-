@@ -357,7 +357,7 @@ public class PlayerCombat : MonoBehaviourPun
                 break;
             case GunType.sniper:
                 sniperScopeUI.SetActive(true);
-                ZoomIn(true, weaponZoom, 5);
+                ZoomIn(true, weaponZoom, 10);
                 break;
             case GunType.noWeapon:
                 sniperScopeUI.SetActive(false);
