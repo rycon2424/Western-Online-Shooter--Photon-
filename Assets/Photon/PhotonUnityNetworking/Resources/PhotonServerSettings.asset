@@ -44,5 +44,11 @@ MonoBehaviour:
   - SyncKnifeAnim
   - SyncWeaponCycle
   - SyncWeaponUI
+  - CowboyUlt
+  - DoctorUlt
+  - DrunkenUlt
+  - EndUlt
+  - SherrifUlt
+  - ShinobiUlt
   DisableAutoOpenWizard: 1
   ShowSettings: 1

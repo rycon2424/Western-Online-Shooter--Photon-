@@ -3833,6 +3833,7 @@ MonoBehaviour:
   weaponDamage: 15
   fireRate: 1
   weaponZoom: 0
+  weaponSpray: 0
   rifleAmmo: 10
   tommygunAmmo: 10
   shotgunAmmo: 10
