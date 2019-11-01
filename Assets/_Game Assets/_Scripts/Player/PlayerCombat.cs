@@ -482,7 +482,6 @@ public class PlayerCombat : MonoBehaviourPun
                     health = health - damage;
                     hit.collider.GetComponentInParent<PlayerBehaviour>().pi.UpdateHealthUI(health, "shot", pb.pv.Owner.NickName);
                     hit.collider.GetComponentInParent<PlayerBehaviour>().pi.UpdateLog();
-                    pb.pu.UltGainShot();
                     CheckIfKilled(health);
                     HitMarker();
                 }
@@ -520,7 +519,6 @@ public class PlayerCombat : MonoBehaviourPun
                 #endregion
                 if (hit.collider.CompareTag("Finish"))
                 {
-                    pb.pu.UltGainShot();
                     HitMarker();
                 }
             }
@@ -540,7 +538,6 @@ public class PlayerCombat : MonoBehaviourPun
                     health = health - damage;
                     hit.collider.GetComponentInParent<PlayerBehaviour>().pi.UpdateHealthUI(health, "shot", pb.pv.Owner.NickName);
                     hit.collider.GetComponentInParent<PlayerBehaviour>().pi.UpdateLog();
-                    pb.pu.UltGainShot();
                     CheckIfKilled(health);
                     HitMarker();
                 }
@@ -578,7 +575,6 @@ public class PlayerCombat : MonoBehaviourPun
                 #endregion
                 if (hit.collider.CompareTag("Finish"))
                 {
-                    pb.pu.UltGainShot();
                     HitMarker();
                 }
             }
@@ -640,13 +636,11 @@ public class PlayerCombat : MonoBehaviourPun
                 int health = knifeHit.collider.GetComponent<PlayerBehaviour>().health;
                 knifeHit.collider.GetComponent<PlayerBehaviour>().pi.UpdateHealthUI(health, "knived", pb.pv.Owner.NickName);
                 knifeHit.collider.GetComponent<PlayerBehaviour>().pi.UpdateLog();
-                pb.pu.UltGainShot();
                 CheckIfKilled(health);
                 HitMarker();
             }
             if (knifeHit.collider.CompareTag("Finish"))
             {
-                pb.pu.UltGainShot();
                 HitMarker();
             }
         }
