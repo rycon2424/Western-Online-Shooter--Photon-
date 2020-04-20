@@ -137,7 +137,7 @@ public class PlayerCombat : MonoBehaviourPun
                 break;
             case GunType.rifle:
                 weaponRange = 150;
-                weaponDamage = 20;
+                weaponDamage = 23;
                 fireRate = 1.25f;
                 weaponZoom = 2.75f;
                 break;
@@ -156,7 +156,7 @@ public class PlayerCombat : MonoBehaviourPun
                 break;
             case GunType.sniper:
                 weaponRange = 400;
-                weaponDamage = 70;
+                weaponDamage = 100;
                 fireRate = 3;
                 weaponZoom = -1f;
                 break;

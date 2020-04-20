@@ -1,6 +1,7 @@
 ﻿using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 using UnityEngine.UI;
 
@@ -16,6 +17,10 @@ public class CustomMatchmakingRoomController : MonoBehaviourPunCallbacks
 
     [SerializeField]
     private GameObject startButton; //only for the master client. used to start the game and load the multiplayer scene
+    [SerializeField]
+    private GameObject mapSelect; //only for the master client. used to start the game and load the multiplayer scene
+    [SerializeField]
+    private Text mapName;
 
     [SerializeField]
     private Transform playersContainer; //used to display all the players in the current room
@@ -38,14 +43,12 @@ public class CustomMatchmakingRoomController : MonoBehaviourPunCallbacks
 
     void ListPlayers() 
     {
-
         foreach (Player player in PhotonNetwork.PlayerList) //loop through each player and create a player listing
         {
             GameObject tempListing = Instantiate(playerListingPrefab, playersContainer);
             Text tempText = tempListing.transform.GetChild(0).GetComponent<Text>();
             tempText.text = player.NickName;
         }
-        
     }
 
     public override void OnJoinedRoom()//called when the local player joins the room
@@ -56,10 +59,12 @@ public class CustomMatchmakingRoomController : MonoBehaviourPunCallbacks
         if (PhotonNetwork.IsMasterClient) //if master client then activate the start button
         {
             startButton.SetActive(true);
+            mapSelect.SetActive(true);
         }
         else
         {
             startButton.SetActive(false);
+            mapSelect.SetActive(false);
         }
         //photonPlayers = PhotonNetwork.PlayerList;
         ClearPlayerListings(); //remove all old player listings
@@ -78,6 +83,7 @@ public class CustomMatchmakingRoomController : MonoBehaviourPunCallbacks
         if (PhotonNetwork.IsMasterClient)//if the local player is now the new master client then we activate the start button
         {
             startButton.SetActive(true);
+            mapSelect.SetActive(true);
         }
     }
 
@@ -108,5 +114,14 @@ public class CustomMatchmakingRoomController : MonoBehaviourPunCallbacks
         StartCoroutine(rejoinLobby());
     }
 
+    public void ChangeOnlineSceneIndex(int mapIndex)
+    {
+        multiPlayerSceneIndex = mapIndex;
+    }
+
+    public void UpdateName(string name)
+    {
+        mapName.text = name;
+    }
     
 }
