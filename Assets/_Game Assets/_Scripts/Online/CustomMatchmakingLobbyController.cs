@@ -59,7 +59,8 @@ public class CustomMatchmakingLobbyController : MonoBehaviourPunCallbacks
     public void JoinLobbyOnClick() //Paired to the Delay Start button
     {
         mainPanel.SetActive(false);
-        lobbyPanel.SetActive(true);
+        MenuInstance.instance.GoToMenu();
+        //lobbyPanel.SetActive(true);
         PhotonNetwork.JoinLobby(); //First tries to join a lobby
     }
 

@@ -114,82 +114,6 @@ public class PlayerCombat : MonoBehaviourPun
                 typeGun = GunType.sniper;
             }
         }
-        #region old version
-        /*if (forward == true)
-        {
-            if (typeGun == GunType.noWeapon)
-            {
-                typeGun = GunType.revolver;
-            }
-            else if (typeGun == GunType.revolver)
-            {
-                if (rifleAmmo > 0)
-                {
-                    typeGun = GunType.rifle;
-                }
-                else if (tommygunAmmo > 0)
-                {
-                    typeGun = GunType.tommygun;
-                }
-                else
-                {
-                    typeGun = GunType.noWeapon;
-                }
-            }
-            else if (typeGun == GunType.rifle)
-            {
-                if (tommygunAmmo > 0)
-                {
-                    typeGun = GunType.tommygun;
-                }
-                else
-                {
-                    typeGun = GunType.noWeapon;
-                }
-            }
-            else if (typeGun == GunType.tommygun)
-            {
-                typeGun = GunType.noWeapon;
-            }
-        }
-        else
-        {
-            if (typeGun == GunType.revolver)
-            {
-                typeGun = GunType.noWeapon;
-            }
-            else if (typeGun == GunType.rifle)
-            {
-                typeGun = GunType.revolver;
-            }
-            else if (typeGun == GunType.tommygun)
-            {
-                if (rifleAmmo > 0)
-                {
-                    typeGun = GunType.rifle;
-                }
-                else
-                {
-                    typeGun = GunType.revolver;
-                }
-            }
-            else if (typeGun == GunType.noWeapon)
-            {
-                if (tommygunAmmo > 0)
-                {
-                    typeGun = GunType.tommygun;
-                }
-                else if (rifleAmmo > 0)
-                {
-                    typeGun = GunType.rifle;
-                }
-                else
-                {
-                    typeGun = GunType.revolver;
-                }
-            }
-        }*/
-        #endregion
         if (pb.onlineReady)
         {
             pb.pv.RPC("AssignDamage", RpcTarget.All);
@@ -375,7 +299,7 @@ public class PlayerCombat : MonoBehaviourPun
         }
     }
 
-    void ZoomIn(bool zooming, float zoomDistance, float fov)
+    public void ZoomIn(bool zooming, float zoomDistance, float fov)
     {
         if (zooming)
         {
@@ -485,38 +409,6 @@ public class PlayerCombat : MonoBehaviourPun
                     CheckIfKilled(health);
                     HitMarker();
                 }
-                #region commented hit tags
-                /*if (hit.collider.CompareTag("Head"))
-                {
-                    int damage = (weaponDamage * 2);
-                    int health = hit.collider.GetComponentInParent<PlayerBehaviour>().health;
-                    health = health - damage;
-                    hit.collider.GetComponentInParent<PlayerBehaviour>().pi.UpdateHealthUI(health, "HEADSHOT", pb.pv.Owner.NickName);
-                    hit.collider.GetComponentInParent<PlayerBehaviour>().pi.UpdateLog();
-                    Debug.Log(hit.collider.name);
-                    HitMarker();
-                }
-                if (hit.collider.CompareTag("Torso"))
-                {
-                    int damage = weaponDamage;
-                    int health = hit.collider.GetComponentInParent<PlayerBehaviour>().health;
-                    health = health - damage;
-                    hit.collider.GetComponentInParent<PlayerBehaviour>().pi.UpdateHealthUI(health, "Torso", pb.pv.Owner.NickName);
-                    hit.collider.GetComponentInParent<PlayerBehaviour>().pi.UpdateLog();
-                    Debug.Log(hit.collider.name);
-                    HitMarker();
-                }
-                if (hit.collider.CompareTag("Limbs"))
-                {
-                    int damage = (weaponDamage / 2);
-                    int health = hit.collider.GetComponentInParent<PlayerBehaviour>().health;
-                    health = health - damage;
-                    hit.collider.GetComponentInParent<PlayerBehaviour>().pi.UpdateHealthUI(health, "Limbs", pb.pv.Owner.NickName);
-                    hit.collider.GetComponentInParent<PlayerBehaviour>().pi.UpdateLog();
-                    Debug.Log(hit.collider.name);
-                    HitMarker();
-                }*/
-                #endregion
                 if (hit.collider.CompareTag("Finish"))
                 {
                     HitMarker();
@@ -541,38 +433,6 @@ public class PlayerCombat : MonoBehaviourPun
                     CheckIfKilled(health);
                     HitMarker();
                 }
-                #region commented hit tags
-                /*if (hit.collider.CompareTag("Head"))
-                {
-                    int damage = (weaponDamage * 2);
-                    int health = hit.collider.GetComponentInParent<PlayerBehaviour>().health;
-                    health = health - damage;
-                    hit.collider.GetComponentInParent<PlayerBehaviour>().pi.UpdateHealthUI(health, "HEADSHOT", pb.pv.Owner.NickName);
-                    hit.collider.GetComponentInParent<PlayerBehaviour>().pi.UpdateLog();
-                    Debug.Log(hit.collider.name);
-                    HitMarker();
-                }
-                if (hit.collider.CompareTag("Torso"))
-                {
-                    int damage = weaponDamage;
-                    int health = hit.collider.GetComponentInParent<PlayerBehaviour>().health;
-                    health = health - damage;
-                    hit.collider.GetComponentInParent<PlayerBehaviour>().pi.UpdateHealthUI(health, "Torso", pb.pv.Owner.NickName);
-                    hit.collider.GetComponentInParent<PlayerBehaviour>().pi.UpdateLog();
-                    Debug.Log(hit.collider.name);
-                    HitMarker();
-                }
-                if (hit.collider.CompareTag("Limbs"))
-                {
-                    int damage = (weaponDamage / 2);
-                    int health = hit.collider.GetComponentInParent<PlayerBehaviour>().health;
-                    health = health - damage;
-                    hit.collider.GetComponentInParent<PlayerBehaviour>().pi.UpdateHealthUI(health, "Limbs", pb.pv.Owner.NickName);
-                    hit.collider.GetComponentInParent<PlayerBehaviour>().pi.UpdateLog();
-                    Debug.Log(hit.collider.name);
-                    HitMarker();
-                }*/
-                #endregion
                 if (hit.collider.CompareTag("Finish"))
                 {
                     HitMarker();

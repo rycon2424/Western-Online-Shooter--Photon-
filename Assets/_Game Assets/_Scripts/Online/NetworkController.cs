@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class NetworkController : MonoBehaviourPunCallbacks
 {
@@ -19,6 +20,8 @@ public class NetworkController : MonoBehaviourPunCallbacks
 
     [SerializeField]
     private int gameVersion;
+    [SerializeField]
+    private Text information;
 
     // Start is called before the first frame update
     void Start()
@@ -31,5 +34,6 @@ public class NetworkController : MonoBehaviourPunCallbacks
     public override void OnConnectedToMaster()
     {
         Debug.Log("We are now connected to the " + PhotonNetwork.CloudRegion + " server!");
+        information.text = "We are now connected to the " + PhotonNetwork.CloudRegion + " server!";
     }
 }
