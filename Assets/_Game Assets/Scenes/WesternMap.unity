@@ -5940,9 +5940,8 @@ MeshCollider:
 --- !u!1 &560471836
 GameObject:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 3318078727704453852, guid: abc8a9728ea6dae4f97fd0d68c2c2690,
-    type: 3}
-  m_PrefabInstance: {fileID: 3318078728230321600}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
@@ -5958,9 +5957,8 @@ GameObject:
 --- !u!4 &560471837
 Transform:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 3318078727704453853, guid: abc8a9728ea6dae4f97fd0d68c2c2690,
-    type: 3}
-  m_PrefabInstance: {fileID: 3318078728230321600}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 560471836}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -5973,9 +5971,8 @@ Transform:
 --- !u!114 &560471838
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 3318078727704453854, guid: abc8a9728ea6dae4f97fd0d68c2c2690,
-    type: 3}
-  m_PrefabInstance: {fileID: 3318078728230321600}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 560471836}
   m_Enabled: 1
@@ -6009,7 +6006,7 @@ MonoBehaviour:
   - {fileID: 1218149100}
   ammoCrate: {fileID: 1885957844890191781, guid: fa08180149d55854087fe8a59ff267ec,
     type: 3}
-  characterSelect: {fileID: 0}
+  characterSelect: {fileID: 2804558536451139099}
   currentSelectedPlayer: 0
 --- !u!1001 &566194050
 PrefabInstance:
@@ -19672,7 +19669,7 @@ PrefabInstance:
     - target: {fileID: 760879694954133357, guid: 43244de96b5403b42af2c21d6918cd36,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0.00000035533952
+      value: 0.0000074215654
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 43244de96b5403b42af2c21d6918cd36, type: 3}
@@ -19822,6 +19819,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2804558537704125888, guid: 03378702597a28940a1e1f2541390304,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2804558536195356310, guid: 03378702597a28940a1e1f2541390304,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -19829,155 +19831,12 @@ PrefabInstance:
       objectReference: {fileID: 560471838}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 03378702597a28940a1e1f2541390304, type: 3}
---- !u!1001 &3318078728230321600
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 3318078727704453852, guid: abc8a9728ea6dae4f97fd0d68c2c2690,
-        type: 3}
-      propertyPath: m_Name
-      value: GameSetup
-      objectReference: {fileID: 0}
-    - target: {fileID: 3318078727704453853, guid: abc8a9728ea6dae4f97fd0d68c2c2690,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 494.93503
-      objectReference: {fileID: 0}
-    - target: {fileID: 3318078727704453853, guid: abc8a9728ea6dae4f97fd0d68c2c2690,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 246.65613
-      objectReference: {fileID: 0}
-    - target: {fileID: 3318078727704453853, guid: abc8a9728ea6dae4f97fd0d68c2c2690,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -3.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3318078727704453853, guid: abc8a9728ea6dae4f97fd0d68c2c2690,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3318078727704453853, guid: abc8a9728ea6dae4f97fd0d68c2c2690,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3318078727704453853, guid: abc8a9728ea6dae4f97fd0d68c2c2690,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3318078727704453853, guid: abc8a9728ea6dae4f97fd0d68c2c2690,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3318078727704453853, guid: abc8a9728ea6dae4f97fd0d68c2c2690,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3318078727704453853, guid: abc8a9728ea6dae4f97fd0d68c2c2690,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3318078727704453853, guid: abc8a9728ea6dae4f97fd0d68c2c2690,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3318078727704453853, guid: abc8a9728ea6dae4f97fd0d68c2c2690,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3318078727704453854, guid: abc8a9728ea6dae4f97fd0d68c2c2690,
-        type: 3}
-      propertyPath: ammoCratesSpawn.Array.size
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 3318078727704453854, guid: abc8a9728ea6dae4f97fd0d68c2c2690,
-        type: 3}
-      propertyPath: spawns.Array.size
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 3318078727704453854, guid: abc8a9728ea6dae4f97fd0d68c2c2690,
-        type: 3}
-      propertyPath: spawns.Array.data[0]
-      value: 
-      objectReference: {fileID: 907747284}
-    - target: {fileID: 3318078727704453854, guid: abc8a9728ea6dae4f97fd0d68c2c2690,
-        type: 3}
-      propertyPath: spawns.Array.data[1]
-      value: 
-      objectReference: {fileID: 1981095645}
-    - target: {fileID: 3318078727704453854, guid: abc8a9728ea6dae4f97fd0d68c2c2690,
-        type: 3}
-      propertyPath: spawns.Array.data[2]
-      value: 
-      objectReference: {fileID: 503342637}
-    - target: {fileID: 3318078727704453854, guid: abc8a9728ea6dae4f97fd0d68c2c2690,
-        type: 3}
-      propertyPath: spawns.Array.data[3]
-      value: 
-      objectReference: {fileID: 316893279}
-    - target: {fileID: 3318078727704453854, guid: abc8a9728ea6dae4f97fd0d68c2c2690,
-        type: 3}
-      propertyPath: spawns.Array.data[4]
-      value: 
-      objectReference: {fileID: 572430607}
-    - target: {fileID: 3318078727704453854, guid: abc8a9728ea6dae4f97fd0d68c2c2690,
-        type: 3}
-      propertyPath: spawns.Array.data[5]
-      value: 
-      objectReference: {fileID: 722406756}
-    - target: {fileID: 3318078727704453854, guid: abc8a9728ea6dae4f97fd0d68c2c2690,
-        type: 3}
-      propertyPath: spawns.Array.data[6]
-      value: 
-      objectReference: {fileID: 138017007}
-    - target: {fileID: 3318078727704453854, guid: abc8a9728ea6dae4f97fd0d68c2c2690,
-        type: 3}
-      propertyPath: spawns.Array.data[7]
-      value: 
-      objectReference: {fileID: 1284926480}
-    - target: {fileID: 3318078727704453854, guid: abc8a9728ea6dae4f97fd0d68c2c2690,
-        type: 3}
-      propertyPath: spawns.Array.data[8]
-      value: 
-      objectReference: {fileID: 1145620350}
-    - target: {fileID: 3318078727704453854, guid: abc8a9728ea6dae4f97fd0d68c2c2690,
-        type: 3}
-      propertyPath: spawns.Array.data[9]
-      value: 
-      objectReference: {fileID: 462253823}
-    - target: {fileID: 3318078727704453854, guid: abc8a9728ea6dae4f97fd0d68c2c2690,
-        type: 3}
-      propertyPath: ammoCratesSpawn.Array.data[0]
-      value: 
-      objectReference: {fileID: 329844781}
-    - target: {fileID: 3318078727704453854, guid: abc8a9728ea6dae4f97fd0d68c2c2690,
-        type: 3}
-      propertyPath: ammoCratesSpawn.Array.data[1]
-      value: 
-      objectReference: {fileID: 1940943600}
-    - target: {fileID: 3318078727704453854, guid: abc8a9728ea6dae4f97fd0d68c2c2690,
-        type: 3}
-      propertyPath: ammoCratesSpawn.Array.data[2]
-      value: 
-      objectReference: {fileID: 1280865439}
-    - target: {fileID: 3318078727704453854, guid: abc8a9728ea6dae4f97fd0d68c2c2690,
-        type: 3}
-      propertyPath: ammoCratesSpawn.Array.data[3]
-      value: 
-      objectReference: {fileID: 1612115424}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: abc8a9728ea6dae4f97fd0d68c2c2690, type: 3}
+--- !u!1 &2804558536451139099 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2804558537362653593, guid: 03378702597a28940a1e1f2541390304,
+    type: 3}
+  m_PrefabInstance: {fileID: 2804558536451139098}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &4430204382082826457 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4430204382082826457, guid: f896412a1fea0104fb68ad127f661af0,
