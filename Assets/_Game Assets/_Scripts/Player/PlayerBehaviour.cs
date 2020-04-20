@@ -136,7 +136,7 @@ public class PlayerBehaviour : MonoBehaviourPun
         anim.SetBool("Alive", false);
         anim.SetBool("Aim", false);
         pc.sniperScopeUI.SetActive(false);
-        pc.ZoomIn(true, pc.weaponZoom, 60);
+        pc.ZoomIn(false, pc.weaponZoom, 60);
         pv.RPC("DisableCollider", RpcTarget.All);
     }
 

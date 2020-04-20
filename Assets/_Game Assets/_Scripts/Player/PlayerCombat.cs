@@ -143,20 +143,20 @@ public class PlayerCombat : MonoBehaviourPun
                 break;
             case GunType.tommygun:
                 weaponRange = 30;
-                weaponDamage = 4;
+                weaponDamage = 6;
                 fireRate = 0.15f;
                 weaponZoom = 3.5f;
                 break;
             case GunType.shotgun:
                 weaponRange = 10;
-                weaponDamage = 45;
+                weaponDamage = 50;
                 fireRate = 1.5f;
                 weaponZoom = 3.5f;
                 weaponSpray = 0.8f;
                 break;
             case GunType.sniper:
                 weaponRange = 400;
-                weaponDamage = 100;
+                weaponDamage = 80;
                 fireRate = 3;
                 weaponZoom = -1f;
                 break;
@@ -272,7 +272,7 @@ public class PlayerCombat : MonoBehaviourPun
             case GunType.rifle:
                 sniperScopeUI.SetActive(false);
                 shotGunUI.SetActive(false);
-                ZoomIn(true, weaponZoom, 60);
+                ZoomIn(true, weaponZoom, 50);
                 break;
             case GunType.tommygun:
                 sniperScopeUI.SetActive(false);
