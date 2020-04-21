@@ -803,8 +803,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d50f03c415d76b42beb1bd4ccb8c71d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  health: 100
+  maxHealth: 95
+  health: 95
   dead: 0
   canRespawn: 1
   cc: {fileID: 0}
