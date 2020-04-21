@@ -3225,7 +3225,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: 1
-  characterHP: 65
+  characterHP: 60
   characterName: Shinobi
   characterSpeed: Fast
   playButton: {fileID: 2804558536195356310}
