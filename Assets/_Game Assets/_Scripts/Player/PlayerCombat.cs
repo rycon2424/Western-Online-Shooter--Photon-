@@ -207,7 +207,6 @@ public class PlayerCombat : MonoBehaviourPun
                 }
                 else
                 {
-                    Debug.Log("melee");
                     pb.anim.Play("Knife");
                     canSwitchWeapons = false;
                 }
@@ -504,10 +503,10 @@ public class PlayerCombat : MonoBehaviourPun
                 HitMarker();
             }
         }
-        else
+        /*else
         {
             Debug.Log("missed");
-        }
+        }*/
         canShoot = false;
     }
 
@@ -516,9 +515,8 @@ public class PlayerCombat : MonoBehaviourPun
         canSwitchWeapons = true;
         canShoot = true;
     }
-
-    [HideInInspector]
-    public bool hasKnifeOut;
+    
+    public bool hasKnifeOut = false;
 
     public void ShowHideKnife()
     {
@@ -527,6 +525,8 @@ public class PlayerCombat : MonoBehaviourPun
     
     void SyncKnifeVisiblity()
     {
+        Debug.Log(knifeInHand.gameObject);
+        Debug.Log(sheatedKnife.gameObject);
         if (hasKnifeOut)
         {
             knifeInHand.SetActive(false);
@@ -539,6 +539,8 @@ public class PlayerCombat : MonoBehaviourPun
             knifeInHand.SetActive(true);
             hasKnifeOut = true;
         }
+        Debug.Log(sheatedKnife.name + " has the active state = " + sheatedKnife.activeSelf);
+        Debug.Log(knifeInHand.name + " has the active state = " + knifeInHand.activeSelf);
     }
 
     //When respawning but knife is still visible

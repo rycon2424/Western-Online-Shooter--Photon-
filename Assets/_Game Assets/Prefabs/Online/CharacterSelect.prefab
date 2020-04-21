@@ -269,7 +269,7 @@ MonoBehaviour:
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 2804558535646043333}
   m_OnClick:
     m_PersistentCalls:
@@ -299,9 +299,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdd26c269c69092479e8da3b20ef2974, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: 3
-  characterHP: 100
-  characterName: Dr. Schneider
+  character: 5
+  characterHP: 95
+  characterName: Pirate
   characterSpeed: Normal
   playButton: {fileID: 2804558536195356310}
   currentselectedChar: {fileID: 2804558535706835138}
@@ -2153,7 +2153,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: TBA
+  m_Text: Pirate
 --- !u!225 &2804558537060887641
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -2697,14 +2697,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 8f7e3b0d6cc8c65429bfd4797d7b387f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c0a139843121209499cec3a6c8328b27, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

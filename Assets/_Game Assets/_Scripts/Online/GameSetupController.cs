@@ -45,6 +45,9 @@ public class GameSetupController : MonoBehaviour
             case 4:
                 PhotonNetwork.Instantiate(Path.Combine("Player", "Drunken"), spawns[Random.Range(0, spawns.Length)].position, Quaternion.identity);
                 break;
+            case 5:
+                PhotonNetwork.Instantiate(Path.Combine("Player", "FemPirate"), spawns[Random.Range(0, spawns.Length)].position, Quaternion.identity);
+                break;
             default:
                 break;
         }

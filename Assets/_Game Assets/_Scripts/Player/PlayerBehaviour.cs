@@ -11,7 +11,7 @@ public class PlayerBehaviour : MonoBehaviourPun
     public int health;
     public bool dead;
     public bool canRespawn;
-    public CharacterController cc;
+    [HideInInspector] public CharacterController cc;
     public float defaultPlayerHeight;
     public Vector3 defaultHitBoxOffset;
     
