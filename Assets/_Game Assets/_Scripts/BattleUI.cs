@@ -7,6 +7,7 @@ using Photon.Pun;
 public class BattleUI : MonoBehaviourPun
 {
     public Text uitext;
+    public Text timeText;
     private PhotonView pv;
     public string savedString;
 
@@ -59,6 +60,20 @@ public class BattleUI : MonoBehaviourPun
     void Leave()
     {
         Application.Quit();
+    }
+
+    public void UpdateTimer(string timer)
+    {
+        timeText.text = timer;
+        Debug.Log("Sended " + timer);
+        pv.RPC("UpdateForEveryone", RpcTarget.Others, timer);
+    }
+
+    [PunRPC]
+    void UpdateForEveryone(string timerT)
+    {
+        timeText.text = timerT;
+        Debug.Log("received " + timerT);
     }
 
 }

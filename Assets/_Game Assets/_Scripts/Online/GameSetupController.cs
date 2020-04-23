@@ -11,21 +11,58 @@ public class GameSetupController : MonoBehaviour
     public Transform[] spawns;
     public Transform[] ammoCratesSpawn;
     public GameObject ammoCrate;
-
+    [Space]
     public GameObject characterSelect;
+    public int currentSelectedPlayer;
+    [Header("Time Settings")]
+    public float maxTime;
+    public float timer;
+    public float timeGoneBy;
+
+    private string niceTime;
+    private BattleUI bu;
 
     void Start()
     {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-
+        bu = FindObjectOfType<BattleUI>();
         if (FFA)
         {
             StartCoroutine(SpawnAmmoCrate());
         }
+        if (PhotonNetwork.IsMasterClient)
+        {
+            StartCoroutine(Timer());
+            StartCoroutine(UpdateTimer());
+        }
     }
 
-    public int currentSelectedPlayer;
+    IEnumerator UpdateTimer()
+    {
+        while (timeGoneBy >= 0)
+        {
+            yield return new WaitForSeconds(1f);
+            bu.UpdateTimer(niceTime);
+        }
+    }
+    
+    IEnumerator Timer()
+    {
+        timeGoneBy = maxTime - timer;
+        while (timeGoneBy >= 0)
+        {
+            timer += Time.deltaTime;
+            timeGoneBy = maxTime - timer;
+            int minutes = Mathf.FloorToInt(timeGoneBy / 60F);
+            int seconds = Mathf.FloorToInt(timeGoneBy - minutes * 60);
+            niceTime = string.Format("{0:0}:{1:00}", minutes, seconds);
+            yield return new WaitForEndOfFrame();
+        }
+        niceTime = string.Format("{0:0}:{1:00}", 0, 0);
+        bu.UpdateTimer(niceTime);
+    }
+    
     public void CreatePlayer()
     {
         switch (currentSelectedPlayer)
