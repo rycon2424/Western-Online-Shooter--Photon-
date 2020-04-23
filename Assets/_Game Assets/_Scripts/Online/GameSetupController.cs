@@ -94,7 +94,7 @@ public class GameSetupController : MonoBehaviour
     #region ammoCrates
     IEnumerator SpawnAmmoCrate()
     {
-        yield return new WaitForSeconds(30f);
+        yield return new WaitForSeconds(15f);
         PhotonNetwork.InstantiateSceneObject(Path.Combine("Objects", "AmmoCrate"), ammoCratesSpawn[Random.Range(0, ammoCratesSpawn.Length)].position, Quaternion.identity);
         StartCoroutine(SpawnAmmoCrate());
     }
