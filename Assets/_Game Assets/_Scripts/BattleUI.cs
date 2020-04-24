@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Photon.Pun;
 
@@ -10,6 +11,7 @@ public class BattleUI : MonoBehaviourPun
     public Text timeText;
     private PhotonView pv;
     public string savedString;
+    public GameObject changemap;
 
     void Start()
     {
@@ -74,6 +76,29 @@ public class BattleUI : MonoBehaviourPun
     {
         timeText.text = timerT;
         Debug.Log("received " + timerT);
+    }
+
+    public void EndGame()
+    {
+        GameSetupController.gameEnded = true;
+        changemap.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        pv.RPC("EndGameForAll", RpcTarget.Others);
+    }
+
+    [PunRPC]
+    void EndGameForAll()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        GameSetupController.gameEnded = true;
+    }
+
+    //Button
+    public void ChangeMap(string levelName)
+    {
+        SceneManager.LoadScene(levelName);
     }
 
 }

@@ -101,6 +101,11 @@ public class PlayerBehaviour : MonoBehaviourPun
         {
             return;
         }
+        if (GameSetupController.gameEnded)
+        {
+            GameEnd();
+            return;
+        }
         if (dead == false)
         {
             OnGround();
@@ -129,6 +134,17 @@ public class PlayerBehaviour : MonoBehaviourPun
                 pv.RPC("Respawn", RpcTarget.All);
             }
         }
+    }
+
+    bool gameEnd;
+    void GameEnd()
+    {
+        if (gameEnd)
+            return;
+        pi.OpenScoreBoard();
+        anim.SetFloat("Horizontal", 0);
+        anim.SetFloat("Vertical", 0);
+        gameEnd = true;
     }
 
     public void Death()

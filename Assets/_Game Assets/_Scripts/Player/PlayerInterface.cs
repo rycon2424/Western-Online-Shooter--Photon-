@@ -53,12 +53,11 @@ public class PlayerInterface : MonoBehaviourPun
         {
             OpenCloseMenu();
         }
-        if (Input.GetKey(KeyCode.Tab) && scoreboardfound)
+        if (Input.GetKey(KeyCode.Tab) && scoreboardfound && GameSetupController.gameEnded == false)
         {
-            scoreBoard.SetActive(true);
-            UpdateScoreBoard();
+            OpenScoreBoard();
         }
-        if (Input.GetKeyUp(KeyCode.Tab) && scoreboardfound)
+        if (Input.GetKeyUp(KeyCode.Tab) && scoreboardfound && GameSetupController.gameEnded == false)
         {
             scoreBoard.SetActive(false);
         }
@@ -71,6 +70,12 @@ public class PlayerInterface : MonoBehaviourPun
     #region ScoreBoard
 
     int playerCount;
+
+    public void OpenScoreBoard()
+    {
+        scoreBoard.SetActive(true);
+        UpdateScoreBoard();
+    }
 
     void UpdateScoreBoard()
     {

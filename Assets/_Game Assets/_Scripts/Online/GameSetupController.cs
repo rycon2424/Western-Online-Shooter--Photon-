@@ -18,12 +18,14 @@ public class GameSetupController : MonoBehaviour
     public float maxTime;
     public float timer;
     public float timeGoneBy;
+    public static bool gameEnded;
 
     private string niceTime;
     private BattleUI bu;
 
     void Start()
     {
+        gameEnded = false;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         bu = FindObjectOfType<BattleUI>();
@@ -59,8 +61,9 @@ public class GameSetupController : MonoBehaviour
             niceTime = string.Format("{0:0}:{1:00}", minutes, seconds);
             yield return new WaitForEndOfFrame();
         }
-        niceTime = string.Format("{0:0}:{1:00}", 0, 0);
+        niceTime = "Time's Up Host is Changing Map";
         bu.UpdateTimer(niceTime);
+        bu.EndGame();
     }
     
     public void CreatePlayer()
