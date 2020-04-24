@@ -6164,7 +6164,7 @@ MonoBehaviour:
     type: 3}
   characterSelect: {fileID: 2804558536451139099}
   currentSelectedPlayer: 0
-  maxTime: 420
+  maxTime: 900
   timer: 0
   timeGoneBy: 0
 --- !u!1001 &566194050
